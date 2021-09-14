@@ -19,7 +19,7 @@ const Dropdown = ({label, labelColor, options, textColor, placeholderColor}) => 
         <div className="w-1/12 inline-block"><i className="fas fa-caret-down" /></div>
       </div>
       {toggle ?
-      <div className="shadow-xl">
+      <div className="shadow-xl absolute rounded-lg">
         {options.map((option, index) => (
           <div
           onClick={() => updateValue(option.name, option.value)}
