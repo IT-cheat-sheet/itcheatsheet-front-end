@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 
-const Dropdown = ({label, labelColor, options, textColor, placeholderColor}) => {
+const Dropdown = ({label, labelColor, options, textColor, placeholderColor, setValue}) => {
   const [display, setDisplay] = useState('none')
-  // eslint-disable-next-line
-  const [selectedValue, setSelectedValue] = useState('none')
   const [toggle, setToggle] = useState(false);
 
   const updateValue = (name, value) => {
     setDisplay(name);
-    setSelectedValue(value);
+    setValue(value);
   }
 
   return (
