@@ -76,10 +76,12 @@ module.exports = {
         '15': '0.15'
       },
       width: {
-        '27': '6.75rem'
+        '27': '6.75rem',
+        '18': '4.5rem'
       },
       height: {
-        '27': '6.75rem'
+        '27': '6.75rem',
+        '18': '4.5rem'
       },
       lineHeight: {
         '11': '2.625rem'
