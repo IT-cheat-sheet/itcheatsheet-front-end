@@ -5,16 +5,17 @@ export default function Button(props) {
   return (
     <div
       className={classNames(
-        "w-full rounded-button",
+        "w-full button-base cursor-pointer transition duration-100 flex justify-center items-center",
         {
-          "bg-violet-button hover:bg-violet-hover": props.color === "purple",
+          [`bg-${props.color}-button`]: true, [`hover:bg-${props.color}-hover`]: true
         },
         {
-          "bg-purple-button hover:bg-purple-hover": props.color === "violet",
+          "text-white":
+            props.color !== "lightblue",
         },
         {
-          "bg-lightblue-button text-lightblue-hover hover:bg-lightblue-hover hover:text-white":
-            props.color === "blue",
+          "text-lightblue-hover hover:text-white":
+            props.color === "lightblue",
         },
         {
           "h-12": props.size === "sm",

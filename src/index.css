@@ -31,7 +31,7 @@
 }
 
 .button-base {
-  @apply rounded-button px-22.5 body-base text-white
+  @apply rounded-button px-22.5 body-base
 }
 
 .button-not-selected {
