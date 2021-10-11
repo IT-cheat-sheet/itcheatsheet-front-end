@@ -1,11 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Kebab from '../../core/components/kebab'
 import Button from '../../core/components/button'
+import { Document, Page, pdfjs } from 'react-pdf';
+import './preview-sheet.css'
+
+const url = "10025-converted.pdf"
 
 export default function PreviewSheet() {
+  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+  const [pageNumber, setPageNumber] = useState(1);
+
+  function onDocumentLoadSuccess() {
+    setPageNumber(1);
+  }
   return (
     <div className="grid grid-cols-3 gap-7 pl-44">
-      <img src="/10025.png" className="border-2" width="475"  alt="temp pdf thumbnail"/>
+      <div>
+      <Document
+        file={url}
+        onLoadSuccess={onDocumentLoadSuccess}
+        >
+        <Page pageNumber={pageNumber}/>
+      </Document>
+      </div>
       <div className="mt-16 col-span-2">
         <div className="flex">
           <h2 className="header-secondary text-violet-header uppercase">title of pdf</h2>
@@ -22,10 +39,10 @@ export default function PreviewSheet() {
             </div>
             <div className="mx-14">
               <p className="text-violet-header">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non nulla  risus elementum sit amet,
-                consectetur adipiscing elit. Non nulla risus elementum egestas massa mi a ultricies. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Non nulla risus elementum risus elementum egestas massa mi a ultricies. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Non nulla adipisc.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.Non nulla  risus elementum sit amet,
+                consectetur adipiscing elit.Non nulla risus elementum egestas massa mi a ultricies.Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit.Non nulla risus elementum risus elementum egestas massa mi a ultricies.Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit.Non nulla adipisc.
               </p>
               <br />
               <a href="/" className="text-violet-link underline">
