@@ -8,7 +8,15 @@ export default function AllReviews() {
   return (
     <div className="mx-44">
       <div className="p-14">
-        <SearchBox page="review" />
+        <div className="px-10">
+          <SearchBox page="review" options={[
+            {name: "Study", value: "Study"},
+            {name: "Lifestyle", value: "Lifestyle"},
+            {name: "Food", value: "Food"},
+            {name: "Activities", value: "Activities"},
+            {name: "Etc.", value: "Etc."}
+          ]} />
+        </div>
         <div className="grid grid-cols-2 mt-7">
           <ReviewThumb review={{ reviewTitle: "Thread 1", reviewContent: temp, reviewImage: null}} />
           <ReviewThumb review={{ reviewTitle: "Thread 2", reviewContent: temp, reviewImage: "aquat.jpg"}} />
