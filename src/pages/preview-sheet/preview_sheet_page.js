@@ -4,25 +4,24 @@ import Button from '../../core/components/button'
 import { Document, Page, pdfjs } from 'react-pdf';
 import './preview-sheet.css'
 
-const url = "10025-converted.pdf"
 
 export default function PreviewSheet() {
+  const url = ""
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-  const [pageNumber, setPageNumber] = useState(1);
 
-  function onDocumentLoadSuccess() {
-    setPageNumber(1);
-  }
   return (
-    <div className="grid grid-cols-3 gap-7 pl-44">
-      <div>
-      <Document
-        file={url}
-        onLoadSuccess={onDocumentLoadSuccess}
-        >
-        <Page pageNumber={pageNumber}/>
-      </Document>
-      </div>
+    <div className={`grid gap-7 pl-44 ${url === "" ? "" : "grid-cols-3"}`}>
+      {
+        url ?
+          <div>
+            <Document
+              file={url}
+            >
+              <Page pageNumber={1} />
+            </Document>
+          </div>
+          : <></>
+      }
       <div className="mt-16 col-span-2">
         <div className="flex">
           <h2 className="header-secondary text-violet-header uppercase">title of pdf</h2>
@@ -51,7 +50,7 @@ export default function PreviewSheet() {
               </a>
             </div>
           </div>
-          <div className="w-1/4 text-center cursor-pointer mt-5 ml-auto text-white">
+          <div className={`w-1/4 text-center cursor-pointer mt-5 ml-auto text-white ${url === "" ? "w-1/6" : "w-1/4"}`}>
             <Button color="purple" size="sm" onClick={() => alert('Download button click!')}>Download</Button>
           </div>
         </div>
