@@ -26,7 +26,7 @@ export default function Pagination({ page, current, total, url }) {
   }
 
   return (
-    <div className="text-gray-header body-base">
+    <div className="text-gray-header body-base w-full flex justify-center">
       <button className="font-bold mx-4" disabled={current === 1} onClick={() => pageHop(1)}>&lt;&lt;</button>
       <button className="font-bold mx-4" disabled={current === 1} onClick={() => pageHop(current - 1)}>&lt;</button>
       <LoopPage />
