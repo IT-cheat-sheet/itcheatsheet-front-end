@@ -1,4 +1,5 @@
 import React from "react";
+import Pagination from "../../core/components/pagination";
 import SearchBox from "../../core/components/searchBox";
 import ReviewThumb from "./review_thumb";
 
@@ -7,8 +8,7 @@ export default function AllReviews() {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis pulvinar fusce vulputate quis bibendum blandit ultrices phasellus ultricies. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis pulvinar fusce vulputate quis bibendum blandit ultrices phasellus ultricies usce vulputate quis bibendum usce dipiscing elit. Mattis pulvinar fusce vulputate quisedbibe";
   return (
     <div className="mx-44">
-      <div className="p-14">
-        <div className="px-10">
+        <div className="px-10 mt-14">
           <SearchBox page="review" options={[
             {name: "Study", value: "Study"},
             {name: "Lifestyle", value: "Lifestyle"},
@@ -25,7 +25,9 @@ export default function AllReviews() {
           <ReviewThumb review={{ reviewTitle: "Thread 5", reviewContent: temp, reviewImage: null}} />
           <ReviewThumb review={{ reviewTitle: "Thread 6", reviewContent: temp, reviewImage: "1618591702703.jpg"}} />
         </div>
-      </div>
+        <div className="pt-12 pb-24">
+          <Pagination page="review" current={1} total={4} url="/asd" />
+        </div>
     </div>
   );
 }
