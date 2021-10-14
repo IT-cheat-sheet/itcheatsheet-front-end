@@ -7,12 +7,17 @@ export default function Pagination({ page, current, total, url }) {
 
   const LoopPage = () => {
     const pages = [];
+    const start = current < 7 ? 1 : current > total - 4 ? total - 9 : current - 5 ;
+    const limit = current < 7 ? 10 : current > total - 4 ? total : current + 4 ;
+
     for(let i = 1; i <= total; i++){
-      pages.push(
-        <button className={classNames("font-bold mx-4",
-        {"text-blue-button" : current === i && page === "review",},
-        {"text-violet-page" : current === i && page === "sheet"})} onClick={() => pageHop(i)}>{i}</button>
-      )
+      if(i >= start && i <= limit){
+        pages.push(
+          <button className={classNames("font-bold mx-4",
+          {"text-blue-button" : current === i && page === "review",},
+          {"text-violet-page" : current === i && page === "sheet"})} onClick={() => pageHop(i)}>{i}</button>
+        )
+      }
     }
     return pages;
   }
@@ -27,11 +32,11 @@ export default function Pagination({ page, current, total, url }) {
 
   return (
     <div className="text-gray-header body-base w-full flex justify-center">
-      <button className="font-bold mx-4" disabled={current === 1} onClick={() => pageHop(1)}>&lt;&lt;</button>
-      <button className="font-bold mx-4" disabled={current === 1} onClick={() => pageHop(current - 1)}>&lt;</button>
+      <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === 1})} disabled={current === 1} onClick={() => pageHop(1)}>&lt;&lt;</button>
+      <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === 1})} disabled={current === 1} onClick={() => pageHop(current - 1)}>&lt;</button>
       <LoopPage />
-      <button className="font-bold mx-4" disabled={current === total} onClick={() => pageHop(current + 1)}>&gt;</button>
-      <button className="font-bold mx-4" disabled={current === total} onClick={() => pageHop(total)}>&gt;&gt;</button>
+      <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === total})} disabled={current === total} onClick={() => pageHop(current + 1)}>&gt;</button>
+      <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === total})} disabled={current === total} onClick={() => pageHop(total)}>&gt;&gt;</button>
     </div>
   )
 }
