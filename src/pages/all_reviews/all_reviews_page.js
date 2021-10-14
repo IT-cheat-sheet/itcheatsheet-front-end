@@ -28,6 +28,11 @@ export default function AllReviews() {
         <div className="pt-12 pb-24">
           <Pagination page="review" current={1} total={4} url="/asd" />
         </div>
+        <div>
+          <button className="button-circular fixed z-30 bottom-12 right-24">
+            <i className="fas fa-plus header-tertiary" />
+          </button>
+        </div>
     </div>
   );
 }
