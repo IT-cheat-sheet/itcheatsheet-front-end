@@ -10,7 +10,7 @@ export default function SearchBox({ page, options }) {
   }
 
   return (
-    <div className={classNames("grid grid-cols-12 gap-3 px-5 py-4 rounded-lg body-base",
+    <div className={classNames("grid grid-cols-12 gap-5 px-6 py-4 rounded-lg body-base",
     {"bg-lightblue-bg" : page === "review",},
     {"bg-violet-bubbleHover" : page === "sheet"}
     )}>
