@@ -1,6 +1,5 @@
 
 
-
 import React from 'react'
 import {
   BrowserRouter as Router,
@@ -33,12 +32,14 @@ const routes = [
 //
 export default function Navbar() {
     return (
-        
-        <div className="sticky top-0 bg-gradient-to-b from-gray-400 h-24 w-full flex justify-between  ">
+      // bg-gradient-to-b from-dark
+        <div className="h-24 w-full flex justify-between z-50 backdrop-filter backdrop-blur-md ">
             <Router>
                 <div className="flex place-self-center w-1/5 justify-center">
                     <div >
-                        <Link to="/home">Home</Link>
+                        <Link to="/home">
+                          <img src="images/cheatsheetlogo1.png" alt="Logo" className="ml-44 w-52" />
+                        </Link>
                     </div>
                 </div> 
                 <div className="flex place-self-center w-2/5 justify-evenly  " >
