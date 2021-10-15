@@ -19,19 +19,19 @@
 }
 
 .body-l {
-  @apply text-4xl font-normal tracking-wider leading-11
+  @apply text-4xl tracking-wider leading-7
 }
 
 .body-base {
-  @apply text-2xl font-normal tracking-wider leading-11
+  @apply text-2xl tracking-wider leading-7
 }
 
 .body-sm {
-  @apply text-sm font-normal tracking-wider leading-11
+  @apply text-sm tracking-wider leading-7
 }
 
 .button-base {
-  @apply rounded-button px-22.5 body-base text-white
+  @apply rounded-button body-base
 }
 
 .button-not-selected {

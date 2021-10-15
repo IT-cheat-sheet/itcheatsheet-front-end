@@ -29,7 +29,7 @@ const Dropdown = ({label, options, page, setValue}) => {
           className={`h-12 w-52 bg-white py-2 px-4 body-base cursor-pointer
           ${index === options.length - 1 ? 'rounded-b-lg' : 'border-b-2 border-gray-disabled'}
           ${index === 0 ? 'rounded-t-lg' : ''}
-          ${textColor}`}>{option.name}</div>
+          ${labelColor}`}>{option.name}</div>
         ))}
       </div>
       : <></>}
