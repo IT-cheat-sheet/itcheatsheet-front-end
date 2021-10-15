@@ -37,7 +37,9 @@ module.exports = {
           'body': '#265FB2',
           'form': '#60A5FA',
           'formHover': '#3B82F6',
-          'page': '#79A4E3'
+          'page': '#79A4E3',
+          'dark':'#163969'
+
         },
         'lightblue': {
           'button': '#D9F8FF',
@@ -61,7 +63,8 @@ module.exports = {
           'mailbox': '#4E4E4E',
           'disabled': '#DBDBDB',
           'header': '#696969',
-          'subheader': '#545454'
+          'subheader': '#545454',
+          'footer':'#F2F2F2'
         },
         'white': '#FFF',
         'black': '#000'
@@ -84,6 +87,8 @@ module.exports = {
         '27': '6.75rem',
         '18': '4.5rem',
         '46.313':'46.313rem',
+        '2.5/4':'63.5%',
+        '1.5/4':'37.5%'
       },
       lineHeight: {
         '11': '2.625rem'
@@ -103,6 +108,10 @@ module.exports = {
       },
       backdropBlur: {
         'glass': '50px'
+      },
+      margin:{
+        '1/3': '33.333333%',
+        '1.3/2':'58.888888%'
       }
     },
   },
