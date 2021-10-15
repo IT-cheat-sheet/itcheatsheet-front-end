@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ReviewThumb({ review }) {
+  const [image, setImage] = useState(null);
   const [isHover, setIsHover] = useState(false);
+
+  useEffect(() => {
+    (async function() {
+      const res = await fetch(`http://localhost:3000/review/image/${review.reviewId}`);
+      const data = await res.data;
+      
+      if(res.status === 200){
+        setImage(data);
+      }
+    })();
+  }, [review])
 
   return (
     <div className="p-3">
@@ -9,7 +21,7 @@ export default function ReviewThumb({ review }) {
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
       className={`relative grid grid-cols-12 h-full rounded-lg shadow-halo transition duration-200 transform cursor-pointer ${isHover ? "bg-blue-button text-white" : "bg-lightblue-bg text-blue-body"}`}>
-        {review.reviewImage ? <div className="col-span-5"><img className="object-cover w-full h-full rounded-l-lg" src={review.reviewImage}/></div> : ""}
+        {image ? <div className="col-span-5"><img className="object-cover w-full h-full rounded-l-lg" src={image} alt="Not Found"/></div> : ""}
         <div className={`${review.reviewImage ? "col-span-7 py-14" : "col-span-12 py-8"} px-9`}>
           <div className="w-full body-l font-bold mb-3">
             {review.reviewTitle}

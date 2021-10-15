@@ -21,13 +21,13 @@ export default function SearchBox({ page, options }) {
           {options.map((option, index) => (
             <div
             onClick={() => {
-              updateValue(option.name, option.value);
+              updateValue(option);
               setToggle(false);
             }}
             className={`bg-lightblue-lighter w-48 py-3 px-4 body-base cursor-pointer hover:bg-blue-form text-blue-body hover:text-white
             ${index === options.length - 1 ? 'rounded-b-lg' : ''}
             ${index === 0 ? 'rounded-t-lg' : ''}
-            `}>{option.name}</div>
+            `}>{option}</div>
           ))}
         </div>
       : <></>}
