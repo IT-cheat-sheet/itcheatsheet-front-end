@@ -38,7 +38,7 @@ module.exports = {
           'form': '#60A5FA',
           'formHover': '#3B82F6',
           'page': '#79A4E3',
-          'dark':'#163969'
+          'dark':'#163969',
           'button': '#79A4E3',
           'hover': '#4E7CBF'
         },
