@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function Carousel({page, amount}) {
-  const[current, setCurrent] = useState(1);
+  const[current, setCurrent] = useState(0);
 
   const settings = {
     dots: true,
