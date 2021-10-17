@@ -1,16 +1,22 @@
 import classNames from "classnames";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./button";
 
 export default function SearchBox({ page, options, onFilter, onSearch }) {
   const [searchWord, setSearchWord] = useState('');
   const [toggle, setToggle] = useState(false);
 
-  document.addEventListener('keypress', (e) => {
-    if(e.code.includes('Enter')){
-      onSearch(searchWord);
+  useEffect(() => {
+    const searchEnter = (e) => {
+      if(e.code.includes('Enter')){
+        onSearch(searchWord);
+      }
     }
-  })
+    document.addEventListener('keypress', searchEnter);
+    return () => {
+      document.removeEventListener('keypress', searchEnter);
+    }
+  }, [onSearch, searchWord])
 
   return (
     <div className={classNames("grid grid-cols-12 gap-5 px-6 py-4 rounded-lg body-base",
