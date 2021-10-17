@@ -55,7 +55,7 @@
 }
 
 .glass {
-  @apply bg-white opacity-50 backdrop-blur-glass
+  @apply bg-white bg-opacity-50 backdrop-filter backdrop-blur-glass
 }
 
 .input:hover {
