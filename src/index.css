@@ -19,7 +19,7 @@
 }
 
 .body-l {
-  @apply text-4xl tracking-wider leading-7
+  @apply text-4xl tracking-wider leading-snug
 }
 
 .body-base {
