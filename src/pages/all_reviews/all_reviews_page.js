@@ -49,7 +49,7 @@ export default function AllReviews() {
         const data = await res.json();
       
         data.data.forEach((topic) => {
-          topics.push(topic.topicName);
+          topics.push({key: topic.topicName, value: topic.topicName});
         })
       })();
     }

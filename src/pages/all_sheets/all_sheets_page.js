@@ -49,13 +49,13 @@ export default function AllSheets() {
         const data = await res.json();
       
         data.semesters.forEach((semester) => {
-          semesters.push(semester.semester);
+          semesters.push({key: semester.semester, value: semester.semesterNumber});
         })
       })();
     }
     
     (async function() {
-      const res = await fetch(`http://localhost:3000/summarypost/getAll?pageNumber=${page}&pageSize=${pageSize}&search=${searchWord}`);
+      const res = await fetch(`http://localhost:3000/summarypost/getAll?pageNumber=${page}&pageSize=${pageSize}&search=${searchWord}&semesterFilter=${filter}`);
       const data = await res.json();
       
       //Clear Existing Reviews

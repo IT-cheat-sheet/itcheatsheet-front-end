@@ -46,7 +46,7 @@ export default function SearchBox({ page, options, onFilter, onSearch }) {
             <div
             key={index}
             onClick={() => {
-              onFilter(option);
+              onFilter(option.value);
               setToggle(false);
             }}
             className={classNames("dropdown w-48 py-3 px-4 body-base cursor-pointer  hover:text-white",
@@ -54,7 +54,7 @@ export default function SearchBox({ page, options, onFilter, onSearch }) {
             {'bg-lightblue-lighter hover:bg-blue-form text-blue-body' : page === "review"},
             {'bg-violet-bubbleHover hover:bg-violet-pill text-violet-bubbleText' : page === "sheet"}
             )
-            }>{option}</div>
+            }>{option.key}</div>
           ))}
         </div>
       : <></>}
