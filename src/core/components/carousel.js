@@ -30,9 +30,8 @@ export default function Carousel({page}) {
     appendDots: dots => (
       <ul>
         {dots.map((item, index) => {
-          console.log(item)
             return (
-              <button onClick={item.props.children.props.onClick} className={`h-3 w-20 inline-block rounded-lg bg-gray-subheader opacity-25 hover:opacity-100 mx-0.5 ${index === current ? "opacity-100" : ""}`}></button>
+              <button key={index} onClick={item.props.children.props.onClick} className={`h-3 w-20 inline-block rounded-lg bg-gray-subheader opacity-25 hover:opacity-100 mx-0.5 ${index === current ? "opacity-100" : ""}`}></button>
             );
           })
         }

@@ -84,8 +84,8 @@ export default function AllReviews() {
           <div>
             <div className="grid grid-cols-2 mt-7">
               {
-                reviews.map((review) => (
-                  <Link to={`/reviews/${review.reviewId}`}>
+                reviews.map((review, index) => (
+                  <Link key={index} to={`/reviews/${review.reviewId}`}>
                     <ReviewThumb review={review} />
                   </Link>
                 ))
