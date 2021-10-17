@@ -52,7 +52,7 @@ export default function SheetThumb({id, fileName, link}) {
           </Document> :
           link ?
           <i className="fas fa-link header-primary w-full" /> :
-          <i className="fas fa-sticky-note header-primary w-full" />}
+          <i className="fas fa-unlink header-primary w-full" />}
         </div>
         <div className="body-base uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>
       </div>
