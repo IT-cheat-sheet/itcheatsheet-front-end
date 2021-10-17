@@ -3,7 +3,14 @@ import React, { useState } from "react";
 import Button from "./button";
 
 export default function SearchBox({ page, options, onFilter, onSearch }) {
+  const [searchWord, setSearchWord] = useState('');
   const [toggle, setToggle] = useState(false);
+
+  document.addEventListener('keypress', (e) => {
+    if(e.code.includes('Enter')){
+      onSearch(searchWord);
+    }
+  })
 
   return (
     <div className={classNames("grid grid-cols-12 gap-5 px-6 py-4 rounded-lg body-base",
@@ -33,8 +40,8 @@ export default function SearchBox({ page, options, onFilter, onSearch }) {
         </div>
       : <></>}
       </div>
-      <div className="col-span-8"><input className="w-full h-full rounded-lg px-4 focus:outline-none" onChange={(e) => onSearch(e.target.value)} /></div>
-      <div className="col-span-2" onClick={onSearch}><Button color={page === "review" ? "blue" : "purple"} size="sm" children={<i className="fas fa-search" />} /></div>
+      <div className="col-span-8"><input className="w-full h-full rounded-lg px-4 focus:outline-none" onChange={(e) => setSearchWord(e.target.value)} /></div>
+      <div className="col-span-2" onClick={() => onSearch(searchWord)}><Button color={page === "review" ? "blue" : "purple"} size="sm" children={<i className="fas fa-search" />} /></div>
     </div>
   )
 }
