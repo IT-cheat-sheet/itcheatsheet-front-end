@@ -12,9 +12,16 @@ export default function SearchBox({ page, options, onFilter, onSearch }) {
         onSearch(searchWord);
       }
     }
+    const closeDropdown = (e) => {
+      if(!e.target.classList.contains('dropdown') && e.target.innerText !== 'SORT BY'){
+        setToggle(false);
+      }
+    }
     document.addEventListener('keypress', searchEnter);
+    document.addEventListener('click', closeDropdown);
     return () => {
       document.removeEventListener('keypress', searchEnter);
+      document.removeEventListener('click', closeDropdown);
     }
   }, [onSearch, searchWord])
 
@@ -23,7 +30,7 @@ export default function SearchBox({ page, options, onFilter, onSearch }) {
     {"bg-lightblue-bg" : page === "review",},
     {"bg-violet-bubbleHover" : page === "sheet"}
     )}>
-      <div className="col-span-2 relative" onClick={() => setToggle(!toggle)}>
+      <div className="col-span-2 relative dropdown" onClick={() => setToggle(!toggle)}>
         <Button color={page === "review" ? "blue" : "purple"} size="sm" children="SORT BY" />
         {toggle ?
         <div className={`shadow-halo absolute top-14 rounded-lg z-20`}>
@@ -32,16 +39,22 @@ export default function SearchBox({ page, options, onFilter, onSearch }) {
               onFilter('');
               setToggle(false);
             }}
-            className={`bg-lightblue-lighter w-48 py-3 px-4 body-base cursor-pointer hover:bg-blue-form text-blue-body hover:text-white rounded-t-lg`}>None</div>
+            className={classNames("dropdown w-48 py-3 px-4 body-base cursor-pointer hover:text-white rounded-t-lg",
+            {'bg-lightblue-lighter hover:bg-blue-form text-blue-body' : page === "review"},
+            {'bg-violet-bubbleHover hover:bg-violet-pill text-violet-bubbleText' : page === "sheet"})}>None</div>
           {options.map((option, index) => (
             <div
+            key={index}
             onClick={() => {
               onFilter(option);
               setToggle(false);
             }}
-            className={`bg-lightblue-lighter w-48 py-3 px-4 body-base cursor-pointer hover:bg-blue-form text-blue-body hover:text-white
-            ${index === options.length - 1 ? 'rounded-b-lg' : ''}
-            `}>{option}</div>
+            className={classNames("dropdown w-48 py-3 px-4 body-base cursor-pointer  hover:text-white",
+            {'rounded-b-lg' : index === options.length - 1},
+            {'bg-lightblue-lighter hover:bg-blue-form text-blue-body' : page === "review"},
+            {'bg-violet-bubbleHover hover:bg-violet-pill text-violet-bubbleText' : page === "sheet"}
+            )
+            }>{option}</div>
           ))}
         </div>
       : <></>}
