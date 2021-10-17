@@ -31,10 +31,10 @@ export default function ReviewThumb({ review }) {
       className={`relative grid grid-cols-12 h-full rounded-lg shadow-halo transition duration-200 transform cursor-pointer ${isHover ? "bg-blue-button text-white" : "bg-lightblue-bg text-blue-body"}`}>
         {image ? <div className="col-span-5"><img className="object-cover w-full h-full rounded-l-lg" src={image} alt="Not Found"/></div> : ""}
         <div className={`${image ? "col-span-7" : "col-span-12"} flex flex-col justify-center px-9`}>
-          <div className={`w-full body-l font-bold mb-3 truncate`}>
+          <div className={`w-full body-l font-bold mb-1 truncate`}>
             {review.reviewTitle}
           </div>
-          <div className={`body-sm ${image ? "line-clamp-4" : "line-clamp-6"}`}>
+          <div className={`body-sm ${image ? "line-clamp-4" : "line-clamp-6"}`} style={{textIndent: image ? '0' : '5%'}}>
             {review.reviewContent}
           </div>
         </div>
