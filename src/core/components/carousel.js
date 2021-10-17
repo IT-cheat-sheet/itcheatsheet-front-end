@@ -49,8 +49,8 @@ export default function Carousel({page}) {
   return (
     <Slider {...settings}>
       {images.map((image, i) => 
-        <div key={i + 1} className="rounded-button">
-          <img src={image.default} alt={`review_${i + 1}`}  className="rounded-button object-center object-cover h-96 w-full"/>
+        <div key={i + 1} className="rounded-button focus:outline-none">
+          <img src={image.default} alt={`review_${i + 1}`}  className="rounded-button object-center object-cover w-full"/>
         </div>
       )}
     </Slider>
