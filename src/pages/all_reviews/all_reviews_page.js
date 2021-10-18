@@ -49,7 +49,7 @@ export default function AllReviews() {
         const data = await res.json();
       
         data.data.forEach((topic) => {
-          topics.push(topic.topicName);
+          topics.push({key: topic.topicName, value: topic.topicName});
         })
       })();
     }
@@ -84,8 +84,8 @@ export default function AllReviews() {
           <div>
             <div className="grid grid-cols-2 mt-7">
               {
-                reviews.map((review) => (
-                  <Link to={`/reviews/${review.reviewId}`}>
+                reviews.map((review, index) => (
+                  <Link key={index} to={`/reviews/${review.reviewId}`}>
                     <ReviewThumb review={review} />
                   </Link>
                 ))

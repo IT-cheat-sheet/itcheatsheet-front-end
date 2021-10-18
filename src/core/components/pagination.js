@@ -13,7 +13,7 @@ export default function Pagination({ page, current, total, url }) {
     for(let i = 1; i <= total; i++){
       if(i >= start && i <= limit){
         pages.push(
-          <button className={classNames("font-bold mx-4",
+          <button key={i} className={classNames("font-bold mx-4",
           {"text-blue-button" : current === i && page === "review",},
           {"text-violet-page" : current === i && page === "sheet"})} onClick={() => pageHop(i)}>{i}</button>
         )
