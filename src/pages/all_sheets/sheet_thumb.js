@@ -41,7 +41,7 @@ export default function SheetThumb({id, fileName, link}) {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
   return (
-    <div className="px-8 py-4" onClick={() => console.log(document.getElementById(`thumb_${id}`).clientHeight)}>
+    <div className="py-3 md:px-8 md:py-4">
       <div className="p-2 cursor-pointer" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
         <div id={`thumb_${id}`} className={classNames("w-full rounded-lg overflow-hidden transition duration-200 transform flex justify-center items-center text-center bg-violet-bubbleHover text-violet-page",
         {"scale-105" : isHover},
@@ -54,7 +54,8 @@ export default function SheetThumb({id, fileName, link}) {
           <span className="material-icons text-9xl w-full transform -rotate-45">link</span> :
           <span className="material-icons text-9xl w-full">subject</span>}
         </div>
-        <div className="body-base uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>
+        <div className="md:hidden text-lg font-semibold uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>
+        <div className="hidden md:block body-base uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>
       </div>
     </div>
   )

@@ -5,10 +5,11 @@ import classNames from 'classnames';
 export default function Pagination({ page, current, total, url }) {
   const history = useHistory();
 
-  const LoopPage = () => {
+  const LoopPage = ({ totalPages }) => {
     const pages = [];
-    const start = current < 7 ? 1 : current > total - 4 ? total - 9 : current - 5 ;
-    const limit = current < 7 ? 10 : current > total - 4 ? total : current + 4 ;
+    const half = totalPages / 2;
+    const start = current < (Math.floor(half) + 1) ? 1 : current > total - (Math.floor(half) - 1) ? total - (totalPages - 1) : current - Math.floor(half) ;
+    const limit = current < (Math.floor(half) + 1) ? totalPages : current > total - (Math.floor(half) - 1) ? total : current + (Math.ceil(half) - 1) ;
 
     for(let i = 1; i <= total; i++){
       if(i >= start && i <= limit){
@@ -31,12 +32,27 @@ export default function Pagination({ page, current, total, url }) {
   }
 
   return (
-    <div className="text-gray-header body-base w-full flex justify-center">
-      <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === 1})} disabled={current === 1} onClick={() => pageHop(1)}>&lt;&lt;</button>
-      <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === 1})} disabled={current === 1} onClick={() => pageHop(current - 1)}>&lt;</button>
-      <LoopPage />
-      <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === total})} disabled={current === total} onClick={() => pageHop(current + 1)}>&gt;</button>
-      <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === total})} disabled={current === total} onClick={() => pageHop(total)}>&gt;&gt;</button>
+    <div>
+      <div className="body-base w-full flex justify-center">
+        <div className="hidden md:block text-gray-header">
+          <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === 1})} disabled={current === 1} onClick={() => pageHop(1)}>&lt;&lt;</button>
+          <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === 1})} disabled={current === 1} onClick={() => pageHop(current - 1)}>&lt;</button>
+          <LoopPage totalPages={10}/>
+          <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === total})} disabled={current === total} onClick={() => pageHop(current + 1)}>&gt;</button>
+          <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === total})} disabled={current === total} onClick={() => pageHop(total)}>&gt;&gt;</button>
+        </div>
+        <div className="md:hidden text-gray-header">
+          <button className={classNames("font-bold mx-3 p-3 rounded-lg",
+          {"bg-purple-form bg-opacity-40 text-violet-sheet" : page === "sheet"},
+          {"bg-purple-form bg-opacity-40 text-blue-dark" : page === "review"},
+          {"text-gray-emptymail cursor-default": current === 1})} disabled={current === 1} onClick={() => pageHop(current - 1)}><span className="material-icons font-bold block">chevron_left</span></button>
+          <LoopPage totalPages={4}/>
+          <button className={classNames("font-bold mx-3 p-3 rounded-lg",
+          {"bg-purple-form bg-opacity-40 text-violet-sheet" : page === "sheet"},
+          {"bg-purple-form bg-opacity-40 text-blue-dark" : page === "review"},
+          {"text-gray-disabled cursor-default": current === total})} disabled={current === total} onClick={() => pageHop(current + 1)}><span className="material-icons font-bold block">chevron_right</span></button>
+        </div>
+      </div>
     </div>
   )
 }

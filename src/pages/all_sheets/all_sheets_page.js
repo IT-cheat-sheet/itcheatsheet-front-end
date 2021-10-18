@@ -72,17 +72,23 @@ export default function AllSheets() {
   }, [semesters, filter, page, sheets, searchWord])
 
   return (
-    <div>
+    <div className="overflow-hidden bg-violet-bg md:bg-white">
       <Navbar />
-      <div className="mx-44 mb-24">
-        <Carousel page="sheet" />
-        <div className="header-popup text-violet-sheet mt-14 mb-5">ALL SHEET</div>
-        <div className="p-14 rounded-lg bg-violet-bg">
+      <div className="md:hidden">
+          <Carousel page="sheet" />
+        </div>
+      <div className="md:mx-44 md:mb-24 px-4 md:p-0">
+        <div className="hidden md:block">
+          <Carousel page="sheet" />
+        </div>
+        <div className="md:hidden body-base font-bold text-violet-sheet mt-14 mb-5">ALL SHEET</div>
+        <div className="hidden md:block header-popup text-violet-sheet mt-14 mb-5">ALL SHEET</div>
+        <div className="pb-6 md:p-14 md:rounded-lg md:bg-violet-bg">
           <SearchBox page="sheet" options={semesters} onFilter={onFilter} onSearch={onSearch} />
           {
             sheets.length > 0 ?
             <div>
-              <div className="grid grid-cols-4 mt-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 mt-4">
                 {
                   sheets.map((sheet, index) => (
                     <Link key={index} to={`/sheets/${sheet.summaryPostId}`}>
@@ -95,20 +101,21 @@ export default function AllSheets() {
                 <Pagination page="sheet" current={current} total={total} url="/sheets" />
               </div>
             </div> :
-            <div className="text-center header-secondary text-purple-hover my-28">
+            <div className="text-center header-tertiary md:header-secondary text-purple-hover my-20 md:my-28">
               <span className="material-icons-round text-9xl block mb-5">sentiment_very_dissatisfied</span>
               No Sheets Found
           </div>
+          
           }
-          <div>
-          <button className="button-circular fixed z-30 bottom-12 right-24">
-            <span className="material-icons-outlined text-7xl">file_upload</span>
-          </button>
-        </div>
         </div>
       </div>
+      <div>
+        <button className="button-circular fixed z-30 bottom-7 right-4">
+          <span className="material-icons-outlined text-5xl md:text-7xl">file_upload</span>
+        </button>
+      </div>
+      <div className="h-12 bg-white md:hidden"></div>
       <Footer />
     </div>
-    
   )
 }

@@ -47,7 +47,7 @@
 }
 
 .button-circular {
-  @apply w-27 h-27 shadow-halo bg-yellow-hover rounded-full flex justify-center items-center text-white
+  @apply w-18 h-18 md:w-27 md:h-27 shadow-halo bg-yellow-hover rounded-full flex justify-center items-center text-white
 }
 
 .banner:hover {
