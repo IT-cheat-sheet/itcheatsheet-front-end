@@ -3,7 +3,6 @@ import Kebab from '../../core/components/kebab'
 import Button from '../../core/components/button'
 import { Document, Page, pdfjs } from 'react-pdf';
 import { useParams } from 'react-router';
-import './preview-sheet.css'
 
 export default function PreviewSheet() {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;

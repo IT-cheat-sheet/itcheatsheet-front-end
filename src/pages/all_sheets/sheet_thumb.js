@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import { Document, Page, pdfjs } from 'react-pdf';
-import './sheet_thumb.css'
 
 export default function SheetThumb({id, fileName, link}) {
   const [file, setFile] = useState(null);
