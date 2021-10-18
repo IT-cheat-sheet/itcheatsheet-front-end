@@ -72,7 +72,7 @@ export default function AllSheets() {
   }, [semesters, filter, page, sheets, searchWord])
 
   return (
-    <div className="overflow-hidden bg-violet-bg md:bg-white">
+    <div className="bg-violet-bg md:bg-white">
       <Navbar />
       <div className="md:hidden">
           <Carousel page="sheet" />

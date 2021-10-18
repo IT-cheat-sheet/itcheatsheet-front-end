@@ -72,7 +72,7 @@ export default function AllReviews() {
   }, [topics, filter, page, reviews, searchWord])
 
   return (
-    <div className="overflow-hidden">
+    <div>
       <Navbar />
       <div className="md:mx-44">
         <Carousel page="review" />
