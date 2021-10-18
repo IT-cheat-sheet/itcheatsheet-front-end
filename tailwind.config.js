@@ -113,11 +113,16 @@ module.exports = {
       margin:{
         '1/3': '33.333333%',
         '1.3/2':'58.888888%'
-      }
+      },
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      ringWidth: ['hover', 'active'],
+      ringColor: ['hover', 'active'],
+      ringOffsetWidth: ['hover', 'active'],
+
+    },
   },
   plugins: [
     require('@tailwindcss/line-clamp'),

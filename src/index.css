@@ -58,12 +58,12 @@
   @apply bg-white bg-opacity-50 backdrop-filter backdrop-blur-glass
 }
 
-.input:hover {
-  @apply outline-none ring-2 ring-offset-2 shadow-lg
+.input {
+  @apply ring-offset-2
 }
 
-.input:focus {
-  @apply outline-none ring-2 shadow-lg
+.input:hover, .input:focus {
+  @apply outline-none ring-4 shadow-lg
 }
 
 .gradient:hover {
