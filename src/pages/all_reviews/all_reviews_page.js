@@ -72,37 +72,40 @@ export default function AllReviews() {
   }, [topics, filter, page, reviews, searchWord])
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Navbar />
-      <div className="mx-44">
+      <div className="md:mx-44">
         <Carousel page="review" />
-        <div className="px-10 mt-14">
-          <SearchBox page="review" options={topics} onFilter={onFilter} onSearch={onSearch} />
-        </div>
-        {
-          reviews.length > 0 ?
-          <div>
-            <div className="grid grid-cols-2 mt-7">
-              {
-                reviews.map((review, index) => (
-                  <Link key={index} to={`/reviews/${review.reviewId}`}>
-                    <ReviewThumb review={review} />
-                  </Link>
-                ))
-              }
-            </div>
-            <div className="pt-12 pb-24">
-              <Pagination page="review" current={current} total={total} url="/reviews" />
-            </div>
-          </div> :
-          <div className="text-center header-secondary text-blue-body my-28">
-            <span className="material-icons-round text-9xl block mb-5">sentiment_very_dissatisfied</span>
-            No Review Found
+        <div className="px-4">
+          <div className="md:hidden body-base font-bold text-blue-body mt-14 mb-5">ALL THREAD</div>
+          <div className="md:px-10 md:mt-14">
+            <SearchBox page="review" options={topics} onFilter={onFilter} onSearch={onSearch} />
           </div>
-        }
+          {
+            reviews.length > 0 ?
+            <div>
+              <div className="grid grid-cols-1 md:grid-cols-2 mt-7">
+                {
+                  reviews.map((review, index) => (
+                    <Link key={index} to={`/reviews/${review.reviewId}`}>
+                      <ReviewThumb review={review} />
+                    </Link>
+                  ))
+                }
+              </div>
+              <div className="pt-10 mb:pt-12 pb-14 mb:pb-24">
+                <Pagination page="review" current={current} total={total} url="/reviews" />
+              </div>
+            </div> :
+            <div className="text-center header-secondary text-blue-body my-28">
+              <span className="material-icons-round text-9xl block mb-5">sentiment_very_dissatisfied</span>
+              No Review Found
+            </div>
+          }
+        </div>
         <div>
-          <button className="button-circular fixed z-30 bottom-12 right-24">
-            <span className="material-icons-round header-primary">add</span>
+          <button className="button-circular fixed z-30 bottom-7 right-4 md:bottom-12 md:right-24">
+            <span className="material-icons-round font-bold text-6xl md:text-8xl">add</span>
           </button>
         </div>
       </div>

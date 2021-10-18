@@ -68,7 +68,9 @@ export default function SearchBox({ page, options, onFilter, onSearch }) {
         <div className="col-span-2" onClick={() => onSearch(searchWord)}><Button color={page === "review" ? "blue" : "purple"} size="sm" children={<span className="material-icons text-4xl">search</span>} /></div>
       </div>
       <div className="grid md:hidden grid-cols-12 gap-x-3 body-base">
-        <div className="col-span-8"><input className="w-full h-full rounded-lg px-4 text-purple-hover focus:outline-none" onChange={(e) => setSearchWord(e.target.value)} /></div>
+        <div className="col-span-8"><input className={classNames("w-full h-full rounded-lg px-4 focus:outline-none",
+        {"text-purple-hover" : page === "sheet"},
+        {"text-blue-body bg-lightblue-bg" : page === "review"})} onChange={(e) => setSearchWord(e.target.value)} /></div>
         <div className="col-span-2" onClick={() => onSearch(searchWord)}><Button color={page === "review" ? "blue" : "purple"} size="sm" children={<span className="material-icons text-3xl">search</span>} /></div>
         <div className="col-span-2 relative dropdown" onClick={() => setToggle(!toggle)}>
           <Button color={page === "review" ? "blue" : "purple"} size="sm" children={<span className="material-icons text-3xl">filter_list</span>} />

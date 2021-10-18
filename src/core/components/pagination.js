@@ -43,14 +43,14 @@ export default function Pagination({ page, current, total, url }) {
         </div>
         <div className="md:hidden text-gray-header">
           <button className={classNames("font-bold mx-3 p-3 rounded-lg",
+          {"cursor-default": current === 1},
           {"bg-purple-form bg-opacity-40 text-violet-sheet" : page === "sheet"},
-          {"bg-purple-form bg-opacity-40 text-blue-dark" : page === "review"},
-          {"text-gray-emptymail cursor-default": current === 1})} disabled={current === 1} onClick={() => pageHop(current - 1)}><span className="material-icons font-bold block">chevron_left</span></button>
+          {"bg-blue-button text-white" : page === "review"})} disabled={current === 1} onClick={() => pageHop(current - 1)}><span className="material-icons font-bold block">chevron_left</span></button>
           <LoopPage totalPages={4}/>
           <button className={classNames("font-bold mx-3 p-3 rounded-lg",
+          {"cursor-default": current === 1},
           {"bg-purple-form bg-opacity-40 text-violet-sheet" : page === "sheet"},
-          {"bg-purple-form bg-opacity-40 text-blue-dark" : page === "review"},
-          {"text-gray-disabled cursor-default": current === total})} disabled={current === total} onClick={() => pageHop(current + 1)}><span className="material-icons font-bold block">chevron_right</span></button>
+          {"bg-blue-button text-white" : page === "review"})} disabled={current === total} onClick={() => pageHop(current + 1)}><span className="material-icons font-bold block">chevron_right</span></button>
         </div>
       </div>
     </div>
