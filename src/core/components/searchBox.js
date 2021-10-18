@@ -60,7 +60,7 @@ export default function SearchBox({ page, options, onFilter, onSearch }) {
       : <></>}
       </div>
       <div className="col-span-8"><input className="w-full h-full rounded-lg px-4 focus:outline-none" onChange={(e) => setSearchWord(e.target.value)} /></div>
-      <div className="col-span-2" onClick={() => onSearch(searchWord)}><Button color={page === "review" ? "blue" : "purple"} size="sm" children={<i className="fas fa-search" />} /></div>
+      <div className="col-span-2" onClick={() => onSearch(searchWord)}><Button color={page === "review" ? "blue" : "purple"} size="sm" children={<span className="material-icons text-4xl">search</span>} /></div>
     </div>
   )
 }

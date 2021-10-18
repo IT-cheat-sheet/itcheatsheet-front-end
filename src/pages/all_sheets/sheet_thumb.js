@@ -51,8 +51,8 @@ export default function SheetThumb({id, fileName, link}) {
             <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
           </Document> :
           link ?
-          <i className="fas fa-link header-primary w-full" /> :
-          <i className="fas fa-unlink header-primary w-full" />}
+          <span className="material-icons text-9xl w-full transform -rotate-45">link</span> :
+          <span className="material-icons text-9xl w-full">subject</span>}
         </div>
         <div className="body-base uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>
       </div>

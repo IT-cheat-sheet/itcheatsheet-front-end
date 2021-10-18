@@ -96,13 +96,13 @@ export default function AllReviews() {
             </div>
           </div> :
           <div className="text-center header-secondary text-blue-body my-28">
-            <i className="fas fa-times-circle header-primary block mb-5"></i>
+            <span className="material-icons-round text-9xl block mb-5">sentiment_very_dissatisfied</span>
             No Review Found
           </div>
         }
         <div>
           <button className="button-circular fixed z-30 bottom-12 right-24">
-            <i className="fas fa-plus header-tertiary" />
+            <span className="material-icons-round header-primary">add</span>
           </button>
         </div>
       </div>

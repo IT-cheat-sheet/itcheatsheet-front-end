@@ -96,10 +96,15 @@ export default function AllSheets() {
               </div>
             </div> :
             <div className="text-center header-secondary text-purple-hover my-28">
-            <i className="fas fa-times-circle header-primary block mb-5"></i>
-            No Sheets Found
+              <span className="material-icons-round text-9xl block mb-5">sentiment_very_dissatisfied</span>
+              No Sheets Found
           </div>
           }
+          <div>
+          <button className="button-circular fixed z-30 bottom-12 right-24">
+            <span className="material-icons-outlined text-7xl">file_upload</span>
+          </button>
+        </div>
         </div>
       </div>
       <Footer />
