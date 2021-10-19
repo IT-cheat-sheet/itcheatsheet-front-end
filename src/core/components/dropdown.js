@@ -10,16 +10,16 @@ const Dropdown = ({label, options, page, setValue}) => {
   }
 
   const placeholderColor = page === 'sheet' ? 'text-violet-bubbleHover' : page === 'review' ? 'text-lightblue-lighter' : 'text-gray-disabled';
-  const ringHoverColor = "hover:text-" + (page === 'sheet' ? 'purple' : page === 'review' ? 'blue' : 'gray') + "-form";
-  const ringFocusColor = "focus:text-" + (page === 'sheet' ? 'purple' : page === 'review' ? 'blue' : 'gray') + "-formHover";
+  const ringHoverColor = "hover:ring-" + (page === 'sheet' ? 'purple' : page === 'review' ? 'blue' : 'gray') + "-form";
+  const ringFocusColor = "focus:ring-" + (page === 'sheet' ? 'purple' : page === 'review' ? 'blue' : 'gray') + "-formHover";
   const labelColor = page === 'sheet' ? 'text-violet-pill' : page === 'review' ? 'text-blue-body' : 'text-gray-mailbox';
 
   return (
     <div>
       <label className={`uppercase body-base mb-5 ${labelColor}`} htmlFor="dropdown">{label}</label>
-      <div id="dropdown" onClick={() => setToggle(!toggle)} className={`rounded-lg h-12 body-base py-2 px-4 bg-white w-52 cursor-pointer input ${ringHoverColor} ${ringFocusColor}`}>
-        <div className={`w-11/12 inline-block ${display === 'none' ? placeholderColor : 'text-gray-mailbox'}`}>{display}</div>
-        <div className={`w-1/12 inline-block ${labelColor}`}><i className="fas fa-caret-down" /></div>
+      <div id="dropdown" onClick={() => setToggle(!toggle)} className={`rounded-lg h-12 body-base py-2 px-4 bg-white w-52 cursor-pointer relative input ${ringFocusColor} ${ringHoverColor}`}>
+        <div className={`inline-block ${display === 'none' ? placeholderColor : 'text-gray-mailbox'}`}>{display}</div>
+        <div className={`absolute right-0 top-0 inline-block ${labelColor}`}><span className="material-icons text-5xl">arrow_drop_down</span></div>
       </div>
       {toggle ?
       <div className={`shadow-xl absolute rounded-lg ${labelColor}`}>
