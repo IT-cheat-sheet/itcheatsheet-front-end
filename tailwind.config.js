@@ -55,7 +55,8 @@ module.exports = {
         }, 
         'red': {
           'button': '#FF6B6B',
-          'hover': '#D05D5D'
+          'hover': '#D05D5D',
+          'padding':'#EBCFCE'
         },
         'gray': {
           'form': '#E5E7EB',
@@ -83,6 +84,8 @@ module.exports = {
         '27': '6.75rem',
         '18': '4.5rem',
         '8/10': '80%',
+        'overscreen':'200%',
+        '120':'30rem'
       },
       height: {
         '27': '6.75rem',
@@ -113,11 +116,20 @@ module.exports = {
       margin:{
         '1/3': '33.333333%',
         '1.3/2':'58.888888%'
+      },
+      blur:{
+        'bx':'50px'
       }
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      ringWidth: ['hover', 'active'],
+      ringColor: ['hover', 'active'],
+      ringOffsetWidth: ['hover', 'active'],
+    },
   },
-  plugins: [],
+  plugins: [
+     require('@tailwindcss/line-clamp'),
+  ],
 };

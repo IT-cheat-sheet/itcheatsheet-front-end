@@ -19,7 +19,7 @@
 }
 
 .body-l {
-  @apply text-4xl tracking-wider leading-7
+  @apply text-4xl tracking-wider leading-snug
 }
 
 .body-base {
@@ -47,7 +47,7 @@
 }
 
 .button-circular {
-  @apply w-27 h-27 shadow-halo bg-yellow-hover rounded-full flex justify-center items-center text-white
+  @apply w-18 h-18 md:w-27 md:h-27 shadow-halo bg-yellow-hover rounded-full flex justify-center items-center text-white
 }
 
 .banner:hover {
@@ -55,15 +55,15 @@
 }
 
 .glass {
-  @apply bg-white opacity-50 backdrop-blur-glass
+  @apply bg-white bg-opacity-50 backdrop-filter backdrop-blur-glass
 }
 
-.input:hover {
-  @apply outline-none ring-2 ring-offset-2 shadow-lg
+.input {
+  @apply ring-offset-2
 }
 
-.input:focus {
-  @apply outline-none ring-2 shadow-lg
+.input:hover, .input:focus {
+  @apply outline-none ring-4 shadow-lg
 }
 
 .gradient:hover {

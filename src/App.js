@@ -1,14 +1,38 @@
-// import logo from './logo.svg';
-import './App.css';
-import HomePage from './pages/home/home_page';
-import Navbar from "./core/components/navbar";
-import Footer from "./core/components/footer";
+import "./App.css";
+import HomePage from "./pages/home/home_page";
+import AllSheets from "./pages/all_sheets/all_sheets_page";
+import AllReviews from "./pages/all_reviews/all_reviews_page";
+import PreviewSheet from "./pages/preview-sheet/preview_sheet_page";
+import PreviewReview from "./pages/preview-review/preview_review_page"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 function App() {
   return (
-    <div className="App ">
-        <Navbar/>
-        <HomePage/>
-        <Footer/>
+    <div className="App">
+      <Router>
+        <Switch>
+          <Route path="/sheets/:id">
+            <PreviewSheet />
+          </Route>
+          <Route path="/reviews/:id">
+            <PreviewReview />
+          </Route>
+          <Route path="/admin/review/:id"></Route>
+          <Route path="/admin/sheet/:id"></Route>
+
+          <Route path="/sheets">
+            <AllSheets />
+          </Route>
+          <Route path="/reviews">
+            <AllReviews />
+          </Route>
+          <Route path="/admin"></Route>
+
+          <Route path="/">
+            <HomePage />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
