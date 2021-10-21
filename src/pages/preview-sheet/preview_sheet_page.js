@@ -43,7 +43,7 @@ export default function PreviewSheet() {
     <div>
       <Navbar />
       {isLoad ?
-        <div className={`px-4 pb-12 md:px-16 lg:px-20 xl:px-44 bg-violet-bg pt-20 lg:pt-0 md:bg-white md:grid md:gap-7 ${file ? "md:grid-cols-3" : ""}`}>
+        <div className={`px-4 pb-12 md:px-16 lg:px-20 xl:px-44 bg-violet-bg pt-24 lg:pt-0 md:bg-white md:grid md:gap-7 ${file ? "md:grid-cols-3" : ""}`}>
           <div className="md:hidden">
             <p className="text-xxs text-purple-hover">{sheet.summaryPost.semester.semester}</p>
             <div className="mt-2">
