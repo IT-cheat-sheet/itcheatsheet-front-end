@@ -17,7 +17,8 @@ module.exports = {
           'bubble': '#E6B0FF',
           'bubbleHover': '#E7B7FF',
           'bubbleText': '#7A44BE',
-          'bg': '#F8F2FF'
+          'bg': '#F8F2FF',
+          'hotsheet':'#E7D4FF'
         },
         'green': {
           'button': '#2DCD86',
@@ -85,14 +86,16 @@ module.exports = {
         '18': '4.5rem',
         '8/10': '80%',
         'overscreen':'200%',
-        '120':'30rem'
+        '120':'30rem',
+        '2.5/6':'40%'
       },
       height: {
         '27': '6.75rem',
         '18': '4.5rem',
         '46.313':'46.313rem',
         '2.5/4':'63.5%',
-        '1.5/4':'37.5%'
+        '1.5/4':'37.5%',
+        'oversize': '156rem'
       },
       lineHeight: {
         '11': '2.625rem'
