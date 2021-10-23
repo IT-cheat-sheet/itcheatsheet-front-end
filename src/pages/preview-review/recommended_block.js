@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 export default function RecommendedBlock({ review }) {
   const [image, setImage] = useState(null);
+  const [isHover, setIsHover] = useState(false);
 
   useEffect(() => {
     (async function() {
@@ -23,22 +24,26 @@ export default function RecommendedBlock({ review }) {
   }, [review])
 
   return (
-      <div className="w-full grid grid-cols-4 text-blue-body bg-lightblue-bg rounded-lg h-44 cursor-pointer hover:shadow-xl">
+      <div 
+        className={`w-full grid grid-cols-5 text-blue-body bg-lightblue-bg rounded-lg h-24 md:h-44 cursor-pointer transform transition duration-200 ${isHover ? "scale-105":""}`} 
+        onMouseEnter={() => setIsHover(true)} 
+        onMouseLeave={() => setIsHover(false)}
+        >
         {image ?
-          <div>
-            <img src={image} className="h-44 object-cover rounded-l-lg" alt="review"/>
+          <div className="col-span-2">
+            <img src={image} className="h-24 md:h-44 object-cover rounded-l-lg" alt="review"/>
           </div>
           : <></>
         }
-        <div className={`pl-4 table mr-4 ${image ? "col-span-3" : "col-span-4"}`}>
+        <div className={`pl-4 table mr-4 ${image ? "col-span-3" : "col-span-5"}`}>
           <div className="table-cell align-middle">
-            <h5 className="body-base">{review.reviewTitle}</h5>
-            <p className="line-clamp-3">
+            <h5 className="text-base md:text-2xl font-bold">{review.reviewTitle}</h5>
+            <p className="line-clamp-2 text-xxs md:text-xl md:line-clamp-3">
               {review.reviewContent}
             </p>
             <div className="flex my-2 justify-end">
-              <p className="uppercase px-6 rounded-3xl bg-blue-form text-white">{review.reviewer}</p>
-              <p className="ml-2.5 text-blue-page">{review.reviewId}</p>
+              <p className="px-6 rounded-3xl bg-blue-form text-white text-xxs md:text-xl">{review.reviewer}</p>
+              <p className="text-xxs ml-2 md:text-xl md:ml-2.5 text-blue-page">{review.reviewId}</p>
             </div>
           </div>
         </div>
