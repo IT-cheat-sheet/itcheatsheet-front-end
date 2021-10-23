@@ -32,7 +32,11 @@ module.exports = {
         },
         'orange': {
           'button': '#FFB26B',
-          'hover': '#FF912C'
+          'hover': '#FF912C',
+          'bg': '#FFF5EC',
+          'header': '#FFB26B',
+          'pill': '#FFDFC1',
+          'post': '#CAA98A'
         },
         'blue': {
           'body': '#265FB2',
@@ -52,7 +56,11 @@ module.exports = {
         },
         'yellow': {
           'button': '#FFE298',
-          'hover': '#FFD66C'
+          'hover': '#FFD66C',
+          'bg': '#FFFBF0',
+          'header': '#FFD152',
+          'pill': '#FFEDBE',
+          'post': '#D0BF8E'
         }, 
         'red': {
           'button': '#FF6B6B',
