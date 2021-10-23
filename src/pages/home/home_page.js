@@ -2,8 +2,7 @@
 import Navbar from "../../core/components/navbar";
 import Footer from "../../core/components/footer";
 import Helloworld from "../../hello-world.jpg";
-import v from "../../1.png";
-import i from "../../2.png";
+
 import Carousel from "../../core/components/carousel";
 import React, { useState, useEffect } from "react";
 import { Document, Page, pdfjs } from 'react-pdf';
