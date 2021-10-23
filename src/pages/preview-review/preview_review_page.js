@@ -47,7 +47,7 @@ export default function PreviewReview() {
       async function fetchRecommendedPost() {
         const res = await fetch(`http://localhost:3000/review/random`);
         const data = await res.json();
-        setReviews(data.data.map((review, index) =>
+        setReviews(data.data.map((review,index) =>
         (
           <Link to={`/reviews/${review.reviewId}`} key={index}>
             <RecommendedBlock
