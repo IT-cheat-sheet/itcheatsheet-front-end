@@ -49,7 +49,7 @@ export default function PreviewSheet() {
             <div className="mt-2">
               <h1 className="text-2xl font-bold text-violet-header mr-4">{sheet.summaryPost.summaryTitle}</h1>
               <div className="float-right -mt-8">
-                <Kebab page="sheet" />
+                <Kebab page="sheet" postId={sheet.summaryPost.summaryPostId}/>
               </div>
             </div>
             <div className="flex mt-1 mb-5">
@@ -84,7 +84,7 @@ export default function PreviewSheet() {
             <div className="text-xs md:mt-5 md:text-2xl">
               <div className="bg-violet-bg md:pt-5 pb-12">
                 <div className="hidden md:flex md:justify-end md:mr-6">
-                  <Kebab page="sheet" />
+                  <Kebab page="sheet" postId={sheet.summaryPost.summaryPostId}/>
                 </div>
                 <div className="md:mx-14">
                   <p className="text-violet-header">

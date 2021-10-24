@@ -71,7 +71,7 @@ export default function PreviewReview() {
               <div className="md:hidden">
                 <h1 className="text-2xl font-bold pt-5 text-blue-body"> {reviewPost.data.reviewTitle}</h1>
                 <div className="float-right -mt-8">
-                  <Kebab page="review" />
+                  <Kebab page="review" postId={reviewPost.data.reviewId}/>
                 </div>
                 <div className="flex mt-1">
                   <p className="px-6 rounded-3xl bg-blue-form text-white text-xxs">{reviewPost.data.reviewer}</p>
@@ -87,7 +87,7 @@ export default function PreviewReview() {
               </div>
               <div className="mt-5 text-sm md:text-2xl bg-lightblue-bg rounded-lg pb-5 md:pb-12">
                 <div className="hidden md:flex justify-end mr-6 pt-2">
-                  <Kebab page="review" />
+                  <Kebab page="review" postId={reviewPost.data.reviewId}/>
                 </div>
                 <p className="md:mx-14 text-blue-body">
                   {reviewPost.data.reviewContent}

@@ -1,17 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-export default function textArea({page, textAreaLabel}) {
-  const ringHoverColor = "hover:text-" + (page === 'sheet' ? 'purple' : 'blue') + "-form";
-  const ringFocusColor = "focus:text-" + (page === 'sheet' ? 'purple' : 'blue') + "-formHover";
+export default function TextArea({page, textAreaLabel, value, setValue}) {
+  const [textAreaValue, setTextAreaValue] = useState(value ? value : "");
+
+  const updateValue = (value) => {
+    setTextAreaValue(value);
+    setValue(value);
+  }
+
+  const ringHoverColor = "hover:ring-" + (page === 'sheet' ? 'purple' : page === 'review' ? 'blue' : 'gray') + "-form";
+  const ringFocusColor = "focus:ring-" + (page === 'sheet' ? 'purple' : page === 'review' ? 'blue' : 'gray') + "-formHover";
 
   return (
     <div>
-      <label className={`uppercase body-base mb-5 ${page === 'sheet' ? 'text-violet-pill' : 'text-blue-body'}`} for="textAreaContent">{textAreaLabel}</label>
+      <label className={`uppercase body-base mb-5 ${page === 'sheet' ? 'text-violet-pill' : (page === 'review') ? 'text-blue-body' : "text-black"}`} for="textAreaContent">{textAreaLabel}</label>
+      <br/>
       <textarea 
         id="textAreaContent" 
         name="textAreaContent" 
-        className={`resize-none w-3/5 h-60 mt-5 input ${ringHoverColor} ${ringFocusColor} rounded-lg py-2 px-4 text-gray-mailbox`} 
-        placeholder="Please text politely :)">  
+        className={`resize-none w-full h-60 mt-5 input ${ringHoverColor} ${ringFocusColor} rounded-lg py-2 px-4 text-gray-mailbox`} 
+        placeholder="Please text politely :)"
+        onChange={e => updateValue(e.target.value)}
+        value={textAreaValue}
+        >
+
       </textarea>
     </div>
   )
