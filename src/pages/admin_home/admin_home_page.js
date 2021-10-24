@@ -8,6 +8,7 @@ import AdminThumb from "./admin_thumb";
 export default function AdminHome() {
   const [reports] = useState([]);
   const [readPage, setReadPage] = useState(false);
+  const [isLoad, setIsLoad] = useState(false);
   // eslint-disable-next-line
   const [refresher, setRefresher] = useState(false);
 
@@ -31,31 +32,48 @@ export default function AdminHome() {
 
   const onRead = (index, id) => {
     if(reports[index].readStatus === 0){
-      fetch(`http://localhost:3000/report/setReadStatus/${id}`, {method: 'PUT', headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`}, body: JSON.stringify({readStatus: 1})});
+      try {
+        fetch(`http://localhost:3000/report/setReadStatus/${id}`,{
+          method: 'PUT',
+          headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`},
+          body: JSON.stringify({readStatus: 1})
+        });
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
+      }
     }
   }
 
   useEffect(() => {
     if(token !== null){
       (async function() {
-        const res = await fetch(`http://localhost:3000/report/getAll?sortBy=${filter}&search=${searchWord}&readStatus=${readPage ? 1 : 0}`,
-        {headers: {"Authorization": `Bearer ${token}`}});
-        const data = await res.json();
+        try {
+          const res = await fetch(`http://localhost:3000/report/getAll?sortBy=${filter}&search=${searchWord}&readStatus=${readPage ? 1 : 0}`,
+            {headers: {"Authorization": `Bearer ${token}`}});
+          const data = await res.json();
         
-        //Clear Existing Reports
-        reports.length = 0;
+          if(res.status === 200){
+            //Clear Existing Reports
+            reports.length = 0;
         
-        data.reports.forEach((report) => {
-          reports.push(report);
-        })
+            data.reports.forEach((report) => {
+              reports.push(report);
+            })
   
-        reports.reverse();
+            reports.reverse();
   
-        if(amount.current < 0){
-          amount.current = reports.length;
+            if(amount.current < 0){
+              amount.current = reports.length;
+            }
+
+            setIsLoad(true);
+            setRefresher(r => !r);
+          }
+        } catch (err) {
+          console.log(err);
+          alert(err.message);
         }
-  
-        setRefresher(r => !r);
       })();
     }
   }, [readPage, history, reports, filter, searchWord, token])
@@ -93,7 +111,7 @@ export default function AdminHome() {
               ]} onFilter={setFilter} onSearch={setSearchWord} />
             </div>
           </div>
-          {
+          {isLoad ? (
             reports.length > 0 ?
             <div>
               <div className="flex flex-col mt-7">
@@ -110,7 +128,7 @@ export default function AdminHome() {
               <span className="material-icons-outlined text-9xl block mb-5">drafts</span>
               No Report Found
             </div>
-          }
+          ) : <></>}
       </div>
       <Footer />
     </div>

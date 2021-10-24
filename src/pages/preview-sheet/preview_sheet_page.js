@@ -17,23 +17,35 @@ export default function PreviewSheet() {
 
   useEffect(() => {
     async function fetchSheet() {
-      const res = await fetch(`http://localhost:3000/summarypost/get/${params.id}`)
-      const data = await res.json();
-      setSheet(data);
-      setIsLoad(true);
+      try {
+        const res = await fetch(`http://localhost:3000/summarypost/get/${params.id}`)
+        const data = await res.json();
+        if(res.status === 200){
+          setSheet(data);
+          setIsLoad(true);
+        }
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
+      }
     };
     async function fetchFile() {
-      const res = await fetch(`http://localhost:3000/summarypost/getFile/${params.id}`);
-      const data = await res.blob();
+      try {
+        const res = await fetch(`http://localhost:3000/summarypost/getFile/${params.id}`);
+        const data = await res.blob();
 
-      if (res.status === 200) {
-        var reader = new FileReader();
-        reader.onload = (e) => {
-          setFile(e.target.result);
-        };
-        reader.readAsDataURL(data);
-      } else {
-        setFile(null);
+        if (res.status === 200) {
+          var reader = new FileReader();
+          reader.onload = (e) => {
+            setFile(e.target.result);
+          };
+          reader.readAsDataURL(data);
+        } else {
+          setFile(null);
+        }
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
       }
     }
 

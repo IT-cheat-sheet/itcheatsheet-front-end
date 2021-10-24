@@ -29,16 +29,12 @@ export default function AllReviews() {
 
   const onFilter = (x) => {
     setFilter(x);
-    //Force Refresher to ensure that the page will fetch the current filter
-    setCurrent(0);
     //Force Back to First Page
     history.replace('/reviews');
   }
 
   const onSearch = (x) => {
     setSearchWord(x);
-    //Force Refresher to ensure that the page will fetch the current search word
-    setCurrent(0);
     //Force Back to First Page
     history.replace('/reviews');
   }
@@ -46,29 +42,43 @@ export default function AllReviews() {
   useEffect(() => {
     if(topics.length === 0){
       (async function() {
-        const res = await fetch(`http://localhost:3000/topic/getAll`);
-        const data = await res.json();
+        try {
+          const res = await fetch(`http://localhost:3000/topic/getAll`);
+          const data = await res.json();
       
-        data.data.forEach((topic) => {
-          topics.push({key: topic.topicName, value: topic.topicName});
-        })
+          if(res.status === 200) {
+            data.data.forEach((topic) => {
+              topics.push({key: topic.topicName, value: topic.topicName});
+            })
+          }
+        } catch (err) {
+          console.log(err);
+          alert(err.message);
+        }
       })();
     }
     
     (async function() {
-      const res = await fetch(`http://localhost:3000/review/getAll?page=${page - 1}&pageSize=${pageSize}&searchWord=${searchWord}&sortTopic=${filter}&sortDesc=true`);
-      const data = await res.json();
+      try {
+        const res = await fetch(`http://localhost:3000/review/getAll?page=${page - 1}&pageSize=${pageSize}&searchWord=${searchWord}&sortTopic=${filter}&sortDesc=true`);
+        const data = await res.json();
       
-      //Clear Existing Reviews
-      reviews.length = 0;
+        if(res.status === 200){
+          //Clear Existing Reviews
+          reviews.length = 0;
       
-      data.data.rows.forEach((review) => {
-        reviews.push(review);
-      })
+          data.data.rows.forEach((review) => {
+            reviews.push(review);
+          })
 
-      setCurrent(page);
-      setTotal(data.totalPage);
-      setIsLoad(true);
+          setCurrent(page);
+          setTotal(data.totalPage);
+          setIsLoad(true);
+        }
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
+      }
     })();
 
   }, [topics, filter, page, reviews, searchWord])

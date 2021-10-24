@@ -14,48 +14,68 @@ export default function PreviewReview() {
 
   useEffect(() => {
     async function fetchReviewPost() {
-      const res = await fetch(`http://localhost:3000/review/get/${params.id}`);
-      const data = await res.json();
-      setReviewPost(data);
+      try {
+        const res = await fetch(`http://localhost:3000/review/get/${params.id}`);
+        const data = await res.json();
+        if(res.status === 200){
+          setReviewPost(data);
+        }
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
+      }
     };
     async function fetchReviewImage() {
-      const res = await fetch(`http://localhost:3000/review/image/${params.id}`);
-      const data = await res.blob();
+      try {
+        const res = await fetch(`http://localhost:3000/review/image/${params.id}`);
+        const data = await res.blob();
 
-      if (res.status === 200) {
-        if (data.type.includes("image")) {
-          var reader = new FileReader();
-          reader.onload = (e) => {
-            setReviewImage(e.target.result);
-          };
-          reader.readAsDataURL(data);
+        if (res.status === 200) {
+          if (data.type.includes("image")) {
+            var reader = new FileReader();
+            reader.onload = (e) => {
+              setReviewImage(e.target.result);
+            };
+            reader.readAsDataURL(data);
+          }
+        } else {
+          setReviewImage(null);
         }
-      } else {
-        setReviewImage(null);
+        setIsLoad(true);
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
       }
-      setIsLoad(true);
     };
 
     fetchReviewPost();
     fetchReviewImage();
-  }, [params.id])
+  }, [params])
 
   const RecommendedBlocks = () => {
     const [reviews, setReviews] = useState([]);
 
     useEffect(() => {
       async function fetchRecommendedPost() {
-        const res = await fetch(`http://localhost:3000/review/random`);
-        const data = await res.json();
-        setReviews(data.data.map((review,index) =>
-        (
-          <Link to={`/reviews/${review.reviewId}`} key={index}>
-            <RecommendedBlock
-              review={review} />
-          </Link>
-        )));
+        try {
+          const res = await fetch(`http://localhost:3000/review/random`);
+          const data = await res.json();
+          if(res.status === 200){
+            setReviews(data.data.map((review,index) => (
+              <Link to={`/reviews/${review.reviewId}`} key={index}>
+                <RecommendedBlock
+                  review={review} />
+              </Link>
+            )));
+          }
+        } catch (err) {
+          console.log(err);
+          alert(err.message);
+        }
       }
-      fetchRecommendedPost();
+      if(reviews.length === 0){
+        fetchRecommendedPost();
+      }
     }, [])
 
     return reviews;

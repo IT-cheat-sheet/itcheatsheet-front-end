@@ -6,19 +6,24 @@ export default function RecommendedBlock({ review }) {
 
   useEffect(() => {
     (async function() {
-      const res = await fetch(`http://localhost:3000/review/image/${review.reviewId}`);
-      const data = await res.blob();
+      try {
+        const res = await fetch(`http://localhost:3000/review/image/${review.reviewId}`);
+        const data = await res.blob();
       
-      if(res.status === 200){
-        if (data.type.includes("image")) {
-          var reader = new FileReader();
-          reader.onload = (e) => {
-            setImage(e.target.result);
-          };
-          reader.readAsDataURL(data);
+        if(res.status === 200){
+          if (data.type.includes("image")) {
+            var reader = new FileReader();
+            reader.onload = (e) => {
+              setImage(e.target.result);
+            };
+            reader.readAsDataURL(data);
+          }
+        } else {
+          setImage(null);
         }
-      } else {
-        setImage(null);
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
       }
     })();
   }, [review])
