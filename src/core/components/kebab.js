@@ -134,15 +134,16 @@ export default function Kebab({ page, postId }) {
         openSuggestModal ?
           <>
             <div
-              className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-60 outline-none focus:outline-none mx-4"
+              className="justify-center items-center flex overflow-x-hidden overflow-y-auto md:overflow-y-hidden fixed inset-0 z-60 outline-none focus:outline-none mx-0 md:mx-4"
             >
-              <div className="relative w-4/5 my-6 mx-auto max-w-3xl text-left">
-                <div className="flex justify-between">
-                  <h3 className="uppercase text-white text-4xl font-bold">report form</h3>
-                  <span className="material-icons text-white text-4xl cursor-pointer" onClick={() => setOpenSuggestModal(false)}>cancel</span>
+              <div className="relative w-full h-screen md:h-auto md:w-4/5 my-6 mx-auto max-w-3xl text-left">
+                <div className="flex md:justify-between mx-4 md:mx-0 pt-10 md:pt-0">
+                  <span class="material-icons text-white text-2xl md:hidden" onClick={() => setOpenSuggestModal(false)}>arrow_back_ios</span>
+                  <h3 className="uppercase text-white text-2xl md:text-4xl font-bold">report form</h3>
+                  <span className="material-icons text-white text-4xl cursor-pointer hidden md:block" onClick={() => setOpenSuggestModal(false)}>cancel</span>
                 </div>
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-footer outline-none focus:outline-none mt-5">
-                  <div className="relative p-6 flex-auto mx-6">
+                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full h-screen md:h-auto bg-gray-footer outline-none focus:outline-none mt-5">
+                  <div className="relative p-6 flex-auto md:mx-6">
                     <form>
                       {
                         showError ?
@@ -171,9 +172,9 @@ export default function Kebab({ page, postId }) {
             <div
               className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none mx-4"
             >
-              <div className="relative w-4/5 my-6 mx-auto max-w-3xl text-left">
+              <div className="relative w-full md:w-4/5 my-6 mx-auto max-w-3xl text-left">
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-footer outline-none focus:outline-none mt-5">
-                  <div className="relative p-6 flex-auto mx-6 text-center text-black">
+                  <div className="relative p-6 flex-auto md:mx-6 text-center text-black">
                     <p>Send Successfully!</p>
                     <div className="mt-5">
                       <Button color="green" size="sm" onClick={() => setOpenSendSuccessModal(false)}>OK</Button>
@@ -192,9 +193,9 @@ export default function Kebab({ page, postId }) {
             <div
               className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none mx-4"
             >
-              <div className="relative w-4/5 my-6 mx-auto max-w-3xl text-left">
+              <div className="relative w-full md:w-4/5 my-6 mx-auto max-w-3xl text-left">
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-footer outline-none focus:outline-none mt-5">
-                  <div className="relative p-6 flex-auto mx-6 text-center text-black">
+                  <div className="relative p-6 flex-auto md:mx-6 text-center text-black">
                     <p>
                       There's some problem occured when processing your request.
                       <br />
