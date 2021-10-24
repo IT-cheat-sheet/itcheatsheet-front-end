@@ -18,7 +18,10 @@ module.exports = {
           'bubbleHover': '#E7B7FF',
           'bubbleText': '#7A44BE',
           'bg': '#F8F2FF',
-          'hotsheet':'#E7D4FF'
+          'hotsheet':'#E7D4FF',
+          'input':'#F4DDFF',
+          'admin':'#662385'
+
         },
         'green': {
           'button': '#2DCD86',
