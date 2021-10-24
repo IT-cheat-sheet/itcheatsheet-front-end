@@ -19,10 +19,15 @@ export default function AdminHome() {
   const amount = useRef(-1);
 
   const getCookie = (name) => {
-    return document.cookie.split(';').find(c => c.trim().startsWith(name + '=')).substring((name + '=').length);
+    const c = document.cookie.split(';').find(c => c.trim().startsWith(name + '='));
+    return c ? c.substring((name + '=').length) : null;
   }
 
   const token = getCookie('cheatSheetToken');
+
+  if(token === null){
+    history.replace('/admin/login');
+  }
 
   const onRead = (index, id) => {
     if(reports[index].readStatus === 0){
@@ -31,30 +36,28 @@ export default function AdminHome() {
   }
 
   useEffect(() => {
-    if(token === null){
-      history.replace('/admin/login');
+    if(token !== null){
+      (async function() {
+        const res = await fetch(`http://localhost:3000/report/getAll?sortBy=${filter}&search=${searchWord}&readStatus=${readPage ? 1 : 0}`,
+        {headers: {"Authorization": `Bearer ${token}`}});
+        const data = await res.json();
+        
+        //Clear Existing Reports
+        reports.length = 0;
+        
+        data.reports.forEach((report) => {
+          reports.push(report);
+        })
+  
+        reports.reverse();
+  
+        if(amount.current < 0){
+          amount.current = reports.length;
+        }
+  
+        setRefresher(r => !r);
+      })();
     }
-
-    (async function() {
-      const res = await fetch(`http://localhost:3000/report/getAll?sortBy=${filter}&search=${searchWord}&readStatus=${readPage ? 1 : 0}`,
-      {headers: {"Authorization": `Bearer ${token}`}});
-      const data = await res.json();
-      
-      //Clear Existing Reports
-      reports.length = 0;
-      
-      data.reports.forEach((report) => {
-        reports.push(report);
-      })
-
-      reports.reverse();
-
-      if(amount.current < 0){
-        amount.current = reports.length;
-      }
-
-      setRefresher(r => !r);
-    })();
   }, [readPage, history, reports, filter, searchWord, token])
 
   return (
