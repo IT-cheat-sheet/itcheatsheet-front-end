@@ -18,14 +18,6 @@ export default function AdminHome() {
 
   const amount = useRef(-1);
 
-  const onFilter = (x) => {
-    setFilter(x);
-  }
-
-  const onSearch = (x) => {
-    setSearchWord(x);
-  }
-
   const onRead = (index, id) => {
     if(reports[index].readStatus === 0){
       fetch(`http://localhost:3000/report/setReadStatus/${id}`, {method: 'PUT', body: JSON.stringify({readStatus: 1})});
@@ -93,7 +85,7 @@ export default function AdminHome() {
               <SearchBox page="admin" options={[
                 {key: 'Sheets', value: 'summaryPost'},
                 {key: 'Thread', value: 'review'}
-              ]} onFilter={onFilter} onSearch={onSearch} />
+              ]} onFilter={setFilter} onSearch={setSearchWord} />
             </div>
           </div>
           {
