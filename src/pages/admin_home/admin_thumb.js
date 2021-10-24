@@ -19,8 +19,8 @@ export default function AdminThumb({ type, read, report }) {
           </div>
           <div className="flex gap-3 my-2">
             <div className={classNames("px-4 rounded-3xl text-white w-max",
-            {"bg-orange-pill" : !read},
-            {"bg-yellow-pill" : read})}>{type === 'sheet' ? report.summarypost.posterName : report.review.reviewer}</div>
+            {"bg-orange-header" : !read},
+            {"bg-yellow-header" : read})}>{type === 'sheet' ? report.summarypost.posterName : report.review.reviewer}</div>
             <div className={classNames({"text-orange-post" : !read},
             {"text-yellow-post" : read})}>{type === 'sheet' ? report.summarypost.summaryPostId : report.review.reviewId}</div>
           </div>
