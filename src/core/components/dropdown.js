@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Dropdown = ({label, options, page, setValue}) => {
   const [display, setDisplay] = useState('none')
@@ -8,6 +8,18 @@ const Dropdown = ({label, options, page, setValue}) => {
     setDisplay(name);
     setValue(value);
   }
+
+  useEffect(() => {
+    const closeDropdown = (e) => {
+      if(e.target.id !== 'dropdown'){
+        setToggle(false);
+      }
+    }
+    document.addEventListener('click', closeDropdown);
+    return () => {
+      document.removeEventListener('click', closeDropdown);
+    }
+  })
 
   const placeholderColor = page === 'sheet' ? 'text-violet-bubbleHover' : page === 'review' ? 'text-lightblue-lighter' : 'text-gray-disabled';
   const ringHoverColor = "hover:ring-" + (page === 'sheet' ? 'purple' : page === 'review' ? 'blue' : 'gray') + "-form";
@@ -25,7 +37,10 @@ const Dropdown = ({label, options, page, setValue}) => {
       <div className={`shadow-xl absolute rounded-lg ${labelColor}`}>
         {options.map((option, index) => (
           <div
-          onClick={() => updateValue(option.name, option.value)}
+          onClick={() => {
+            updateValue(option.name, option.value);
+            setToggle(false);
+          }}
           className={`h-12 w-52 bg-white py-2 px-4 body-base cursor-pointer
           ${index === options.length - 1 ? 'rounded-b-lg' : 'border-b-2 border-gray-disabled'}
           ${index === 0 ? 'rounded-t-lg' : ''}

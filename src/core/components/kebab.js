@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from './button'
 import Dropdown from './dropdown';
 import TextArea from './textArea';
@@ -81,9 +81,21 @@ export default function Kebab({ page, postId }) {
     }
   }
 
+  useEffect(() => {
+    const closeKebab = (e) => {
+      if(!e.target.classList.contains('kebab')){
+        setToggle(false);
+      }
+    }
+    document.addEventListener('click', closeKebab);
+    return () => {
+      document.removeEventListener('click', closeKebab);
+    }
+  })
+
   return (
     <div className={`text-right relative w-27 md:w-36 lg:w-64 ${page === 'sheet' ? 'text-violet-hover' : 'text-blue-body'}`}>
-      <span className="material-icons cursor-pointer p-1" onClick={() => setToggle(!toggle)}>more_vert</span>
+      <span className="kebab material-icons cursor-pointer p-1" onClick={() => setToggle(!toggle)}>more_vert</span>
       {toggle
         ? <div className={`uppercase w-27 md:w-36 lg:w-60 text-center absolute top-0 right-7 text-xs md:text-sm lg:text-xl rounded-lg ${page === 'sheet' ? 'bg-violet-bubble' : 'bg-lightblue-lighter'}`}>
           <p className={`py-2 lg:py-5 cursor-pointer rounded-t-lg flex justify-center items-center ${page === 'sheet' ? 'hover:bg-violet-bubbleHover' : 'hover:bg-lightblue-light'}`}
@@ -108,7 +120,7 @@ export default function Kebab({ page, postId }) {
               <div className="relative w-auto my-6 mx-auto max-w-3xl">
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                   <div className="relative p-6 flex-auto text-center mx-6">
-                    <span class="material-icons-outlined text-5xl">
+                    <span className="material-icons-outlined text-5xl">
                       sentiment_dissatisfied
                     </span>
                     <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
