@@ -12,6 +12,7 @@ export default function PreviewSheet() {
   const [sheet, setSheet] = useState([]);
   const [file, setFile] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
+  const [toggleSeeMore, setToggleSeeMore] = useState(false);
 
   useEffect(() => {
     async function fetchSheet() {
@@ -43,34 +44,39 @@ export default function PreviewSheet() {
     <div>
       <Navbar />
       {isLoad ?
-        <div className={`px-4 pb-12 md:px-16 lg:px-20 xl:px-44 bg-violet-bg pt-24 lg:pt-0 md:bg-white md:grid md:gap-7 ${file ? "md:grid-cols-3" : ""}`}>
-          <div className="md:hidden">
-            <p className="text-xxs text-purple-hover">{sheet.summaryPost.semester.semester}</p>
-            <div className="mt-2">
-              <h1 className="text-2xl font-bold text-violet-header mr-4">{sheet.summaryPost.summaryTitle}</h1>
-              <div className="float-right -mt-8">
-                <Kebab page="sheet" postId={sheet.summaryPost.summaryPostId}/>
+        <div className={`px-4 pb-12 md:px-16 lg:px-20 xl:px-44 bg-violet-bg pt-24 lg:pt-0 md:bg-white md:grid md:gap-7 ${file ? "md:grid-cols-12" : ""}`}>
+          <div className="col-span-5">
+            <div className="md:hidden">
+              <p className="text-xxs text-purple-hover">{sheet.summaryPost.semester.semester}</p>
+              <div className="mt-2">
+                <h1 className="text-2xl font-bold text-violet-header mr-4">{sheet.summaryPost.summaryTitle}</h1>
+                <div className="float-right -mt-8">
+                  <Kebab page="sheet" postId={sheet.summaryPost.summaryPostId} />
+                </div>
+              </div>
+              <div className="flex mt-1 mb-5">
+                <p className="px-2 text-xxs rounded-3xl bg-violet-pill text-white">{sheet.summaryPost.posterName}</p>
+                <p className="ml-4 text-purple-hover text-xxs">{sheet.summaryPost.summaryPostId}</p>
               </div>
             </div>
-            <div className="flex mt-1 mb-5">
-              <p className="px-2 text-xxs rounded-3xl bg-violet-pill text-white">{sheet.summaryPost.posterName}</p>
-              <p className="ml-4 text-purple-hover text-xxs">{sheet.summaryPost.summaryPostId}</p>
+            <div className="shadow-halo">
+              {
+              file ?
+                <a href={`http://localhost:3000/summarypost/getFile/${params.id}`} target="_blank" rel="noreferrer">
+                  <div>
+                    <Document
+                      file={file}
+                    >
+                      <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
+                    </Document>
+                  </div>
+                </a>
+                : <></>
+            }
             </div>
+            
           </div>
-          {
-            file ?
-              <a href={`http://localhost:3000/summarypost/getFile/${params.id}`} target="_blank" rel="noreferrer">
-                <div>
-                  <Document
-                    file={file}
-                  >
-                    <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
-                  </Document>
-                </div>
-              </a>
-              : <></>
-          }
-          <div className="mt-5 xl:mt-16 md:col-span-2">
+          <div className="mt-5 xl:mt-7 md:col-span-7">
             <div className="hidden md:block">
               <div className="flex">
                 <h2 className="header-secondary text-violet-header">{sheet.summaryPost.summaryTitle}</h2>
@@ -84,12 +90,18 @@ export default function PreviewSheet() {
             <div className="text-xs md:mt-5 md:text-2xl">
               <div className="bg-violet-bg md:pt-5 pb-12">
                 <div className="hidden md:flex md:justify-end md:mr-6">
-                  <Kebab page="sheet" postId={sheet.summaryPost.summaryPostId}/>
+                  <Kebab page="sheet" postId={sheet.summaryPost.summaryPostId} />
                 </div>
                 <div className="md:mx-14">
-                  <p className="text-violet-header">
+                  <p className={`text-violet-header ${toggleSeeMore ? "" : "line-clamp-6"} max-h-72 overflow-y-scroll`}>
                     {sheet.summaryPost.summaryContent}
                   </p>
+                  {
+                    toggleSeeMore ?
+                      <></>
+                      : <span className="text-violet-link hover:text-violet-admin cursor-pointer" onClick={() => setToggleSeeMore(true)}>see more</span>
+                  }
+                  <br />
                   <br />
                   {
                     sheet.summaryPost.linkAttachment ?
