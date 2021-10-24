@@ -79,7 +79,7 @@ export default function PreviewSheet() {
                 : <></>
               }
             </div>
-            <div className="w-full text-center mt-2 text-purple-hover text-2xl">Click to View File</div>
+            <div className="w-full text-center mt-2 text-purple-hover text-sm md:text-2xl">Click to View File</div>
             
           </div>
           <div className="mt-5 xl:mt-7 md:col-span-7">
@@ -109,9 +109,9 @@ export default function PreviewSheet() {
                   }
                   {
                     sheet.summaryPost.linkAttachment ?
-                      <a href={sheet.summaryPost.linkAttachment} className="text-violet-link mt-10 flex" target="_blank" rel="noreferrer">
-                        <span className="material-icons text-3xl transform -rotate-45">link</span>
-                        <span className="ml-2 underline">{sheet.summaryPost.linkAttachment}</span>
+                      <a href={sheet.summaryPost.linkAttachment} className="text-violet-link mt-10 flex items-center" target="_blank" rel="noreferrer">
+                        <span className="material-icons text-base md:text-3xl transform -rotate-45">link</span>
+                        <span className="ml-1 md:ml-2 underline">{sheet.summaryPost.linkAttachment}</span>
                       </a>
                       : <></>
                   }
