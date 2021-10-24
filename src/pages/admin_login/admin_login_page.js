@@ -44,18 +44,18 @@ return (
                 <div className=" w-3/6 mt-12">
                   <div>USERNAME</div>
                   <input type="text" name="username" value={username}
-                    onChange={e => setUsername(e.target.value)} className="bg-violet-input w-full text-violet-admin h-9 rounded-lg text-2xl pl-3" />
+                    onChange={e => setUsername(e.target.value)} className="bg-violet-input w-full text-violet-admin h-9 rounded-lg text-2xl pl-3 focus:outline-none" />
                 </div>
               </div>
               <div className="flex justify-center mt-5">
                 <div className="w-3/6">
                   <div>PASSWORD</div>
                   <input type="password" name="password" value={password}
-                    onChange={e => setPassword(e.target.value)} className="bg-violet-input w-full text-violet-admin h-9 rounded-lg text-2xl pl-3" />
+                    onChange={e => setPassword(e.target.value)} className="bg-violet-input w-full text-violet-admin h-9 rounded-lg text-2xl pl-3 focus:outline-none" />
                 </div>
               </div>
               <div className="flex justify-center mt-12">
-                <input type="submit" value="SIGN IN" className="w-32 h-11 tracking-wider font-normal bg-violet-admin text-white rounded-lg" />
+                <input type="submit" value="SIGN IN" className="w-32 h-11 tracking-wider font-normal bg-violet-admin text-white rounded-lg cursor-pointer" />
               </div>
             </form>
           </div>
