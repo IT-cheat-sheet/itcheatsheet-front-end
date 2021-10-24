@@ -120,6 +120,9 @@ module.exports = {
       },
       blur:{
         'bx':'50px'
+      },
+      zIndex: {
+        '60': '60'
       }
     },
   },
