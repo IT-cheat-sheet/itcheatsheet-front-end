@@ -244,11 +244,11 @@ export default function HomePage() {
                             <div className="p-5 text-center">Basic use</div>
                         </div>
                         <div className="w-120 " >
-                            <img onClick={() => Clickclick({ Helloworld })} src={v} alt="tutorial for use website" />
+                            <img onClick={() => Clickclick({ Helloworld })} src={Helloworld} alt="tutorial for use website" />
                             <div className="p-5 text-center">Post sheet</div>
                         </div>
                         <div className="w-120 "  >
-                            <img onClick={() => Clickclick({ Helloworld })} src={i} alt="tutorial for use website" />
+                            <img onClick={() => Clickclick({ Helloworld })} src={Helloworld} alt="tutorial for use website" />
                             <div className="p-5 text-center">Delete post</div>
                         </div>
                     </div>
