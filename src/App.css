@@ -1,3 +1,7 @@
+.App {
+  font-family: 'Roboto';
+}
+
 .material-icons, .material-icons-outlined, .material-icons-round {
   -webkit-touch-callout: none;
     -webkit-user-select: none;
