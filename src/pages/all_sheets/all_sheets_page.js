@@ -13,6 +13,7 @@ export default function AllSheets() {
   const [sheets] = useState([]);
   const [current, setCurrent] = useState(0);
   const [total, setTotal] = useState(0);
+  const [isLoad, setIsLoad] = useState(false);
 
   var [searchWord, setSearchWord] = useState('');
   var [filter, setFilter] = useState('');
@@ -55,7 +56,7 @@ export default function AllSheets() {
     }
     
     (async function() {
-      const res = await fetch(`http://localhost:3000/summarypost/getAll?pageNumber=${page}&pageSize=${pageSize}&search=${searchWord}&semesterFilter=${filter}`);
+      const res = await fetch(`http://localhost:3000/summarypost/getAll?pageNumber=${page}&pageSize=${pageSize}&search=${searchWord}&semesterFilter=${filter}&sortType=DESC`);
       const data = await res.json();
       
       //Clear Existing Reviews
@@ -67,6 +68,8 @@ export default function AllSheets() {
 
       setCurrent(page);
       setTotal(data.totalPage);
+
+      setIsLoad(true);
     })();
 
   }, [semesters, filter, page, sheets, searchWord])
@@ -85,7 +88,7 @@ export default function AllSheets() {
         <div className="hidden md:block header-popup text-violet-sheet mt-14 mb-5">ALL SHEET</div>
         <div className="pb-6 md:p-14 md:rounded-lg md:bg-violet-bg">
           <SearchBox page="sheet" options={semesters} onFilter={onFilter} onSearch={onSearch} />
-          {
+          {isLoad ? (
             sheets.length > 0 ?
             <div>
               <div className="grid grid-cols-2 md:grid-cols-4 mt-4">
@@ -105,8 +108,7 @@ export default function AllSheets() {
               <span className="material-icons-round text-9xl block mb-5">sentiment_very_dissatisfied</span>
               No Sheets Found
           </div>
-          
-          }
+          ) : <></>}
         </div>
       </div>
       <div>

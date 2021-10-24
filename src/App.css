@@ -27,3 +27,37 @@
 -ms-overflow-style: none;  /* IE and Edge */
 scrollbar-width: none;  /* Firefox */
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #545454;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #c4c4c4;
+}
+
+.innerTrack::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Handle */
+.innerTrack::-webkit-scrollbar-thumb {
+  background: #e3e3e3;
+  border-radius: 10px;
+}
+
+/* Track */
+.innerTrack::-webkit-scrollbar-thumb:hover {
+  background: #c4c4c4;
+}
+
+.innerTrack::-webkit-scrollbar-track {
+  background: none;
+}

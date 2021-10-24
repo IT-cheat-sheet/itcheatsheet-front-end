@@ -13,6 +13,7 @@ export default function AllReviews() {
   const [reviews] = useState([]);
   const [current, setCurrent] = useState(0);
   const [total, setTotal] = useState(0);
+  const [isLoad, setIsLoad] = useState(false);
 
   var [searchWord, setSearchWord] = useState('');
   var [filter, setFilter] = useState('');
@@ -67,6 +68,7 @@ export default function AllReviews() {
 
       setCurrent(page);
       setTotal(data.totalPage);
+      setIsLoad(true);
     })();
 
   }, [topics, filter, page, reviews, searchWord])
@@ -81,7 +83,7 @@ export default function AllReviews() {
           <div className="md:px-10 md:mt-14">
             <SearchBox page="review" options={topics} onFilter={onFilter} onSearch={onSearch} />
           </div>
-          {
+          {isLoad ? (
             reviews.length > 0 ?
             <div>
               <div className="grid grid-cols-1 md:grid-cols-2 mt-7">
@@ -101,7 +103,7 @@ export default function AllReviews() {
               <span className="material-icons-round text-9xl block mb-5">sentiment_very_dissatisfied</span>
               No Review Found
             </div>
-          }
+          ) : <></>}
         </div>
         <div>
           <button className="button-circular fixed z-30 bottom-7 right-4 md:bottom-12 md:right-24">
