@@ -18,25 +18,25 @@ export default function AdminHome() {
 
   const amount = useRef(-1);
 
-  const onRead = (index, id) => {
-    if(reports[index].readStatus === 0){
-      fetch(`http://localhost:3000/report/setReadStatus/${id}`, {method: 'PUT', body: JSON.stringify({readStatus: 1})});
-    }
-  }
-
   const getCookie = (name) => {
     return document.cookie.split(';').find(c => c.trim().startsWith(name + '=')).substring((name + '=').length);
   }
 
-  useEffect(() => {
-    const token = getCookie('cheatSheetToken');
+  const token = getCookie('cheatSheetToken');
 
+  const onRead = (index, id) => {
+    if(reports[index].readStatus === 0){
+      fetch(`http://localhost:3000/report/setReadStatus/${id}`, {method: 'PUT', headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`}, body: JSON.stringify({readStatus: 1})});
+    }
+  }
+
+  useEffect(() => {
     if(token === null){
       history.replace('/admin/login');
     }
 
     (async function() {
-      const res = await fetch(`http://localhost:3000/report/getAll?sortBy=${filter}&readStatus=${readPage ? 1 : 0}`,
+      const res = await fetch(`http://localhost:3000/report/getAll?sortBy=${filter}&search=${searchWord}&readStatus=${readPage ? 1 : 0}`,
       {headers: {"Authorization": `Bearer ${token}`}});
       const data = await res.json();
       
@@ -47,13 +47,15 @@ export default function AdminHome() {
         reports.push(report);
       })
 
+      reports.reverse();
+
       if(amount.current < 0){
         amount.current = reports.length;
       }
 
       setRefresher(r => !r);
     })();
-  }, [readPage, history, reports, filter, searchWord])
+  }, [readPage, history, reports, filter, searchWord, token])
 
   return (
     <div>
@@ -94,7 +96,7 @@ export default function AdminHome() {
               <div className="flex flex-col mt-7">
                 {
                   reports.map((report, index) => (
-                    <Link onClick={() => onRead(index, report.summaryPostId ?? report.reviewId)} key={index} to={report.summaryPostId ? `/admin/sheets/${report.summaryPostId}` : `/admin/reviews/${report.reviewId}`}>
+                    <Link onClick={() => onRead(index, report.reportNumber)} key={index} to={report.summaryPostId ? `/admin/sheets/${report.summaryPostId}` : `/admin/reviews/${report.reviewId}`}>
                       <AdminThumb type={report.summaryPostId ? 'sheet' : 'review'} read={readPage} report={report} />
                     </Link>
                   ))
