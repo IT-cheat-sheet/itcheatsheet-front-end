@@ -6,11 +6,9 @@ import SearchBox from "../../core/components/searchBox";
 import AdminThumb from "./admin_thumb";
 
 export default function AdminHome() {
-  const [reports] = useState([]);
+  const [reports, setReports] = useState([]);
   const [readPage, setReadPage] = useState(false);
   const [isLoad, setIsLoad] = useState(false);
-  // eslint-disable-next-line
-  const [refresher, setRefresher] = useState(false);
 
   const [searchWord, setSearchWord] = useState('');
   const [filter, setFilter] = useState('');
@@ -54,21 +52,20 @@ export default function AdminHome() {
           const data = await res.json();
         
           if(res.status === 200){
-            //Clear Existing Reports
-            reports.length = 0;
+            let temp = [];
         
             data.reports.forEach((report) => {
-              reports.push(report);
+              temp.push(report);
             })
   
-            reports.reverse();
+            temp.reverse();
   
             if(amount.current < 0){
-              amount.current = reports.length;
+              amount.current = temp.length;
             }
 
             setIsLoad(true);
-            setRefresher(r => !r);
+            setReports(temp);
           }
         } catch (err) {
           console.log(err);
@@ -76,7 +73,7 @@ export default function AdminHome() {
         }
       })();
     }
-  }, [readPage, history, reports, filter, searchWord, token])
+  }, [readPage, history, filter, searchWord, token])
 
   return (
     <div>

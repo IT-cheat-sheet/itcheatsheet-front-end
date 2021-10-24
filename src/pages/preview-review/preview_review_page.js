@@ -76,7 +76,7 @@ export default function PreviewReview() {
       if(reviews.length === 0){
         fetchRecommendedPost();
       }
-    }, [])
+    }, [reviews])
 
     return reviews;
   }
