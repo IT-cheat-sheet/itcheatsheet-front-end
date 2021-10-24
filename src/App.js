@@ -3,15 +3,24 @@ import HomePage from "./pages/home/home_page";
 import AllSheets from "./pages/all_sheets/all_sheets_page";
 import AllReviews from "./pages/all_reviews/all_reviews_page";
 import PreviewSheet from "./pages/preview-sheet/preview_sheet_page";
-import PreviewReview from "./pages/preview-review/preview_review_page"
+import PreviewReview from "./pages/preview-review/preview_review_page";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AdminHome from "./pages/admin_home/admin_home_page";
 import AdminLogin from "./pages/admin_login/admin_login_page";
+import CreateSheetModal from "./pages/preview-review/components/create_review_modal";
+import { useState } from "react";
 function App() {
+  const [isOpen, setIsOpen] = useState(true);
   return (
     <div className="App">
       <Router>
         <Switch>
+          <Route path="/test">
+            <CreateSheetModal
+              isOpen={isOpen}
+              onClose={() => setIsOpen(false)}
+            ></CreateSheetModal>
+          </Route>
           <Route path="/sheets/:id">
             <PreviewSheet />
           </Route>
@@ -21,7 +30,7 @@ function App() {
           <Route path="/admin/reviews/:id"></Route>
           <Route path="/admin/sheets/:id"></Route>
           <Route path="/admin/login">
-            <AdminLogin/>
+            <AdminLogin />
           </Route>
 
           <Route path="/sheets">
