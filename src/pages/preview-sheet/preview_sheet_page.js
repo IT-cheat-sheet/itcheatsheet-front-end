@@ -13,32 +13,51 @@ export default function PreviewSheet() {
   const [file, setFile] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
   const [toggleSeeMore, setToggleSeeMore] = useState(false);
+  const [exceed, setExceed] = useState(false);
 
   useEffect(() => {
     async function fetchSheet() {
-      const res = await fetch(`http://localhost:3000/summarypost/get/${params.id}`)
-      const data = await res.json();
-      setSheet(data);
-      setIsLoad(true);
+      try {
+        const res = await fetch(`http://localhost:3000/summarypost/get/${params.id}`)
+        const data = await res.json();
+        if(res.status === 200){
+          setSheet(data);
+          setIsLoad(true);
+        }
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
+      }
     };
     async function fetchFile() {
-      const res = await fetch(`http://localhost:3000/summarypost/getFile/${params.id}`);
-      const data = await res.blob();
+      try {
+        const res = await fetch(`http://localhost:3000/summarypost/getFile/${params.id}`);
+        const data = await res.blob();
 
-      if (res.status === 200) {
-        var reader = new FileReader();
-        reader.onload = (e) => {
-          setFile(e.target.result);
-        };
-        reader.readAsDataURL(data);
-      } else {
-        setFile(null);
+        if (res.status === 200) {
+          var reader = new FileReader();
+          reader.onload = (e) => {
+            setFile(e.target.result);
+          };
+          reader.readAsDataURL(data);
+        } else {
+          setFile(null);
+        }
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
       }
     }
 
     fetchSheet();
     fetchFile();
-  }, [params.id])
+
+    if(isLoad){
+        const elm = document.getElementById('sheetContent');
+        setExceed(elm.scrollHeight > elm.clientHeight);
+    } 
+
+  }, [params, isLoad])
 
   return (
     <div>
@@ -59,21 +78,20 @@ export default function PreviewSheet() {
                 <p className="ml-4 text-purple-hover text-xxs">{sheet.summaryPost.summaryPostId}</p>
               </div>
             </div>
-            <div className="shadow-halo">
+            <div className="shadow-halo mt-5 rounded-button overflow-hidden">
               {
-              file ?
-                <a href={`http://localhost:3000/summarypost/getFile/${params.id}`} target="_blank" rel="noreferrer">
-                  <div>
-                    <Document
-                      file={file}
-                    >
+                file ?
+                  <a href={`http://localhost:3000/summarypost/getFile/${params.id}`} target="_blank" rel="noreferrer">
+                    <div>
+                      <Document file={file}>
                       <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
                     </Document>
                   </div>
                 </a>
                 : <></>
-            }
+              }
             </div>
+            <div className="w-full text-center mt-2 text-purple-hover text-sm md:text-2xl">Click to View File</div>
             
           </div>
           <div className="mt-5 xl:mt-7 md:col-span-7">
@@ -92,22 +110,20 @@ export default function PreviewSheet() {
                 <div className="hidden md:flex md:justify-end md:mr-6">
                   <Kebab page="sheet" postId={sheet.summaryPost.summaryPostId} />
                 </div>
-                <div className="md:mx-14">
-                  <p className={`text-violet-header ${toggleSeeMore ? "" : "line-clamp-6"} max-h-72 overflow-y-scroll`}>
+                <div className="md:mx-11">
+                  <p id="sheetContent" className={`text-purple-hover ${toggleSeeMore ? "" : "line-clamp-6"} max-h-72 overflow-y-scroll innerTrack px-3`}>
                     {sheet.summaryPost.summaryContent}
                   </p>
                   {
-                    toggleSeeMore ?
+                    toggleSeeMore || !exceed ?
                       <></>
-                      : <span className="text-violet-link hover:text-violet-admin cursor-pointer" onClick={() => setToggleSeeMore(true)}>see more</span>
+                      : <div className="text-violet-link hover:text-violet-admin cursor-pointer px-3" onClick={() => setToggleSeeMore(true)}>see more</div>
                   }
-                  <br />
-                  <br />
                   {
                     sheet.summaryPost.linkAttachment ?
-                      <a href={sheet.summaryPost.linkAttachment} className="text-violet-link underline" target="_blank" rel="noreferrer">
-                        <i className="fas fa-link"></i>
-                        <span className="ml-2">{sheet.summaryPost.linkAttachment}</span>
+                      <a href={sheet.summaryPost.linkAttachment} className="text-violet-link mt-10 flex items-center" target="_blank" rel="noreferrer">
+                        <span className="material-icons text-base md:text-3xl transform -rotate-45">link</span>
+                        <span className="ml-1 md:ml-2 underline">{sheet.summaryPost.linkAttachment}</span>
                       </a>
                       : <></>
                   }

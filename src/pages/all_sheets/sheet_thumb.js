@@ -9,17 +9,22 @@ export default function SheetThumb({id, fileName, link}) {
 
   useEffect(() => {
     (async function() {
-      const res = await fetch(`http://localhost:3000/summarypost/getFile/${id}`);
-      const data = await res.blob();
+      try {
+        const res = await fetch(`http://localhost:3000/summarypost/getFile/${id}`);
+        const data = await res.blob();
       
-      if(res.status === 200){
+        if(res.status === 200){
           var reader = new FileReader();
           reader.onload = (e) => {
             setFile(e.target.result);
           };
           reader.readAsDataURL(data);
-      } else {
-        setFile(null);
+        } else {
+          setFile(null);
+        }
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
       }
     })();
 

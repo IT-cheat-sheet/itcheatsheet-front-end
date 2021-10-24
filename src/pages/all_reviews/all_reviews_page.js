@@ -13,6 +13,7 @@ export default function AllReviews() {
   const [reviews] = useState([]);
   const [current, setCurrent] = useState(0);
   const [total, setTotal] = useState(0);
+  const [isLoad, setIsLoad] = useState(false);
 
   var [searchWord, setSearchWord] = useState('');
   var [filter, setFilter] = useState('');
@@ -28,16 +29,12 @@ export default function AllReviews() {
 
   const onFilter = (x) => {
     setFilter(x);
-    //Force Refresher to ensure that the page will fetch the current filter
-    setCurrent(0);
     //Force Back to First Page
     history.replace('/reviews');
   }
 
   const onSearch = (x) => {
     setSearchWord(x);
-    //Force Refresher to ensure that the page will fetch the current search word
-    setCurrent(0);
     //Force Back to First Page
     history.replace('/reviews');
   }
@@ -45,28 +42,43 @@ export default function AllReviews() {
   useEffect(() => {
     if(topics.length === 0){
       (async function() {
-        const res = await fetch(`http://localhost:3000/topic/getAll`);
-        const data = await res.json();
+        try {
+          const res = await fetch(`http://localhost:3000/topic/getAll`);
+          const data = await res.json();
       
-        data.data.forEach((topic) => {
-          topics.push({key: topic.topicName, value: topic.topicName});
-        })
+          if(res.status === 200) {
+            data.data.forEach((topic) => {
+              topics.push({key: topic.topicName, value: topic.topicName});
+            })
+          }
+        } catch (err) {
+          console.log(err);
+          alert(err.message);
+        }
       })();
     }
     
     (async function() {
-      const res = await fetch(`http://localhost:3000/review/getAll?page=${page - 1}&pageSize=${pageSize}&searchWord=${searchWord}&sortTopic=${filter}&sortDesc=true`);
-      const data = await res.json();
+      try {
+        const res = await fetch(`http://localhost:3000/review/getAll?page=${page - 1}&pageSize=${pageSize}&searchWord=${searchWord}&sortTopic=${filter}&sortDesc=true`);
+        const data = await res.json();
       
-      //Clear Existing Reviews
-      reviews.length = 0;
+        if(res.status === 200){
+          //Clear Existing Reviews
+          reviews.length = 0;
       
-      data.data.rows.forEach((review) => {
-        reviews.push(review);
-      })
+          data.data.rows.forEach((review) => {
+            reviews.push(review);
+          })
 
-      setCurrent(page);
-      setTotal(data.totalPage);
+          setCurrent(page);
+          setTotal(data.totalPage);
+          setIsLoad(true);
+        }
+      } catch (err) {
+        console.log(err);
+        alert(err.message);
+      }
     })();
 
   }, [topics, filter, page, reviews, searchWord])
@@ -81,7 +93,7 @@ export default function AllReviews() {
           <div className="md:px-10 md:mt-14">
             <SearchBox page="review" options={topics} onFilter={onFilter} onSearch={onSearch} />
           </div>
-          {
+          {isLoad ? (
             reviews.length > 0 ?
             <div>
               <div className="grid grid-cols-1 md:grid-cols-2 mt-7">
@@ -101,7 +113,7 @@ export default function AllReviews() {
               <span className="material-icons-round text-9xl block mb-5">sentiment_very_dissatisfied</span>
               No Review Found
             </div>
-          }
+          ) : <></>}
         </div>
         <div>
           <button className="button-circular fixed z-30 bottom-7 right-4 md:bottom-12 md:right-24">

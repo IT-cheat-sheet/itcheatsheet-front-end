@@ -9,29 +9,30 @@ export default function AdminLogin() {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    console.log(username)
-    console.log(password)
-    const res = await fetch('http://localhost:3000/admin/login', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        "username": `${username}`,
-        "password": `${password}`
-      })
-    });
-    const data = await res.json();
-    if (res.status === 200) {
-      console.log(data.token)
-      document.cookie =`cheatSheetToken=${data.token};path=/admin;`
-      history.push("/admin")
-    } else {
-      console.log(data)
+    try {
+      const res = await fetch('http://localhost:3000/admin/login', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "username": `${username}`,
+          "password": `${password}`
+        })
+      });
+      const data = await res.json();
+      if (res.status === 200) {
+        console.log(data.token)
+        document.cookie =`cheatSheetToken=${data.token};path=/admin;`
+        history.push("/admin")
+      }
+    } catch (err) {
+      console.log(err);
+      alert(err.message);
     }
   }
 
 
 return (
-  <div className="bg-gray-formHover  h-screen w-screen static  " style={{ backgroundImage: `url(/images/bgLogin.png)` }}>
+  <div className="bg-gray-formHover h-screen w-screen static" style={{ backgroundImage: `url(/images/bgLogin.png)` }}>
     <div className="h-full w-full flex justify-center fixed z-50">
       <div className=" w-4/6 h-4/6 self-center flex">
         <div className="bg-white w-7/12 rounded-l-3xl flex flex-wrap content-center">
