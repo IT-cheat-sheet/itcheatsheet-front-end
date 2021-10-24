@@ -16,9 +16,9 @@ const Dropdown = ({label, options, page, setValue}) => {
 
   return (
     <div>
-      <label className={`uppercase body-base mb-5 ${labelColor}`} htmlFor="dropdown">{label}</label>
-      <div id="dropdown" onClick={() => setToggle(!toggle)} className={`rounded-lg h-12 body-base py-2 px-4 bg-white w-52 cursor-pointer input ${ringHoverColor} ${ringFocusColor}`}>
-        <div className={`w-11/12 inline-block ${display === 'none' ? placeholderColor : 'text-gray-mailbox'}`}>{display}</div>
+      <label className={`uppercase body-sm mb-5 ${labelColor}`} htmlFor="dropdown">{label}</label>
+      <div id="dropdown" onClick={() => setToggle(!toggle)} className={`rounded-lg h-12 body-sm py-2 px-4 bg-white w-52 cursor-pointer input ${ringHoverColor} ${ringFocusColor}`}>
+        <div className={`w-11/12 inline-block text-left ${display === 'none' ? placeholderColor : 'text-gray-mailbox'}`}>{display}</div>
         <div className={`w-1/12 inline-block ${labelColor}`}><i className="fas fa-caret-down" /></div>
       </div>
       {toggle ?
@@ -26,7 +26,7 @@ const Dropdown = ({label, options, page, setValue}) => {
         {options.map((option, index) => (
           <div
           onClick={() => updateValue(option.name, option.value)}
-          className={`h-12 w-52 bg-white py-2 px-4 body-base cursor-pointer
+          className={`h-12 w-52 bg-white py-2 px-4 body-sm cursor-pointer
           ${index === options.length - 1 ? 'rounded-b-lg' : 'border-b-2 border-gray-disabled'}
           ${index === 0 ? 'rounded-t-lg' : ''}
           ${labelColor}`}>{option.name}</div>
