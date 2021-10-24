@@ -81,7 +81,7 @@ export default function PreviewSheet() {
             <div className="shadow-halo mt-5 rounded-button overflow-hidden">
               {
                 file ?
-                  <a href={`http://localhost:3000/summarypost/getFile/${params.id}`} target="_blank" rel="noreferrer">
+                  <a id="pdfOpen" href={`http://localhost:3000/summarypost/getFile/${params.id}`} target="_blank" rel="noreferrer">
                     <div>
                       <Document file={file}>
                       <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
@@ -91,7 +91,7 @@ export default function PreviewSheet() {
                 : <></>
               }
             </div>
-            <div className="w-full text-center mt-2 text-purple-hover text-sm md:text-2xl">Click to View File</div>
+            <div className="w-full text-center mt-2 text-purple-hover text-sm md:text-2xl">Click PDF to View File</div>
             
           </div>
           <div className="mt-5 xl:mt-7 md:col-span-7">
