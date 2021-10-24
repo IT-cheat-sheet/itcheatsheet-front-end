@@ -20,9 +20,16 @@ export default function AdminNavbar() {
   }
 
   const logout = async () => {
-    fetch("http://localhost:3000/admin/logout", {method: "DELETE", headers: {"Authorization": `Bearer ${getCookie('cheatSheetToken')}`}});
-    document.cookie = "cheatSheetToken= ;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    history.push("/admin/login");
+    try {
+      const res = await fetch("http://localhost:3000/admin/logout", {method: "DELETE", headers: {"Authorization": `Bearer ${getCookie('cheatSheetToken')}`}});
+      if(res.status === 200){
+        document.cookie = "cheatSheetToken= ;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      history.push("/admin/login");
+      }
+    } catch (err) {
+      console.log(err);
+      alert(err.message);
+    }
   }
 
   return (
