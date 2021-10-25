@@ -34,7 +34,7 @@ const Dropdown = ({label, options, page, setValue}) => {
         <div className={`absolute right-0 top-0 inline-block ${labelColor}`}><span className="text-5xl material-icons">arrow_drop_down</span></div>
       </div>
       {toggle ?
-      <div className={`shadow-xl absolute rounded-lg ${labelColor}`}>
+      <div className={`shadow-xl absolute rounded-lg max-h-80 overflow-y-scroll innerTrack bg-white ${labelColor}`}>
         {options.map((option, index) => (
           <div
           onClick={() => {updateValue(option.name, option.value)
