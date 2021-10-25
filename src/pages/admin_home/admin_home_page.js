@@ -75,7 +75,11 @@ export default function AdminHome() {
                 <div className="flex flex-col mt-7">
                   {
                     _.map(context.reports, (report, index) => (
-                      <div key={index} onClick={() => history.push(report.summaryPostId ? `/admin/sheets/${report.summaryPostId}` : `/admin/reviews/${report.reviewId}`, { reportNumber: report.reportNumber})}>
+                      <div key={index} onClick={() => {
+                        if(!context.readPage){
+                          history.push(report.summaryPostId ? `/admin/sheets/${report.summaryPostId}` : `/admin/reviews/${report.reviewId}`, { reportNumber: report.reportNumber})
+                        }
+                      }}>
                         <AdminThumb type={report.summaryPostId ? 'sheet' : 'review'} read={context.readPage} report={report} />
                       </div>
                     ))

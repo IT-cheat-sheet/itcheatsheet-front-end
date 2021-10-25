@@ -6,8 +6,8 @@ export default function AdminThumb({ type, read, report }) {
   return (
     <div className="p-3 h-auto">
       <div
-      className={classNames("text-gray-mailbox py-4 text-sm h-full rounded-button hover:shadow-halo transition duration-200 cursor-pointer",
-      {"bg-orange-bg" : !read},
+      className={classNames("text-gray-mailbox py-4 text-sm h-full rounded-button",
+      {"bg-orange-bg hover:shadow-halo transition duration-200 cursor-pointer" : !read},
       {"bg-yellow-bg" : read})}>
         <div className="flex flex-col justify-center px-9 py-5">
           <div className={`w-full flex items-center gap-2 body-base font-bold mb-1 truncate`}>
