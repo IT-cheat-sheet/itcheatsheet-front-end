@@ -10,7 +10,8 @@ export default function AdminPreviewSheet() {
   const context = useContext(adminPreviewSheetContext);
 
   useEffect(() => {
-    context.prepareSheet(params.id)
+    context.prepareSheet(params.id);
+    context.preparePdf(params.id);
   }, [])
   return (
     <Observer>
@@ -38,7 +39,7 @@ export default function AdminPreviewSheet() {
                     <></>
                 }
                 {
-                  context.file !== null ?
+                  context.file ?
                     <div className="mt-10">
                       <a
                         href={`http://localhost:3000/summarypost/getFile/${params.id}`}

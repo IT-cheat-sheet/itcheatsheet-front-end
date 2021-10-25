@@ -35,18 +35,17 @@ class AdminPreviewSheetContext {
   async preparePdf(id) {
     try {
       const resp = await getSpecificPdf(id);
-      if (resp.status !== 204) {
+      if (resp.status === 200) {
         var reader = new FileReader();
         reader.onload = (e) => {
           this.setValue('file', e.target.result)
         };
         reader.readAsDataURL(resp.data);
       } else {
-        this.setValue('file', null)
+        this.setValue('file',null)
       }
     } catch (err) {
       console.log(err);
-      alert(err.message);
     }
   }
 

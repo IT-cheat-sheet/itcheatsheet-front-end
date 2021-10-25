@@ -13,5 +13,7 @@ export const getSpecificSheet = (id) => {
 }
 
 export const getSpecificPdf = (id) => {
-  return axios.get(`http://localhost:3000/summarypost/getFile/${id}`)
+  return axios.get(`http://localhost:3000/summarypost/getFile/${id}`,{
+    responseType: 'blob'
+  })
 }
