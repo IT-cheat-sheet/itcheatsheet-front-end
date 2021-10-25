@@ -28,25 +28,11 @@ class AdminHomeContext {
 
   setValue(key, value) {
     this[key] = value;
-    if(key === 'readPage' || key === 'filter' || key === 'searchWord'){
-      this.prepareReport();
-    }
   }
 
   getCookie = (name) => {
     const c = document.cookie.split(';').find(c => c.trim().startsWith(name + '='));
     return c ? c.substring((name + '=').length) : null;
-  }
-
-  onRead = (index, id) => {
-    if(this.reports[index].readStatus === 0){
-      try {
-        setReadStatus(id, this.token);
-      } catch (err) {
-        console.log(err);
-        alert(err.message);
-      }
-    }
   }
 
   async prepareReport() {
@@ -57,7 +43,7 @@ class AdminHomeContext {
         this.setValue('isLoad', true)
         this.setValue('reports', res.data.reports.reverse());
 
-        if(this.amount){
+        if(this.amount < 0){
           this.setValue('amount', res.data.reports.length);
         }
       }

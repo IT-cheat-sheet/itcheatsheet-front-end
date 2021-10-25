@@ -43,18 +43,30 @@ export default function AdminHome() {
               <div className="col-span-1">
                 <button className={`w-full cursor-pointer transition duration-100 flex justify-center items-center h-12
                 ${context.readPage ? 'button-not-selected border-orange-button hover:border-orange-hover text-orange-button hover:text-orange-hover' : 'button-base bg-orange-button hover:bg-orange-hover text-white'}`}
-                onClick={() => context.setValue('readPage', false)}>UNREAD</button>
+                onClick={() => {
+                  context.setValue('readPage', false);
+                  context.prepareReport();
+                  }}>PENDING</button>
               </div>
               <div className="col-span-1">
               <button className={`w-full cursor-pointer transition duration-100 flex justify-center items-center h-12
                 ${!context.readPage ? 'button-not-selected border-yellow-button hover:border-yellow-hover text-yellow-button hover:text-yellow-hover' : 'button-base bg-yellow-button hover:bg-yellow-hover text-white'}`}
-                onClick={() => context.setValue('readPage', true)}>READ</button>
+                onClick={() => {
+                  context.setValue('readPage', true);
+                  context.prepareReport();
+                }}>DONE</button>
               </div>
               <div className="col-span-4">
                 <SearchBox page="admin" options={[
                   {key: 'Sheets', value: 'summaryPost'},
                   {key: 'Thread', value: 'review'}
-                ]} onFilter={(x) => context.setValue('filter', x)} onSearch={(x) => context.setValue('searchWord', x)} />
+                ]} onFilter={(x) => {
+                  context.setValue('filter', x);
+                  context.prepareReport();
+                }} onSearch={(x) => {
+                  context.setValue('searchWord', x);
+                  context.prepareReport();
+                }} />
               </div>
             </div>
             {context.isLoad ? (
@@ -63,9 +75,9 @@ export default function AdminHome() {
                 <div className="flex flex-col mt-7">
                   {
                     _.map(context.reports, (report, index) => (
-                      <Link onClick={() => context.onRead(index, report.reportNumber)} key={index} to={report.summaryPostId ? `/admin/sheets/${report.summaryPostId}` : `/admin/reviews/${report.reviewId}`}>
+                      <div key={index} onClick={() => history.push(report.summaryPostId ? `/admin/sheets/${report.summaryPostId}` : `/admin/reviews/${report.reviewId}`, { reportNumber: report.reportNumber})}>
                         <AdminThumb type={report.summaryPostId ? 'sheet' : 'review'} read={context.readPage} report={report} />
-                      </Link>
+                      </div>
                     ))
                   }
                 </div>
