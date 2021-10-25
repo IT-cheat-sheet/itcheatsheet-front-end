@@ -49,9 +49,9 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                 >
                   <div className="flex space-x-12">
                     <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-violet-bubbleText">TITLE</p>
                       <InputText
                         placeholder="Text here"
+                        label="title"
                         page="sheet"
                         onChange={(e) => {
                           context.setValue("title", e.target.value);
@@ -66,11 +66,9 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                     </div>
 
                     <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-violet-bubbleText">
-                        SEMESTER/YEAR
-                      </p>
                       <Dropdown
                         page="sheet"
+                        label="semester/year"
                         options={_.map(context.semesterChoice, (semester) => ({
                           name: semester.semester,
                           value: semester.semesterNumber,
@@ -87,12 +85,12 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                       </p>
                     </div>
 
-                    <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-violet-bubbleText">SUBJECT</p>
+                    <div className="flex flex-col items-start">
                       <Dropdown
                         page="sheet"
+                        label="subject"
                         options={_.map(context.subjectChoice, (subject) => ({
-                          name: subject.subjectId,
+                          name: subject.subjectId + ': ' + subject.subjectName,
                           value: subject.subjectNumber,
                         }))}
                         setValue={(e) => {
@@ -107,12 +105,10 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                       </p>
                     </div>
 
-                    <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-violet-bubbleText">
-                        LISENCE/YOUR NAME
-                      </p>
+                    <div className="flex flex-col items-start">
                       <InputText
                         placeholder="Text here"
+                        label="license/your name"
                         page="sheet"
                         onChange={(e) => {
                           context.setValue("licence", e.target.value);
