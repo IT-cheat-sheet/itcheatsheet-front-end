@@ -70,7 +70,7 @@ export default function SearchBox({ page, options, onFilter, onSearch }) {
         </div>
         <div className={`col-span-8 order-1 md:order-2 ${page === 'admin' ? 'md:col-span-6 md:col-start-5' : 'md:col-span-8'}`}><input className={classNames("w-full h-full rounded-lg px-4 focus:outline-none",
         {"text-purple-hover": page === "sheet"},
-        {"text-blue-body": page === "review"},
+        {"text-blue-body bg-lightblue-bg md:bg-white": page === "review"},
         {"text-gray-mailbox bg-gray-form bg-opacity-50": page === "admin"})} onChange={(e) => setSearchWord(e.target.value)} /></div>
         <div className="col-span-2 order-2 md:order-3"><Button color={page === "sheet" ? "purple" : "blue"} size="sm" children={<span className="material-icons text-3xl md:text-4xl">search</span>} onClick={() => onSearch(searchWord)} /></div>
       </div>
