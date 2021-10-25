@@ -8,6 +8,8 @@ export default function ReviewThumb({ review }) {
   useEffect(() => {
     (async function() {
       try {
+        setImage(null);
+
         const res = await getReviewImage(review.reviewId);
       
         if(res.status === 200){
@@ -18,8 +20,6 @@ export default function ReviewThumb({ review }) {
             };
             reader.readAsDataURL(res.data);
           }
-        } else {
-          setImage(null);
         }
       } catch (err) {
         console.log(err)
