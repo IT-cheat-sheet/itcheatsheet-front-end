@@ -16,6 +16,9 @@ export default function AdminThumb({ type, read, report }) {
             {"bg-green-button" : read},
             {"bg-violet-header" : type === 'sheet' && !read},
             {"bg-blue-formHover" : type === 'review' && !read})}></div>
+            <div className={classNames("px-3 rounded-3xl text-white w-max text-sm",
+            {"bg-red-button" : report.reportAction === 'Delete'},
+            {"bg-yellow-header" : report.reportAction === 'Edit'})}>{report.reportAction}</div>
           </div>
           <div className="flex gap-3 my-2">
             <div className={classNames("px-4 rounded-3xl text-white w-max",
