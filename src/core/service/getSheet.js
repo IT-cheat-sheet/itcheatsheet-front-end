@@ -28,3 +28,10 @@ export const getReport = (filter, searchWord, readPage, token) => {
     }
   });
 };
+
+export const getReviewImage = (id) => {
+  return axios.get(`http://localhost:3000/review/image/${id}`,
+  {
+    responseType: "blob"
+  });
+}

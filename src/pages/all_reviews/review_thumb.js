@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { getReviewImage } from "../../core/service/getSheet";
 
 export default function ReviewThumb({ review }) {
   const [image, setImage] = useState(null);
@@ -7,23 +8,21 @@ export default function ReviewThumb({ review }) {
   useEffect(() => {
     (async function() {
       try {
-        const res = await fetch(`http://localhost:3000/review/image/${review.reviewId}`);
-        const data = await res.blob();
+        const res = await getReviewImage(review.reviewId);
       
         if(res.status === 200){
-          if (data.type.includes("image")) {
+          if (res.data.type.includes("image")) {
             var reader = new FileReader();
             reader.onload = (e) => {
               setImage(e.target.result);
             };
-            reader.readAsDataURL(data);
+            reader.readAsDataURL(res.data);
           }
         } else {
           setImage(null);
         }
       } catch (err) {
-        console.log(err);
-        alert(err.message);
+        console.log(err)
       }
     })();
   }, [review])
