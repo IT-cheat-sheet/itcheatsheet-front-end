@@ -46,8 +46,8 @@ export default function AllReviews() {
         <div className="md:mx-44">
           <Carousel page="review" />
           <div className="px-4">
-            <div className="md:hidden body-base font-bold text-blue-body mt-14 mb-5">ALL THREAD</div>
-            <div className="md:px-10 md:mt-14">
+            <div className="text-2xl tracking-wider leading-normal md:text-popup font-bold text-blue-body mt-14 mb-5">ALL THREAD</div>
+            <div className="md:px-10 md:mt-3">
               <SearchBox page="review" options={
                 _.map(context.topics, (topic) => ({
                   key: topic.topicName,
