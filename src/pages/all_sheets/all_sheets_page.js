@@ -7,6 +7,7 @@ import SheetThumb from "./sheet_thumb";
 import Carousel from "../../core/components/carousel";
 import { Link } from "react-router-dom";
 import Pagination from "../../core/components/pagination";
+import CreateSheetModal from "./components/create_sheet_modal";
 
 export default function AllSheets() {
   const [semesters] = useState([]);
@@ -14,6 +15,7 @@ export default function AllSheets() {
   const [current, setCurrent] = useState(0);
   const [total, setTotal] = useState(0);
   const [isLoad, setIsLoad] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   var [searchWord, setSearchWord] = useState('');
   var [filter, setFilter] = useState('');
@@ -122,10 +124,11 @@ export default function AllSheets() {
         </div>
       </div>
       <div>
-        <button className="button-circular fixed z-30 bottom-7 right-4 md:bottom-12 md:right-24">
+        <button className="button-circular fixed z-30 bottom-7 right-4 md:bottom-12 md:right-24" onClick={() => setToggle(true)}>
           <span className="material-icons-outlined text-5xl md:text-7xl">file_upload</span>
         </button>
       </div>
+      <CreateSheetModal isOpen={toggle} onClose={() => setToggle(false)} />
       <div className="h-12 bg-white md:hidden"></div>
       <Footer />
     </div>
