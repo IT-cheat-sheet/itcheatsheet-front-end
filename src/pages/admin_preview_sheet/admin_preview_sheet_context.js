@@ -2,21 +2,31 @@ import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
 import { getSpecificPdf, getSpecificSheet } from "../../core/service/getSheet";
 import { deleteSheet } from "../../core/service/deleteSheet"
-
 class AdminPreviewSheetContext {
   isLoad;
   sheet;
   file;
+  token;
+  history;
+  state;
 
   constructor() {
     this.sheet = [];
     this.file = null;
     this.isLoad = false;
+    this.token = this.getCookie('cheatSheetToken');
+    this.history = "";
+    this.state = [];
     makeAutoObservable(this);
   }
 
   setValue(key, value) {
     this[key] = value;
+  }
+
+  getCookie = (name) => {
+    const c = document.cookie.split(';').find(c => c.trim().startsWith(name + '='));
+    return c ? c.substring((name + '=').length) : null;
   }
 
   async prepareSheet(id) {
@@ -52,6 +62,7 @@ class AdminPreviewSheetContext {
   async delSheet(id, token) {
     try {
       await deleteSheet(id, token);
+      this.history.replace("/admin");
     } catch (err) {
       console.log(err);
       alert(err.message);

@@ -1,17 +1,21 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router';
 import AdminNavbar from '../../core/components/adminNavbar';
 import { adminPreviewSheetContext } from './admin_preview_sheet_context';
 import { Observer } from "mobx-react-lite";
-// import _ from "lodash";
+import Button from '../../core/components/button'
+import { useHistory } from 'react-router'
 
 export default function AdminPreviewSheet() {
   const params = useParams();
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const context = useContext(adminPreviewSheetContext);
+  const history = useHistory();
 
   useEffect(() => {
     context.prepareSheet(params.id);
     context.preparePdf(params.id);
+    context.setValue("history", history);
   }, [])
   return (
     <Observer>
@@ -52,6 +56,40 @@ export default function AdminPreviewSheet() {
                     : <></>
                 }
               </div>
+              <div className="grid grid-cols-12 gap-5 mt-5">
+                <div className="col-span-8"></div>
+                <div className="col-span-2">
+                  <Button size="sm" color="yellow">EDIT</Button>
+                </div>
+                <div className="col-span-2">
+                  <Button size="sm" color="red" onClick={() => setOpenDeleteModal(true)}>DELETE</Button>
+                </div>
+              </div>
+              {
+                openDeleteModal ?
+                  <>
+                    <div
+                      className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-60 outline-none focus:outline-none mx-4"
+                    >
+                      <div className="relative w-1/3 my-6 mx-auto max-w-3xl text-left">
+                        <div className="flex justify-between">
+                          <h3 className="uppercase text-white text-4xl font-bold">CONFIRM DELETE</h3>
+                          <span className="material-icons text-white text-4xl cursor-pointer" onClick={() => setOpenDeleteModal(false)}>cancel</span>
+                        </div>
+                        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-footer outline-none focus:outline-none mt-5">
+                          <div className="relative p-6 flex-auto mx-6 text-center text-black">
+                            <p className="text-2xl text-gray-subheader font-bold">ARE YOU SURE TO DELETE?</p>
+                            <div className="mt-5">
+                              <Button color="red" size="sm" onClick={() => context.delSheet(context.sheet.summaryPostId,context.token)}>DELETE</Button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="opacity-25 fixed inset-0 z-50 bg-black"></div>
+                  </>
+                  : <></>
+              }
             </div>
             : <></>}
         </>
