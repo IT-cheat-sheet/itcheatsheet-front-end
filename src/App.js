@@ -7,6 +7,7 @@ import PreviewReview from "./pages/preview-review/preview_review_page"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AdminHome from "./pages/admin_home/admin_home_page";
 import AdminLogin from "./pages/admin_login/admin_login_page";
+import AdminPreviewSheet from "./pages/admin_preview_sheet/admin_preview_sheet_page.jsx"
 function App() {
   return (
     <div className="App">
@@ -19,7 +20,9 @@ function App() {
             <PreviewReview />
           </Route>
           <Route path="/admin/reviews/:id"></Route>
-          <Route path="/admin/sheets/:id"></Route>
+          <Route path="/admin/sheets/:id">
+            <AdminPreviewSheet/>
+          </Route>
           <Route path="/admin/login">
             <AdminLogin/>
           </Route>

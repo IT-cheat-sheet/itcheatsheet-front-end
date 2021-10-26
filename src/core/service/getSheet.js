@@ -35,3 +35,13 @@ export const getReviewImage = (id) => {
     responseType: "blob"
   });
 }
+
+export const getSpecificSheet = (id) => {
+  return axios.get(`http://localhost:3000/summarypost/get/${id}`);
+}
+
+export const getSpecificPdf = (id) => {
+  return axios.get(`http://localhost:3000/summarypost/getFile/${id}`,{
+    responseType: 'blob'
+  })
+}

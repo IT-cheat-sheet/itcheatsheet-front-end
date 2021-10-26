@@ -33,7 +33,7 @@ export default function AdminNavbar() {
   }
 
   return (
-    <div className="h-full w-full sticky top-0 z-50 ">
+    <div className="h-full w-full sticky top-0 z-40 ">
       <div className="h-24 w-full flex justify-between glass">
         <div className="flex place-self-center justify-center ml-36">
           <Link to="/admin">
