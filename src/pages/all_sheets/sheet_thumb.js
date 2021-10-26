@@ -1,11 +1,14 @@
 import classNames from "classnames";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Document, Page, pdfjs } from 'react-pdf';
+import { Link } from "react-router-dom";
 
 export default function SheetThumb({id, fileName, link}) {
   const [file, setFile] = useState(null);
   const [isHover, setIsHover] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const ref = useRef();
 
   useEffect(() => {
     (async function() {
@@ -29,8 +32,7 @@ export default function SheetThumb({id, fileName, link}) {
     })();
 
     const keepRatio = () => {
-      const w = document.getElementById(`thumb_${id}`);
-      w.style.height = `${(w.clientWidth / 254) * 358}px`;
+      ref.current.style.height = `${(ref.current.clientWidth / 254) * 358}px`;
     }
 
     keepRatio();
@@ -46,21 +48,23 @@ export default function SheetThumb({id, fileName, link}) {
 
   return (
     <div className="py-3 md:px-8 md:py-4">
-      <div className="p-2 cursor-pointer" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
-        <div id={`thumb_${id}`} className={classNames("w-full rounded-lg overflow-hidden transition duration-200 transform flex justify-center items-center text-center bg-violet-bubbleHover text-violet-page",
-        {"scale-105" : isHover},
-        {"shadow-halo" : isLoaded})}>
-          {file ?
-          <Document file={file} onLoadSuccess={() => setIsLoaded(true)}>
-            <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
-          </Document> :
-          link ?
-          <span className="material-icons text-9xl w-full transform -rotate-45">link</span> :
-          <span className="material-icons text-9xl w-full">subject</span>}
+      <Link key={id} to={`/sheets/${id}`}>
+        <div className="p-2 cursor-pointer" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+          <div ref={ref} className={classNames("w-full rounded-lg overflow-hidden transition duration-200 transform flex justify-center items-center text-center bg-violet-bubbleHover text-violet-page",
+          {"scale-105" : isHover},
+          {"shadow-halo" : isLoaded})}>
+            {file ?
+            <Document file={file} onLoadSuccess={() => setIsLoaded(true)}>
+              <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
+            </Document> :
+            link ?
+            <span className="material-icons text-9xl w-full transform -rotate-45">link</span> :
+            <span className="material-icons text-9xl w-full">subject</span>}
+          </div>
+          <div className="md:hidden text-lg font-semibold uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>
+          <div className="hidden md:block body-base uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>
         </div>
-        <div className="md:hidden text-lg font-semibold uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>
-        <div className="hidden md:block body-base uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>
-      </div>
+      </Link>
     </div>
   )
 }

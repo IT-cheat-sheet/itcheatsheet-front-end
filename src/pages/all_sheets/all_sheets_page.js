@@ -5,7 +5,6 @@ import Footer from "../../core/components/footer";
 import SearchBox from "../../core/components/searchBox";
 import SheetThumb from "./sheet_thumb";
 import Carousel from "../../core/components/carousel";
-import { Link } from "react-router-dom";
 import Pagination from "../../core/components/pagination";
 import CreateSheetModal from "./components/create_sheet_modal";
 import { allSheetContext } from "./components/all_sheets_context";
@@ -66,9 +65,7 @@ export default function AllSheets() {
                 <div className="grid grid-cols-2 md:grid-cols-4 mt-4">
                   {
                     _.map(context.sheets, (sheet, index) => (
-                      <Link key={index} to={`/sheets/${sheet.summaryPostId}`}>
-                        <SheetThumb id={sheet.summaryPostId} fileName={sheet.summaryTitle} link={sheet.linkAttachment}/>
-                      </Link>
+                      <SheetThumb id={sheet.summaryPostId} fileName={sheet.summaryTitle} link={sheet.linkAttachment}/>
                     ))
                   }
                 </div>

@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory, useLocation } from "react-router";
-import { Link } from "react-router-dom";
 import Carousel from "../../core/components/carousel";
 import Navbar from "../../core/components/navbar";
 import Footer from "../../core/components/footer";
@@ -61,9 +60,7 @@ export default function AllReviews() {
                 <div className="grid grid-cols-1 md:grid-cols-2 mt-7">
                   {
                     _.map(context.reviews, (review, index) => (
-                      <Link key={index} to={`/reviews/${review.reviewId}`}>
-                        <ReviewThumb review={review} />
-                      </Link>
+                      <ReviewThumb review={review} />
                     ))
                   }
                 </div>
