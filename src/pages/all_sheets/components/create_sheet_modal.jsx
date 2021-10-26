@@ -36,12 +36,7 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                   style={{ width: "1080px" }}
                 >
                   <p className="text-gray-form body-base">UPLOAD SHEET</p>
-                  <button
-                    className="w-6 h-6 rounded-full bg-gray-footer"
-                    onClick={onClose}
-                  >
-                    x
-                  </button>
+                  <span className="material-icons text-gray-footer text-4xl cursor-pointer hidden md:block" onClick={onClose}>cancel</span>
                 </div>
                 <div
                   className="flex flex-col px-8 py-6 space-y-5 rounded-lg bg-violet-bg"
@@ -49,9 +44,9 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                 >
                   <div className="flex space-x-12">
                     <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-violet-bubbleText">TITLE</p>
                       <InputText
                         placeholder="Text here"
+                        label="title"
                         page="sheet"
                         onChange={(e) => {
                           context.setValue("title", e.target.value);
@@ -66,11 +61,9 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                     </div>
 
                     <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-violet-bubbleText">
-                        SEMESTER/YEAR
-                      </p>
                       <Dropdown
                         page="sheet"
+                        label="semester/year"
                         options={_.map(context.semesterChoice, (semester) => ({
                           name: semester.semester,
                           value: semester.semesterNumber,
@@ -88,11 +81,11 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                     </div>
 
                     <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-violet-bubbleText">SUBJECT</p>
                       <Dropdown
                         page="sheet"
+                        label="subject"
                         options={_.map(context.subjectChoice, (subject) => ({
-                          name: subject.subjectId,
+                          name: subject.subjectId + ': ' + subject.subjectName,
                           value: subject.subjectNumber,
                         }))}
                         setValue={(e) => {
@@ -108,11 +101,9 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                     </div>
 
                     <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-violet-bubbleText">
-                        LISENCE/YOUR NAME
-                      </p>
                       <InputText
                         placeholder="Text here"
+                        label="license/your name"
                         page="sheet"
                         onChange={(e) => {
                           context.setValue("licence", e.target.value);
