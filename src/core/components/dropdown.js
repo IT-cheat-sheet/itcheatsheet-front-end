@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import _ from 'lodash';
 
 const Dropdown = ({label, options, page, setValue}) => {
   const [display, setDisplay] = useState('none')
@@ -48,7 +49,7 @@ const Dropdown = ({label, options, page, setValue}) => {
             </div>
           }
           {
-            options.map((option, index) => {
+            _.map(options, (option, index) => {
               if(option.name.toLowerCase().includes(search.toLowerCase())){
                 return (
                   <div
@@ -61,10 +62,11 @@ const Dropdown = ({label, options, page, setValue}) => {
                     ${labelColor}`}>{option.name}</div>
                 )
               }
+              return <></>
             })
           }
         </div> :
-        options.map((option, index) => (
+        _.map(options, (option, index) => (
           <div
           onClick={() => {updateValue(option.name, option.value)
             setToggle(false);}}

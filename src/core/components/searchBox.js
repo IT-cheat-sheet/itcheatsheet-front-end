@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Button from "./button";
 
 export default function SearchBox({ page, options, onFilter, onSearch }) {
@@ -65,7 +65,8 @@ export default function SearchBox({ page, options, onFilter, onSearch }) {
       )}>
         <div className={`col-span-2 order-3 md:order-1 ${page === 'admin' ? 'md:col-span-3' : 'md:col-span-2'} relative dropdown`}>
           <Button color={page === "review" ? "blue" : page === "sheet" ? "purple" : "lightblue"} size="sm" children={
-            window.innerWidth < 768 ? <span className="material-icons text-3xl">filter_list</span> : "SORT BY"} onClick={() => setToggle(!toggle)} />
+            <Fragment><span className="md:hidden material-icons text-3xl">filter_list</span><span className="hidden md:inline">SORT BY</span></Fragment>
+          } onClick={() => setToggle(!toggle)} />
           {toggle ? <Dropdown /> : <></>}
         </div>
         <div className={`col-span-8 order-1 md:order-2 ${page === 'admin' ? 'md:col-span-6 md:col-start-5' : 'md:col-span-8'}`}><input className={classNames("w-full h-full rounded-lg px-4 focus:outline-none",
