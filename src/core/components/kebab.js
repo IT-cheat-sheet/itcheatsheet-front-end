@@ -165,7 +165,7 @@ export default function Kebab({ page, postId }) {
                       }
                       <Dropdown label="ACTIONS" options={action} setValue={setActionSelected} />
                       <div className="mt-5">
-                        <TextArea textAreaLabel="EXPLANATION" setValue={setDescription} />
+                        <TextArea textAreaLabel="EXPLANATION" setValue={setDescription} placeholder="Please text politely :)" />
                       </div>
                       <div className="mt-10">
                         <Button color="green" size="sm" onClick={() => sendReport()}>SEND</Button>

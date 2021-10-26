@@ -4,6 +4,7 @@ import Dropdown from "../../../core/components/dropdown";
 import { createSheetContext } from "./create_sheet_context";
 import { Observer } from "mobx-react-lite";
 import _ from "lodash";
+import TextArea from "../../../core/components/textArea";
 
 export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
   const context = useContext(createSheetContext);
@@ -121,16 +122,9 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
                   </div>
 
                   <div className="flex flex-col items-start space-y-2">
-                    <p className="body-sm text-violet-bubbleText">
-                      DESCRIPTION
-                    </p>
-                    <textarea
-                      className="w-full px-6 py-3 overflow-y-auto rounded-lg h-36 body-sm text-violet-bubbleText focus:outline-none"
-                      placeholder="Text here"
-                      onChange={(e) => {
-                        context.setValue("description", e.target.value);
-                      }}
-                    />
+                    <TextArea page="sheet" textAreaLabel="DESCRIPTION" placeholder="Text here" setValue={(x) => {
+                        context.setValue("description", x);
+                      }}/>
                     <p
                       className="h-4 text-red-button"
                       style={{ fontSize: "10px" }}
