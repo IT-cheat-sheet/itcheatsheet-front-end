@@ -12,13 +12,13 @@ export default function TextArea({page, textAreaLabel, value, setValue}) {
   const ringFocusColor = "focus:ring-" + (page === 'sheet' ? 'purple' : page === 'review' ? 'blue' : 'gray') + "-formHover";
 
   return (
-    <div>
-      <label className={`uppercase body-base mb-5 ${page === 'sheet' ? 'text-violet-pill' : (page === 'review') ? 'text-blue-body' : "text-black"}`} for="textAreaContent">{textAreaLabel}</label>
+    <div className="body-sm">
+      <label className={`uppercase mb-5 ${page === 'sheet' ? 'text-violet-pill' : (page === 'review') ? 'text-blue-body' : "text-black"}`} for="textAreaContent">{textAreaLabel}</label>
       <br/>
       <textarea 
         id="textAreaContent" 
         name="textAreaContent" 
-        className={`resize-none w-full h-60 mt-5 input ${ringHoverColor} ${ringFocusColor} rounded-lg py-2 px-4 text-gray-mailbox`} 
+        className={`resize-none w-full h-60 mt-5 input ${ringHoverColor} ${ringFocusColor} placeholder-gray-disabled text-gray-mailbox rounded-lg py-2 px-4`} 
         placeholder="Please text politely :)"
         onChange={e => updateValue(e.target.value)}
         value={textAreaValue}
