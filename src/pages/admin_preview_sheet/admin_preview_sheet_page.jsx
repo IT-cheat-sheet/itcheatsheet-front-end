@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import AdminNavbar from '../../core/components/adminNavbar';
 import { adminPreviewSheetContext } from './admin_preview_sheet_context';
 import { Observer } from "mobx-react-lite";
 import Button from '../../core/components/button'
-import { useHistory } from 'react-router'
 
 export default function AdminPreviewSheet() {
   const params = useParams();
@@ -17,6 +16,7 @@ export default function AdminPreviewSheet() {
     context.preparePdf(params.id);
     context.setValue("history", history);
   }, [])
+
   return (
     <Observer>
       {() => (

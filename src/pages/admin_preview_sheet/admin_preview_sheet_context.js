@@ -7,16 +7,16 @@ class AdminPreviewSheetContext {
   sheet;
   file;
   token;
-  history;
   state;
+  history;
 
   constructor() {
     this.sheet = [];
     this.file = null;
     this.isLoad = false;
     this.token = this.getCookie('cheatSheetToken');
-    this.history = "";
-    this.state = [];
+    this.deleteSuccess = false;
+    this.history = [];
     makeAutoObservable(this);
   }
 
@@ -52,18 +52,20 @@ class AdminPreviewSheetContext {
         };
         reader.readAsDataURL(resp.data);
       } else {
-        this.setValue('file',null)
+        this.setValue('file', null)
       }
     } catch (err) {
       console.log(err);
     }
   }
 
-  async delSheet(id, token) {
+  async delSheet(postId, token) {
     try {
-      await deleteSheet(id, token);
-      this.history.replace("/admin");
-    } catch (err) {
+      const resp = await deleteSheet(postId, token);
+      if (resp.status !== 204) {
+        this.history.replace("/admin");
+      }
+    } catch(err) {
       console.log(err);
       alert(err.message);
     }
