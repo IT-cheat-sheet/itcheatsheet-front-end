@@ -33,3 +33,15 @@ export const postThread = ({
     topicId,
   });
 };
+
+export const postPdf = (id, file) => {
+  const fd = new FormData();
+  fd.append('file', file);
+
+  return axios.post(`http://localhost:3000/summaryPost/upload/${id}`, fd,
+  {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+}

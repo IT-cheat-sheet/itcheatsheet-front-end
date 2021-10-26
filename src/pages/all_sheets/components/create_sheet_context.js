@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
-import { postSheet } from "../../../core/service/postSheet";
+import { postPdf, postSheet } from "../../../core/service/postSheet";
 import { getSemester, getSubject } from "../../../core/service/getSheet";
 
 class CreateSheetContext {
@@ -19,10 +19,12 @@ class CreateSheetContext {
   licenceError;
   descriptionError;
   linkError;
+  fileError;
 
   subjectChoice;
   semesterChoice;
   onClose;
+  onComplete;
 
   constructor() {
     this.title = "";
@@ -39,6 +41,7 @@ class CreateSheetContext {
     this.licenceError = "";
     this.descriptionError = "";
     this.linkError = "";
+    this.fileError = "";
     makeAutoObservable(this);
   }
 
@@ -71,20 +74,21 @@ class CreateSheetContext {
   }
 
   async onSubmit() {
-    this.titleError = this.title === "" ? "this field is required" : "";
-    this.subjectError = this.subject === "" ? "this field is required" : "";
-    this.semesterError = this.semester === "" ? "this field is required" : "";
-    this.licenceError = this.licence === "" ? "this field is required" : "";
+    this.titleError = this.title === "" ? "This field is required." : "";
+    this.subjectError = this.subject === "" ? "This field is required." : "";
+    this.semesterError = this.semester === "" ? "This field is required." : "";
+    this.licenceError = this.licence === "" ? "This field is required." : "";
     this.descriptionError =
-      this.description === "" ? "this field is required" : "";
-    this.linkError = this.link === "" ? "this field is required" : "";
+      this.description === "" ? "This field is required." : "";
+    this.linkError = this.link === "" && this.file === null ? "Either this field or upload file is required." : "";
+    this.fileError = this.link === "" && this.file === null ? "Either this field or link is required." : "";
 
     if (
       this.subjectError === "" &&
       this.semesterError === "" &&
       this.licenceError === "" &&
       this.descriptionError === "" &&
-      this.linkError === ""
+      (this.linkError === "" || this.fileError === "")
     ) {
       try {
         const resp = await postSheet(
@@ -96,7 +100,11 @@ class CreateSheetContext {
           this.link
         );
         if (resp.status === 200) {
-          this.onClose();
+          const postResp = await postPdf(resp.data.result.summaryPostId, this.file);
+          if(postResp.status === 200){
+            this.onClose();
+            this.onComplete();
+          }
         }
       } catch (error) {
         console.error(error);

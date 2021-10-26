@@ -4,6 +4,7 @@ import AdminNavbar from '../../core/components/adminNavbar';
 import { adminPreviewReviewContext } from './admin_preview_review_context';
 import { Observer } from "mobx-react-lite";
 import Button from '../../core/components/button'
+import ConfirmModal from '../../core/components/comfirmModal';
 
 export default function AdminPreviewReview() {
   const params = useParams();
@@ -48,32 +49,15 @@ export default function AdminPreviewReview() {
                   <Button size="sm" color="red" onClick={() => setOpenDeleteModal(true)}>DELETE</Button>
                 </div>
               </div>
-              {
-                openDeleteModal ?
-                  <>
-                    <div
-                      className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-60 outline-none focus:outline-none mx-4"
-                    >
-                      <div className="relative w-1/3 my-6 mx-auto max-w-3xl text-left">
-                        <div className="flex justify-between">
-                          <h3 className="uppercase text-white text-4xl font-bold">CONFIRM DELETE</h3>
-                          <span className="material-icons text-white text-4xl cursor-pointer" onClick={() => setOpenDeleteModal(false)}>cancel</span>
-                        </div>
-                        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-footer outline-none focus:outline-none mt-5">
-                          <div className="relative p-6 flex-auto mx-6 text-center text-black">
-                            <p className="text-2xl text-gray-subheader font-bold">ARE YOU SURE TO DELETE?</p>
-                            <div className="mt-5">
-                              <Button color="red" size="sm" onClick={() => context.delReview(context.review.reviewId, context.token)}>DELETE</Button>
-                            </div>
-                            <p className="text-md text-red-button mt-2">Delete this review will also delete all reports of this review. </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="opacity-50 fixed inset-0 z-50 bg-black"></div>
-                  </>
-                  : <></>
-              }
+              <ConfirmModal
+              isOpen={openDeleteModal}
+              onButtonClick={() => context.delSheet(context.sheet.summaryPostId,context.token)}
+              onClose={() => setOpenDeleteModal(false)}
+              label="confirm delete"
+              buttonText="delete"
+              header="are you sure you want to delete?"
+              desc="Delete this sheet will also delete all reports of this sheet."
+              buttonColor="red" />
             </div>
             : <></>}
         </>

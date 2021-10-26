@@ -10,6 +10,7 @@ import CreateSheetModal from "./components/create_sheet_modal";
 import { allSheetContext } from "./components/all_sheets_context";
 import _ from 'lodash';
 import { Observer } from "mobx-react-lite";
+import ConfirmModal from "../../core/components/comfirmModal";
 
 export default function AllSheets() {
   const context = useContext(allSheetContext);
@@ -85,7 +86,21 @@ export default function AllSheets() {
             <span className="material-icons-outlined text-5xl md:text-7xl">file_upload</span>
           </button>
         </div>
-        <CreateSheetModal isOpen={context.createToggle} onClose={() => context.setValue('createToggle', false)} />
+        <CreateSheetModal isOpen={context.createToggle} onClose={() => context.setValue('createToggle', false)} onComplete={() => context.setValue('confirmToggle', true)} />
+        <ConfirmModal
+              isOpen={context.confirmToggle}
+              onButtonClick={() => {
+                context.setValue('confirmToggle', false);
+                context.prepareSheet();
+              }}
+              onClose={() => {
+                context.setValue('confirmToggle', false);
+                context.prepareSheet();
+              }}
+              label="upload sheet"
+              buttonText="ok"
+              header="sheet posted successfully!"
+              buttonColor="green" />
         <div className="h-12 bg-white md:hidden"></div>
         <Footer />
       </div>

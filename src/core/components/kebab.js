@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Button from './button'
+import ConfirmModal from './comfirmModal';
 import Dropdown from './dropdown';
 import TextArea from './textArea';
 
@@ -115,7 +116,7 @@ export default function Kebab({ page, postId }) {
         openShareModal ?
           <>
             <div
-              className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none mx-4"
+              className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none mx-4 backdrop-filter backdrop-blur-sm"
             >
               <div className="relative w-auto my-6 mx-auto max-w-3xl">
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
@@ -138,7 +139,7 @@ export default function Kebab({ page, postId }) {
                 </div>
               </div>
             </div>
-            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+            <div className="fixed inset-0 z-40 bg-black opacity-50"></div>
           </>
           : <></>
       }
@@ -146,7 +147,7 @@ export default function Kebab({ page, postId }) {
         openSuggestModal ?
           <>
             <div
-              className="justify-center items-center flex overflow-x-hidden overflow-y-auto md:overflow-y-hidden fixed inset-0 z-60 outline-none focus:outline-none mx-0 md:mx-4"
+              className="justify-center items-center flex overflow-x-hidden overflow-y-auto md:overflow-y-hidden fixed inset-0 z-60 outline-none focus:outline-none mx-0 md:mx-4 md:backdrop-filter md:backdrop-blur-sm"
             >
               <div className="relative w-full h-screen md:h-auto md:w-4/5 my-6 mx-auto max-w-3xl text-left">
                 <div className="flex md:justify-between mx-4 md:mx-0 pt-10 md:pt-0">
@@ -174,56 +175,28 @@ export default function Kebab({ page, postId }) {
                 </div>
               </div>
             </div>
-            <div className="fixed inset-0 z-50 bg-gray-mailbox bg-opacity-60"></div>
+            <div className="fixed inset-0 z-50 bg-black opacity-50"></div>
           </>
           : <></>
       }
-      {
-        openSendSuccessModal ?
-          <>
-            <div
-              className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none mx-4"
-            >
-              <div className="relative w-full md:w-4/5 my-6 mx-auto max-w-3xl text-left">
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-footer outline-none focus:outline-none mt-5">
-                  <div className="relative p-6 flex-auto md:mx-6 text-center text-black">
-                    <p>Send Successfully!</p>
-                    <div className="mt-5">
-                      <Button color="green" size="sm" onClick={() => setOpenSendSuccessModal(false)}>OK</Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-          </>
-          : <></>
-      }
-      {
-        openSendFailModal ?
-          <>
-            <div
-              className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none mx-4"
-            >
-              <div className="relative w-full md:w-4/5 my-6 mx-auto max-w-3xl text-left">
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-footer outline-none focus:outline-none mt-5">
-                  <div className="relative p-6 flex-auto md:mx-6 text-center text-black">
-                    <p>
-                      There's some problem occured when processing your request.
-                      <br />
-                      Please try again later.
-                    </p>
-                    <div className="mt-5">
-                      <Button color="green" size="sm" onClick={() => setOpenSendFailModal(false)}>OK</Button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-          </>
-          : <></>
-      }
+      <ConfirmModal
+              isOpen={openSendSuccessModal}
+              onButtonClick={() => setOpenSendSuccessModal(false)}
+              onClose={() => setOpenSendSuccessModal(false)}
+              label="report form"
+              buttonText="ok"
+              header="Send Successfully!"
+              buttonColor="green" />
+      <ConfirmModal
+              isOpen={openSendFailModal}
+              onButtonClick={() => setOpenSendFailModal(false)}
+              onClose={() => setOpenSendFailModal(false)}
+              label="report form"
+              buttonText="ok"
+              header="There's some problem occured when processing your request.
+              <br />
+              Please try again later."
+              buttonColor="red" />
     </div>
   )
 }

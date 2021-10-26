@@ -1,6 +1,6 @@
 import { Observer } from "mobx-react-lite";
 import React, { useContext, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import AdminNavbar from "../../core/components/adminNavbar";
 import Footer from "../../core/components/footer";
 import SearchBox from "../../core/components/searchBox";

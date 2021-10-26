@@ -5,7 +5,7 @@ import { createSheetContext } from "./create_sheet_context";
 import { Observer } from "mobx-react-lite";
 import _ from "lodash";
 
-export default function CreateSheetModal({ isOpen, onClose }) {
+export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
   const context = useContext(createSheetContext);
 
   const ref = useRef();
@@ -14,6 +14,7 @@ export default function CreateSheetModal({ isOpen, onClose }) {
     context.prepareSemester();
     context.prepareSubject();
     context.setValue("onClose", onClose);
+    context.setValue("onComplete", onComplete);
   }, []);
 
   return (
@@ -23,7 +24,7 @@ export default function CreateSheetModal({ isOpen, onClose }) {
           {isOpen && (
             <Fragment>
               <div
-                className="fixed top-0 left-0 w-screen h-screen bg-black opacity-20"
+                className="fixed top-0 left-0 w-screen h-screen bg-black opacity-50"
                 style={{ zIndex: 100 }}
               />
 
@@ -35,7 +36,8 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                   className="flex justify-between mb-2"
                   style={{ width: "1080px" }}
                 >
-                  <p className="text-gray-form body-base">UPLOAD SHEET</p>
+                  {/* <p className="text-gray-form body-base">UPLOAD SHEET</p> */}
+                  <h3 className="uppercase text-white text-2xl md:text-4xl font-bold">UPLOAD SHEET</h3>
                   <span className="material-icons text-gray-footer text-4xl cursor-pointer hidden md:block" onClick={onClose}>cancel</span>
                 </div>
                 <div

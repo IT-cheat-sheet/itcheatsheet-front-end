@@ -9,6 +9,7 @@ class AllSheetContext {
   total;
   isLoad;
   createToggle;
+  confirmToggle;
 
   searchWord;
   filter;
@@ -22,6 +23,7 @@ class AllSheetContext {
     this.total = 0;
     this.isLoad = false;
     this.createToggle = false;
+    this.confirmToggle = false;
     this.searchWord = '';
     this.filter = '';
     this.pageSize = 12;
