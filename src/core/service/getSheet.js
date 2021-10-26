@@ -45,3 +45,13 @@ export const getSpecificPdf = (id) => {
     responseType: 'blob'
   })
 }
+
+export const getSpecificReview = (id) => {
+  return axios.get(`http://localhost:3000/review/get/${id}`);
+}
+
+export const getSpecificReviewImage = (id) => {
+  return axios.get(`http://localhost:3000/review/image/${id}`, {
+    responseType: 'blob'
+  })
+}
