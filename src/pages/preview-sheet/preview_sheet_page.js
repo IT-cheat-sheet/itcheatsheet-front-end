@@ -63,7 +63,7 @@ export default function PreviewSheet() {
     <div>
       <Navbar />
       {isLoad ?
-        <div className={`px-4 pb-12 md:px-16 lg:px-20 xl:px-44 bg-violet-bg pt-24 lg:pt-0 md:bg-white md:grid md:gap-7 ${file ? "md:grid-cols-12" : ""}`}>
+        <div className={`px-4 pb-12 md:px-16 lg:px-20 xl:px-44 bg-violet-bg pt-24 lg:pt-0 md:bg-white ${file ? "md:grid-cols-12 md:grid md:gap-7" : ""}`}>
           <div className="col-span-5">
             <div className="md:hidden">
               <p className="text-xxs text-purple-hover">{sheet.summaryPost.semester.semester}</p>
@@ -91,7 +91,7 @@ export default function PreviewSheet() {
                 : <></>
               }
             </div>
-            <div className="w-full text-center mt-2 text-purple-hover text-sm md:text-2xl">Click PDF to View File</div>
+            {file && (<div className="w-full text-center mt-2 text-purple-hover text-sm md:text-2xl">Click PDF to View File</div>)}
             
           </div>
           <div className="mt-5 xl:mt-7 md:col-span-7">

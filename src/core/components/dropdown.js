@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 
 const Dropdown = ({label, options, page, setValue}) => {
-  const [display, setDisplay] = useState('none')
+  const [display, setDisplay] = useState('None')
   const [toggle, setToggle] = useState(false);
   const [search, setSearch] = useState('');
 
@@ -33,7 +33,7 @@ const Dropdown = ({label, options, page, setValue}) => {
     <div>
       <p className={`uppercase body-sm ${labelColor}`} htmlFor="dropdown">{label}</p>
       <div onClick={() => setToggle(!toggle)} className={`dropdown rounded-lg h-12 body-sm mt-3 py-2 px-4 bg-white w-52 cursor-pointer relative input ${ringFocusColor} ${ringHoverColor}`}>
-        <div className={`dropdown inline-block truncate w-3/4 ${display === 'none' ? placeholderColor : 'text-gray-mailbox'}`}>{display}</div>
+        <div className={`dropdown inline-block truncate w-3/4 ${display === 'None' ? placeholderColor : 'text-gray-mailbox'}`}>{display}</div>
         <div className={`absolute right-0 top-0 inline-block ${labelColor}`}><span className="dropdown text-5xl material-icons">arrow_drop_down</span></div>
       </div>
       {toggle ?
