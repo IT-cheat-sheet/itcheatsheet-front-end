@@ -82,6 +82,7 @@ export default function AdminPreviewSheet() {
                             <div className="mt-5">
                               <Button color="red" size="sm" onClick={() => context.delSheet(context.sheet.summaryPostId,context.token)}>DELETE</Button>
                             </div>
+                            <p className="text-md text-red-button mt-2">Delete this sheet will also delete all reports of this sheet. </p>
                           </div>
                         </div>
                       </div>
