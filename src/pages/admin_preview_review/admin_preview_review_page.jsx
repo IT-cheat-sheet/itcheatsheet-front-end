@@ -24,7 +24,7 @@ export default function AdminPreviewReview() {
         <>
           <AdminNavbar />
           {context.isLoad ?
-            <div className="mx-36 mb-12">
+            <div className="mx-36 mb-12 mt-5">
               <div className="flex">
                 <h2 className="header-secondary text-blue-body">{context.review.reviewTitle}</h2>
               </div>

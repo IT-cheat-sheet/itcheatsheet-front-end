@@ -23,8 +23,8 @@ export default function AdminPreviewSheet() {
       {() => (
         <>
           <AdminNavbar />
-          {context.isLoad ?
-            <div className="mx-36">
+          {context.isLoad &&
+            <div className="mx-36 mb-12 my-5">
               <div className="flex">
                 <h2 className="header-secondary text-violet-header">{context.sheet.summaryTitle}</h2>
                 <p className="ml-3 text-purple-hover mt-8">{context.sheet.semester.semester}</p>
@@ -75,8 +75,7 @@ export default function AdminPreviewSheet() {
               header="are you sure you want to delete?"
               desc="Delete this sheet will also delete all reports of this sheet."
               buttonColor="red" />
-            </div>
-            : <></>}
+            </div>}
         </>
       )}
 

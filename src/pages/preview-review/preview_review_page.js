@@ -98,7 +98,7 @@ export default function PreviewReview() {
                   <p className="ml-4 text-blue-page text-xxs">{reviewPost.data.reviewId}</p>
                 </div>
               </div>
-              <div className="hidden md:block">
+              <div className="hidden md:block md:mt-5">
                 <h1 className="header-secondary text-blue-body"> {reviewPost.data.reviewTitle}</h1 >
                 <div className="flex my-2">
                   <p className="uppercase px-6 rounded-3xl bg-blue-form text-white">{reviewPost.data.reviewer}</p>

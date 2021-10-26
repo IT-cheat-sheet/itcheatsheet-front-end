@@ -78,7 +78,7 @@ export default function PreviewSheet() {
                 <p className="ml-4 text-purple-hover text-xxs">{sheet.summaryPost.summaryPostId}</p>
               </div>
             </div>
-            <div className="shadow-halo mt-5 rounded-button overflow-hidden">
+            <div className={`shadow-halo rounded-button overflow-hidden ${file && 'mt-5'}`}>
               {
                 file ?
                   <a id="pdfOpen" href={`http://localhost:3000/summarypost/getFile/${params.id}`} target="_blank" rel="noreferrer">
