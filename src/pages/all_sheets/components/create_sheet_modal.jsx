@@ -36,12 +36,7 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                   style={{ width: "1080px" }}
                 >
                   <p className="text-gray-form body-base">UPLOAD SHEET</p>
-                  <button
-                    className="w-6 h-6 rounded-full bg-gray-footer"
-                    onClick={onClose}
-                  >
-                    x
-                  </button>
+                  <span className="material-icons text-gray-footer text-4xl cursor-pointer hidden md:block" onClick={onClose}>cancel</span>
                 </div>
                 <div
                   className="flex flex-col px-8 py-6 space-y-5 rounded-lg bg-violet-bg"
