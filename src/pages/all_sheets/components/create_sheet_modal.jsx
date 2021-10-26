@@ -80,7 +80,7 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                       </p>
                     </div>
 
-                    <div className="flex flex-col items-start">
+                    <div className="flex flex-col items-start space-y-2">
                       <Dropdown
                         page="sheet"
                         label="subject"
@@ -100,7 +100,7 @@ export default function CreateSheetModal({ isOpen, onClose }) {
                       </p>
                     </div>
 
-                    <div className="flex flex-col items-start">
+                    <div className="flex flex-col items-start space-y-2">
                       <InputText
                         placeholder="Text here"
                         label="license/your name"
