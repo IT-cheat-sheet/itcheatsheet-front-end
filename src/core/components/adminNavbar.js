@@ -37,7 +37,7 @@ export default function AdminNavbar() {
       <div className="h-24 w-full flex justify-between glass">
         <div className="flex place-self-center justify-center ml-36">
           <Link to="/admin">
-            <img src="images/cheatsheetlogo1.png" alt="Logo" className="h-14 w-52" />
+            <img src="/images/cheatsheetlogo1.png" alt="Logo" className="h-14 w-52" />
           </Link>
         </div>
         <div className="flex place-self-center space-x-14 justify-evenly mr-36">
