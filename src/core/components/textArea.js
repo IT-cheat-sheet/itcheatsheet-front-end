@@ -17,7 +17,7 @@ export default function TextArea({page, textAreaLabel, value, setValue, placehol
       <textarea 
         id="textAreaContent" 
         name="textAreaContent" 
-        className={`resize-none w-full h-36 overflow-y-auto mt-5 input ${ringHoverColor} ${ringFocusColor} ${page === 'sheet' ? 'placeholder-violet-bubbleHover' : page === 'review' ? 'placeholder-lightblue-lighter' : 'placeholder-gray-disabled'} text-gray-mailbox rounded-lg py-2 px-4`} 
+        className={`resize-none w-full h-36 overflow-y-auto mt-5 px-6 py-3 input ${ringHoverColor} ${ringFocusColor} ${page === 'sheet' ? 'placeholder-violet-bubbleHover' : page === 'review' ? 'placeholder-lightblue-lighter' : 'placeholder-gray-disabled'} text-gray-mailbox rounded-lg`} 
         placeholder={placeholder}
         onChange={e => updateValue(e.target.value)}
         value={textAreaValue}

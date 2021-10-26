@@ -165,6 +165,12 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
                             {context.file?.name || ""}
                           </p>
                         )}
+                        <p
+                          className="h-4 text-red-button"
+                          style={{ fontSize: "10px" }}
+                        >
+                      {context.fileError}
+                    </p>
                       </div>
                       <input
                         type="file"
