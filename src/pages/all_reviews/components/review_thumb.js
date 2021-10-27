@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getReviewImage } from "../../core/service/getSheet";
+import { getReviewImage } from "../../../core/service/getSheet";
 
 export default function ReviewThumb({ review }) {
   const [image, setImage] = useState(null);

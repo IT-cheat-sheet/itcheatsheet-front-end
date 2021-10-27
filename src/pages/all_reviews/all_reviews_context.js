@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
-import { getReview, getTopic } from "../../../core/service/getSheet";
+import { getReview, getTopic } from "../../core/service/getSheet";
 
 class AllReviewContext {
   topics;

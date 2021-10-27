@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
-import { getReport } from "../../../core/service/getSheet";
+import { getReport } from "../../core/service/getSheet";
 
 class AdminHomeContext {
   reports;

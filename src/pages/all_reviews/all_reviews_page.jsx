@@ -5,8 +5,8 @@ import Navbar from "../../core/components/navbar";
 import Footer from "../../core/components/footer";
 import Pagination from "../../core/components/pagination";
 import SearchBox from "../../core/components/searchBox";
-import ReviewThumb from "./review_thumb";
-import { allReviewContext } from "./components/all_reviews_context";
+import ReviewThumb from "./components/review_thumb";
+import { allReviewContext } from "./all_reviews_context";
 import _ from 'lodash';
 import { Observer } from "mobx-react-lite";
 

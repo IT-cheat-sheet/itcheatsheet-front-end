@@ -14,6 +14,7 @@ export default function PreviewSheet() {
   const [isLoad, setIsLoad] = useState(false);
   const [toggleSeeMore, setToggleSeeMore] = useState(false);
   const [exceed, setExceed] = useState(false);
+  const [isPdfLoad, setIsPdfLoad] = useState(false);
 
   useEffect(() => {
     async function fetchSheet() {
@@ -78,12 +79,12 @@ export default function PreviewSheet() {
                 <p className="ml-4 text-purple-hover text-xxs">{sheet.summaryPost.summaryPostId}</p>
               </div>
             </div>
-            <div className={`shadow-halo rounded-button overflow-hidden ${file && 'mt-5'}`}>
+            <div className={`rounded-button overflow-hidden ${file && 'mt-5'} ${isPdfLoad && 'shadow-halo'}`}>
               {
                 file ?
                   <a id="pdfOpen" href={`http://localhost:3000/summarypost/getFile/${params.id}`} target="_blank" rel="noreferrer">
                     <div>
-                      <Document file={file}>
+                      <Document file={file} onLoadSuccess={() => setIsPdfLoad(true)} loading={<div className="text-center my-5">Loading PDF...<br />Please Wait</div>}>
                       <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
                     </Document>
                   </div>
