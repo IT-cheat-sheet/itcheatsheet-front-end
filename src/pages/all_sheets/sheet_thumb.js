@@ -50,16 +50,21 @@ export default function SheetThumb({id, fileName, link}) {
     <div className="py-3 md:px-8 md:py-4">
       <Link key={id} to={`/sheets/${id}`}>
         <div className="p-2 cursor-pointer" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
-          <div ref={ref} className={classNames("w-full rounded-lg overflow-hidden transition duration-200 transform flex justify-center items-center text-center bg-violet-bubbleHover text-violet-page",
+          <div ref={ref} className={classNames("w-full h-auto rounded-lg transition duration-200 transform flex justify-center items-center text-center",
+          {"bg-violet-bubbleHover text-violet-page" : !file},
           {"scale-105" : isHover},
-          {"shadow-halo" : isLoaded})}>
-            {file ?
-            <Document file={file} onLoadSuccess={() => setIsLoaded(true)}>
-              <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
-            </Document> :
-            link ?
-            <span className="material-icons text-9xl w-full transform -rotate-45">link</span> :
-            <span className="material-icons text-9xl w-full">subject</span>}
+          {"shadow-halo-sm" : !file && isLoaded}
+          )}>
+              {file ?
+                <div className={classNames("rounded-lg overflow-hidden", {"shadow-halo-sm" : isLoaded})}>
+                  <Document file={file} onLoadSuccess={() => setIsLoaded(true)}>
+                    <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
+                  </Document>
+                </div> :
+              link ?
+                <span className="material-icons text-9xl w-full transform -rotate-45">link</span> :
+                <span className="material-icons text-9xl w-full">subject</span>
+              }
           </div>
           <div className="md:hidden text-lg font-semibold uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>
           <div className="hidden md:block body-base uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>

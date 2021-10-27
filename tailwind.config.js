@@ -123,6 +123,7 @@ module.exports = {
         '22.5': '5.625rem'
       },
       boxShadow: {
+        'halo-sm': '0 0 15px rgba(0,0,0,0.15)',
         'halo': '0 0 25px rgba(0,0,0,0.15)'
       },
       backdropBlur: {
