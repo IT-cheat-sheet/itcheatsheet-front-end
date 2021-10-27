@@ -133,6 +133,7 @@ export default function HomePage() {
     // };
     // fetchSheet();
     // fetchFile();
+    document.title = "ITCheatSheet"
   }, [isVideo, reviewPost])
   // , [params.id])
 
