@@ -51,9 +51,8 @@ export default function SheetThumb({id, fileName, link}) {
       <Link key={id} to={`/sheets/${id}`}>
         <div className="p-2 cursor-pointer" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
           <div ref={ref} className={classNames("w-full h-auto rounded-lg transition duration-200 transform flex justify-center items-center text-center",
-          {"bg-violet-bubbleHover text-violet-page" : !file},
-          {"scale-105" : isHover},
-          {"shadow-halo-sm" : !file && isLoaded}
+          {"bg-violet-bubbleHover text-violet-page shadow-halo-sm" : !file},
+          {"scale-105" : isHover}
           )}>
               {file ?
                 <div className={classNames("rounded-lg overflow-hidden", {"shadow-halo-sm" : isLoaded})}>
