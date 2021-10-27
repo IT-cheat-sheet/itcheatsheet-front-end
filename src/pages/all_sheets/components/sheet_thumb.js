@@ -55,7 +55,7 @@ export default function SheetThumb({id, fileName, link}) {
           )}>
               {file ?
                 <div className={classNames("rounded-lg overflow-hidden", {"shadow-halo-sm" : isLoaded})}>
-                  <Document file={file} onLoadSuccess={() => setIsLoaded(true)}>
+                  <Document file={file} onLoadSuccess={() => setIsLoaded(true)} loading={<div>Loading PDF...<br />Please Wait</div>}>
                     <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
                   </Document>
                 </div> :
