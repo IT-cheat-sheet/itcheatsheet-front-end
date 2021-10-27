@@ -12,6 +12,8 @@ export default function SheetThumb({id, fileName, link}) {
   const ref = useRef();
 
   useEffect(() => {
+    setFile(null);
+
     (async function() {
       try {
         const res = await getSpecificPdf(id);
@@ -22,8 +24,6 @@ export default function SheetThumb({id, fileName, link}) {
             setFile(e.target.result);
           };
           reader.readAsDataURL(res.data);
-        } else {
-          setFile(null);
         }
       } catch (err) {
         console.log(err);
@@ -55,8 +55,8 @@ export default function SheetThumb({id, fileName, link}) {
           )}>
               {file ?
                 <div className={classNames("rounded-lg overflow-hidden", {"shadow-halo-sm" : isLoaded})}>
-                  <Document file={file} onLoadSuccess={() => setIsLoaded(true)} loading={<div>Loading PDF...<br />Please Wait</div>}>
-                    <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
+                  <Document file={file} loading={<div>Loading PDF...<br />Please Wait</div>}>
+                    <Page pageNumber={1} onLoadSuccess={() => setIsLoaded(true)} renderTextLayer={false} renderAnnotationLayer={false} />
                   </Document>
                 </div> :
                 link ?
