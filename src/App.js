@@ -9,41 +9,25 @@ import AdminHome from "./pages/admin_home/admin_home_page";
 import AdminLogin from "./pages/admin_login/admin_login_page";
 import AdminPreviewSheet from "./pages/admin_preview_sheet/admin_preview_sheet_page.jsx"
 import AdminPreviewReview from "./pages/admin_preview_review/admin_preview_review_page";
+import NotFound from "./pages/not_found/not_found_page";
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/sheets/:id">
-            <PreviewSheet />
-          </Route>
-          <Route path="/reviews/:id">
-            <PreviewReview />
-          </Route>
-          <Route path="/admin/reviews/:id">
-            <AdminPreviewReview />
-          </Route>
-          <Route path="/admin/sheets/:id">
-            <AdminPreviewSheet/>
-          </Route>
-          <Route path="/admin/login">
-            <AdminLogin/>
-          </Route>
+          <Route path="/sheets/:id" component={PreviewSheet} />
+          <Route path="/reviews/:id" component={PreviewReview} />
+          <Route path="/admin/reviews/:id" component={AdminPreviewReview} />
+          <Route path="/admin/sheets/:id" component={AdminPreviewSheet} />
+          <Route path="/admin/login" component={AdminLogin} />
 
-          <Route path="/sheets">
-            <AllSheets />
-          </Route>
-          <Route path="/reviews">
-            <AllReviews />
-          </Route>
-          <Route path="/admin">
-            <AdminHome />
-          </Route>
+          <Route path="/sheets" component={AllSheets} />
+          <Route path="/reviews" component={AllReviews} />
+          <Route path="/admin" component={AdminHome} />
 
-          <Route path="/">
-            <HomePage />
-          </Route>
+          <Route exact path="/" component={HomePage} />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     </div>
