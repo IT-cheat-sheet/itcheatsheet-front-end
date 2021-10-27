@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 import { Document, Page, pdfjs } from 'react-pdf';
 import { Link } from "react-router-dom";
+import { getSpecificPdf } from "../../core/service/getSheet";
 
 export default function SheetThumb({id, fileName, link}) {
   const [file, setFile] = useState(null);
@@ -13,21 +14,19 @@ export default function SheetThumb({id, fileName, link}) {
   useEffect(() => {
     (async function() {
       try {
-        const res = await fetch(`http://localhost:3000/summarypost/getFile/${id}`);
-        const data = await res.blob();
+        const res = await getSpecificPdf(id);
       
         if(res.status === 200){
           var reader = new FileReader();
           reader.onload = (e) => {
             setFile(e.target.result);
           };
-          reader.readAsDataURL(data);
+          reader.readAsDataURL(res.data);
         } else {
           setFile(null);
         }
       } catch (err) {
         console.log(err);
-        alert(err.message);
       }
     })();
 
@@ -51,7 +50,7 @@ export default function SheetThumb({id, fileName, link}) {
       <Link key={id} to={`/sheets/${id}`}>
         <div className="p-2 cursor-pointer" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
           <div ref={ref} className={classNames("w-full h-auto rounded-lg transition duration-200 transform flex justify-center items-center text-center",
-          {"bg-violet-bubbleHover text-violet-page shadow-halo-sm" : !file},
+          {"bg-violet-bubbleHover text-violet-page shadow-halo-sm overflow-hidden" : !file},
           {"scale-105" : isHover}
           )}>
               {file ?
@@ -60,9 +59,9 @@ export default function SheetThumb({id, fileName, link}) {
                     <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
                   </Document>
                 </div> :
-              link ?
-                <span className="material-icons text-9xl w-full transform -rotate-45">link</span> :
-                <span className="material-icons text-9xl w-full">subject</span>
+                link ?
+                  <span className="material-icons xl:text-9xl lg:text-5xl text-9xl w-full transform -rotate-45">link</span> :
+                  <span className="material-icons xl:text-9xl lg:text-5xl text-9xl w-full">subject</span>
               }
           </div>
           <div className="md:hidden text-lg font-semibold uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>
