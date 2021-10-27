@@ -56,7 +56,8 @@ export default function PreviewSheet() {
     if(isLoad){
         const elm = document.getElementById('sheetContent');
         setExceed(elm.scrollHeight > elm.clientHeight);
-    } 
+    }
+    document.title = "ITCheatSheet-Sheet "+params.id; 
 
   }, [params, isLoad])
 

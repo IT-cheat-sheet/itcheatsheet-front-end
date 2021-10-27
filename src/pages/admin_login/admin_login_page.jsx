@@ -1,11 +1,15 @@
 
 import { useHistory } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   let history = useHistory();
+
+  useEffect(() => {
+    document.title = "ITCheatSheet-Admin Login"
+  }, [])
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
