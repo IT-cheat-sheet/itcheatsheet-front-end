@@ -13,6 +13,7 @@ export default function SheetThumb({id, fileName, link}) {
 
   useEffect(() => {
     setFile(null);
+    setIsLoaded(false);
 
     (async function() {
       try {

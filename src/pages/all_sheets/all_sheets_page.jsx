@@ -37,7 +37,7 @@ export default function AllSheets() {
     context.setValue('current', page)
     context.prepareSemester();
     context.prepareSheet();
-    document.title = "ITCheatSheet-Sheets"
+    document.title = "ITCheatSheet – Sheets"
   }, [location])
 
   return (

@@ -13,7 +13,6 @@ export default function AdminPreviewSheet() {
   const history = useHistory();
 
   useEffect(() => {
-    document.title = "ITCheatSheet-Report Sheet "+params.id
     context.prepareSheet(params.id);
     context.preparePdf(params.id);
     context.setValue("history", history);

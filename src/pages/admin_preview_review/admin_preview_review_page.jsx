@@ -16,7 +16,6 @@ export default function AdminPreviewReview() {
     context.prepareReview(params.id);
     context.prepareReviewImage(params.id);
     context.setValue("history", history);
-    document.title = "ITCheatSheet-Report Review "+params.id;
   }, [])
 
   return (

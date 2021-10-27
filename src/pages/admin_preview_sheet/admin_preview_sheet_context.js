@@ -35,6 +35,7 @@ class AdminPreviewSheetContext {
       if (resp.status !== 204) {
         this.setValue('sheet', resp.data.summaryPost);
         this.setValue('isLoad', true)
+        document.title = "ITCheatSheet – "+this.sheet.summaryTitle;
       }
     } catch (err) {
       console.error(err);

@@ -17,7 +17,7 @@ export default function AdminHome() {
   }
 
   useEffect(() => {
-    context.setValue("title","ITCheatSheet-Admin Tasks");
+    context.setValue("title","ITCheatSheet – Admin Tasks");
     document.title = context.title;
     if(context.token !== null){
       context.prepareReport();

@@ -36,6 +36,7 @@ class AdminPreviewReviewContext {
       if (resp.status !== 204) {
         this.setValue('review', resp.data.data);
         this.setValue('isLoad', true);
+        document.title = "ITCheatSheet – " + this.review.reviewTitle;
       }
     } catch (err) {
       console.error(err);
