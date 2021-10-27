@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 import { Document, Page, pdfjs } from 'react-pdf';
 import { Link } from "react-router-dom";
-import { getSpecificPdf } from "../../core/service/getSheet";
+import { getSpecificPdf } from "../../../core/service/getSheet";
 
 export default function SheetThumb({id, fileName, link}) {
   const [file, setFile] = useState(null);

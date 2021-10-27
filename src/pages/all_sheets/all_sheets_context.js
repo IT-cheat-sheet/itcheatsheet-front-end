@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
-import { getSemester, getSheet } from "../../../core/service/getSheet";
+import { getSemester, getSheet } from "../../core/service/getSheet";
 
 class AllSheetContext {
   semesters;

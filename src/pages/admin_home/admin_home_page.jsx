@@ -5,7 +5,7 @@ import AdminNavbar from "../../core/components/adminNavbar";
 import Footer from "../../core/components/footer";
 import SearchBox from "../../core/components/searchBox";
 import AdminThumb from "./admin_thumb";
-import { adminHomeContext } from "./components/admin_home_context";
+import { adminHomeContext } from "./admin_home_context";
 import _ from 'lodash';
 
 export default function AdminHome() {
