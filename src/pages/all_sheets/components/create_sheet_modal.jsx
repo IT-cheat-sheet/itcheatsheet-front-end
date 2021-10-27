@@ -152,7 +152,13 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
 
                   <div className="flex items-end justify-between w-full">
                     <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-violet-bubbleText">FILE</p>
+                      <p className="body-sm text-violet-bubbleText">FILE
+                      <span
+                          className="text-red-button tracking-normal ml-4"
+                          style={{ fontSize: "10px" }}
+                        >
+                        {context.fileError}
+                      </span></p>
                       <div className="flex items-center space-x-4">
                         <button
                           className="h-10 px-4 rounded-lg bg-purple-button"
@@ -165,12 +171,6 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
                             {context.file?.name || ""}
                           </p>
                         )}
-                        <p
-                          className="h-4 text-red-button"
-                          style={{ fontSize: "10px" }}
-                        >
-                      {context.fileError}
-                    </p>
                       </div>
                       <input
                         type="file"
