@@ -32,6 +32,7 @@ export default function AllReviews() {
   }
 
   useEffect(() => {
+    document.title = "ITCheatSheet-Review"
     context.setValue('current', page);
     context.prepareTopic();
     context.prepareReview();

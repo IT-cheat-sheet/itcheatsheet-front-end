@@ -50,6 +50,7 @@ export default function PreviewReview() {
 
     fetchReviewPost();
     fetchReviewImage();
+    document.title = "ITCheatSheet-Review "+params.id;
   }, [params])
 
   const RecommendedBlocks = () => {

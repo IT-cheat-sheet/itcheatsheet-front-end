@@ -6,6 +6,7 @@ class AdminHomeContext {
   reports;
   readPage;
   isLoad;
+  title;
 
   searchWord;
   filter;
@@ -18,6 +19,7 @@ class AdminHomeContext {
     this.reports = [];
     this.readPage = false;
     this.isLoad = false;
+    this.title = ""
     this.searchWord = '';
     this.filter = '';
     this.token = this.getCookie('cheatSheetToken');

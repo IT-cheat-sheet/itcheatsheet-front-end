@@ -35,7 +35,7 @@ class AdminPreviewReviewContext {
       const resp = await getSpecificReview(id);
       if (resp.status !== 204) {
         this.setValue('review', resp.data.data);
-        this.setValue('isLoad', true)
+        this.setValue('isLoad', true);
       }
     } catch (err) {
       console.error(err);

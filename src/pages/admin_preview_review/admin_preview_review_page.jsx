@@ -16,6 +16,7 @@ export default function AdminPreviewReview() {
     context.prepareReview(params.id);
     context.prepareReviewImage(params.id);
     context.setValue("history", history);
+    document.title = "ITCheatSheet-Report Review "+params.id;
   }, [])
 
   return (
@@ -50,14 +51,14 @@ export default function AdminPreviewReview() {
                 </div>
               </div>
               <ConfirmModal
-              isOpen={openDeleteModal}
-              onButtonClick={() => context.delSheet(context.sheet.summaryPostId,context.token)}
-              onClose={() => setOpenDeleteModal(false)}
-              label="confirm delete"
-              buttonText="delete"
-              header="are you sure you want to delete?"
-              desc="Delete this sheet will also delete all reports of this sheet."
-              buttonColor="red" />
+                isOpen={openDeleteModal}
+                onButtonClick={() => context.delSheet(context.sheet.summaryPostId, context.token)}
+                onClose={() => setOpenDeleteModal(false)}
+                label="confirm delete"
+                buttonText="delete"
+                header="are you sure you want to delete?"
+                desc="Delete this sheet will also delete all reports of this sheet."
+                buttonColor="red" />
             </div>
             : <></>}
         </>
