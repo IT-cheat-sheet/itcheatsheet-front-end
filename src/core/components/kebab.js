@@ -12,7 +12,8 @@ export default function Kebab({ page, postId }) {
   const [openSendFailModal, setOpenSendFailModal] = useState(false);
   const [actionSelected, setActionSelected] = useState("");
   const [description, setDescription] = useState("");
-  const [showError, setShowError] = useState(false);
+  const [actError, setActError] = useState("");
+  const [descError, setDescError] = useState("");
 
   const action = [
     {
@@ -35,13 +36,11 @@ export default function Kebab({ page, postId }) {
     }
   }
 
-  const validate = () => {
-    return actionSelected !== "" && description !== "";
-  };
-
   const sendReport = async () => {
-    if (validate()) {
-      setShowError(false);
+    setActError(actionSelected === "" ? "This field is required." : "");
+    setDescError(description === "" ? "This field is required." : "");
+
+    if (actionSelected !== "" && description !== "") {
       const res = await fetch(`http://localhost:3000/report/add`,
         (page === "sheet") ?
           {
@@ -77,8 +76,6 @@ export default function Kebab({ page, postId }) {
         setOpenSendFailModal(true);
         setOpenSuggestModal(false);
       }
-    } else {
-      setShowError(true);
     }
   }
 
@@ -151,21 +148,24 @@ export default function Kebab({ page, postId }) {
             >
               <div className="relative w-full h-screen md:h-auto md:w-4/5 my-6 mx-auto max-w-3xl text-left">
                 <div className="flex md:justify-between mx-4 md:mx-0 pt-10 md:pt-0">
-                  <span class="material-icons text-white text-2xl md:hidden" onClick={() => setOpenSuggestModal(false)}>arrow_back_ios</span>
+                  <span class="material-icons text-white text-2xl md:hidden" onClick={() => {
+                    setOpenSuggestModal(false);
+                    setActError("");
+                    setDescError("");
+                  }}>arrow_back_ios</span>
                   <h3 className="uppercase text-white text-2xl md:text-4xl font-bold">report form</h3>
-                  <span className="material-icons text-white text-4xl cursor-pointer hidden md:block" onClick={() => setOpenSuggestModal(false)}>cancel</span>
+                  <span className="material-icons text-white text-4xl cursor-pointer hidden md:block" onClick={() => {
+                    setOpenSuggestModal(false);
+                    setActError("");
+                    setDescError("");
+                  }}>cancel</span>
                 </div>
                 <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full h-screen md:h-auto bg-gray-footer outline-none focus:outline-none mt-5">
                   <div className="relative p-6 flex-auto md:mx-6">
                     <form>
-                      {
-                        showError ?
-                          <p className="text-red-button mb-2">Please fill every field.</p> :
-                          <></>
-                      }
-                      <Dropdown label="ACTIONS" options={action} setValue={setActionSelected} />
+                      <Dropdown label="ACTIONS" options={action} setValue={setActionSelected} errorText={actError} />
                       <div className="mt-5">
-                        <TextArea textAreaLabel="EXPLANATION" setValue={setDescription} placeholder="Please text politely :)" />
+                        <TextArea textAreaLabel="EXPLANATION" setValue={setDescription} placeholder="Please text politely :)" errorText={descError} />
                       </div>
                       <div className="mt-10">
                         <Button color="green" size="sm" onClick={() => sendReport()}>SEND</Button>

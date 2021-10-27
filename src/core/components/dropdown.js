@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import _ from 'lodash';
 
-const Dropdown = ({label, options, page, setValue}) => {
+const Dropdown = ({label, options, page, setValue, errorText}) => {
   const [display, setDisplay] = useState('None')
   const [toggle, setToggle] = useState(false);
   const [search, setSearch] = useState('');
@@ -30,14 +30,13 @@ const Dropdown = ({label, options, page, setValue}) => {
   const labelColor = page === 'sheet' ? 'text-violet-bubbleText' : page === 'review' ? 'text-blue-body' : 'text-gray-mailbox';
 
   return (
-    <div>
+    <div className="flex flex-col items-start space-y-2">
       <p className={`uppercase body-sm ${labelColor}`} htmlFor="dropdown">{label}</p>
-      <div onClick={() => setToggle(!toggle)} className={`dropdown rounded-lg h-12 body-sm mt-3 py-2 px-4 bg-white w-52 cursor-pointer relative input ${ringFocusColor} ${ringHoverColor}`}>
-        <div className={`dropdown inline-block truncate w-3/4 ${display === 'None' ? placeholderColor : 'text-gray-mailbox'}`}>{display}</div>
+      <div onClick={() => setToggle(!toggle)} className={`dropdown rounded-lg h-12 body-sm bg-white w-52 cursor-pointer relative input ${ringFocusColor} ${ringHoverColor}`}>
+        <div className={`dropdown inline-block truncate w-3/4 py-2 px-4 ${display === 'None' ? placeholderColor : 'text-gray-mailbox'}`}>{display}</div>
         <div className={`absolute right-0 top-0 inline-block ${labelColor}`}><span className="dropdown text-5xl material-icons">arrow_drop_down</span></div>
-      </div>
-      {toggle ?
-      <div className={`shadow-xl absolute rounded-lg max-h-80 mt-2 overflow-y-scroll innerTrack bg-white ${labelColor}`}>
+      {toggle &&
+      <div className={`shadow-xl absolute rounded-lg max-h-80 mt-1 overflow-y-scroll innerTrack bg-white ${labelColor}`}>
         {label === 'subject' ?
         <div>
           {
@@ -75,8 +74,9 @@ const Dropdown = ({label, options, page, setValue}) => {
           ${index === 0 ? 'rounded-t-lg' : ''}
           ${labelColor}`}>{option.name}</div>
         ))}
+      </div>}
       </div>
-      : <></>}
+      <p className="h-4 text-red-button" style={{ fontSize: "10px" }}>{errorText}</p>
     </div>
   )
 } 

@@ -39,14 +39,17 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
                 >
                   {/* <p className="text-gray-form body-base">UPLOAD SHEET</p> */}
                   <h3 className="uppercase text-white text-2xl md:text-4xl font-bold">UPLOAD SHEET</h3>
-                  <span className="material-icons text-gray-footer text-4xl cursor-pointer hidden md:block" onClick={onClose}>cancel</span>
+                  <span className="material-icons text-gray-footer text-4xl cursor-pointer hidden md:block" onClick={() => {
+                    onClose();
+                    context.resetError();
+                  }}>cancel</span>
                 </div>
                 <div
                   className="flex flex-col px-8 py-6 space-y-5 rounded-lg bg-violet-bg"
                   style={{ width: "1080px" }}
                 >
                   <div className="flex space-x-12">
-                    <div className="flex flex-col items-start space-y-2">
+                    <div className="flex flex-col items-start">
                       <InputText
                         placeholder="Text here"
                         label="title"
@@ -54,16 +57,11 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
                         onChange={(e) => {
                           context.setValue("title", e.target.value);
                         }}
+                        errorText={context.titleError}
                       />
-                      <p
-                        className="h-4 text-red-button"
-                        style={{ fontSize: "10px" }}
-                      >
-                        {context.titleError}
-                      </p>
                     </div>
 
-                    <div className="flex flex-col items-start space-y-2">
+                    <div className="flex flex-col items-start">
                       <Dropdown
                         page="sheet"
                         label="semester/year"
@@ -74,16 +72,11 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
                         setValue={(e) => {
                           context.setValue("semester", e);
                         }}
+                        errorText={context.semesterError}
                       ></Dropdown>
-                      <p
-                        className="h-4 text-red-button"
-                        style={{ fontSize: "10px" }}
-                      >
-                        {context.semesterError}
-                      </p>
                     </div>
 
-                    <div className="flex flex-col items-start space-y-2">
+                    <div className="flex flex-col items-start">
                       <Dropdown
                         page="sheet"
                         label="subject"
@@ -94,16 +87,11 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
                         setValue={(e) => {
                           context.setValue("subject", e);
                         }}
+                        errorText={context.subjectError}
                       ></Dropdown>
-                      <p
-                        className="h-4 text-red-button"
-                        style={{ fontSize: "10px" }}
-                      >
-                        {context.subjectError}
-                      </p>
                     </div>
 
-                    <div className="flex flex-col items-start space-y-2">
+                    <div className="flex flex-col items-start">
                       <InputText
                         placeholder="Text here"
                         label="license/your name"
@@ -111,29 +99,18 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
                         onChange={(e) => {
                           context.setValue("licence", e.target.value);
                         }}
+                        errorText={context.licenceError}
                       />
-                      <p
-                        className="h-4 text-red-button"
-                        style={{ fontSize: "10px" }}
-                      >
-                        {context.licenceError}
-                      </p>
                     </div>
                   </div>
 
-                  <div className="flex flex-col items-start space-y-2">
+                  <div className="flex flex-col items-start">
                     <TextArea page="sheet" textAreaLabel="DESCRIPTION" placeholder="Text here" setValue={(x) => {
                         context.setValue("description", x);
-                      }}/>
-                    <p
-                      className="h-4 text-red-button"
-                      style={{ fontSize: "10px" }}
-                    >
-                      {context.descriptionError}
-                    </p>
+                      }} errorText={context.descriptionError} />
                   </div>
 
-                  <div className="flex flex-col items-start space-y-2">
+                  <div className="flex flex-col items-start">
                     <p className="body-sm text-violet-bubbleText">LINK</p>
                     <InputText
                       placeholder="Text here"
@@ -141,13 +118,8 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
                       onChange={(e) => {
                         context.setValue("link", e.target.value);
                       }}
+                      errorText={context.linkError}
                     />
-                    <p
-                      className="h-4 text-red-button"
-                      style={{ fontSize: "10px" }}
-                    >
-                      {context.linkError}
-                    </p>
                   </div>
 
                   <div className="flex items-end justify-between w-full">

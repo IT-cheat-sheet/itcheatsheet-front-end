@@ -73,6 +73,16 @@ class CreateSheetContext {
     }
   }
 
+  resetError() {
+    this.titleError = "";
+    this.subjectError = "";
+    this.semesterError = "";
+    this.licenceError = "";
+    this.descriptionError = "";
+    this.linkError = "";
+    this.fileError = "";
+  }
+
   async onSubmit() {
     this.titleError = this.title === "" ? "This field is required." : "";
     this.subjectError = this.subject === "" ? "This field is required." : "";
