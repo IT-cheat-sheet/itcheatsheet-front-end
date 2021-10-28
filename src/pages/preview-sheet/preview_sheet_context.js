@@ -23,7 +23,7 @@ class PreviewSheetContext {
       if (resp.status !== 204) {
         this.setValue('sheet', resp.data);
         this.setValue('isLoad', true)
-        document.title = "ITCheatSheet – "+this.sheet.summaryTitle;
+        document.title = "ITCheatSheet – "+this.sheet.summaryPost.summaryTitle;
       }
     } catch (err) {
       console.error(err);

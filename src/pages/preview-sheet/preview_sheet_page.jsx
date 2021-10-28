@@ -7,6 +7,7 @@ import Navbar from '../../core/components/navbar'
 import Footer from '../../core/components/footer'
 import { previewSheetContext } from './preview_sheet_context';
 import { Observer } from "mobx-react-lite";
+import _ from 'lodash';
 
 export default function PreviewSheet() {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -43,7 +44,7 @@ export default function PreviewSheet() {
                   </div>
                   <div className="flex mt-1 mb-5">
                     <p className="px-2 text-xxs rounded-3xl bg-violet-pill text-white">{context.sheet.summaryPost.posterName}</p>
-                    <p className="ml-4 text-purple-hover text-xxs">{context.sheet.summaryPost.summaryPostId}</p>
+                    <p className="ml-4 text-purple-hover text-xxs">{context.sheet.summaryPost.subject.subjectId + ' ' + _.startCase(context.sheet.summaryPost.subject.subjectName.toLowerCase())}</p>
                   </div>
                 </div>
                 <div className={`rounded-button overflow-hidden ${context.file && 'mt-5'} ${isPdfLoad && 'shadow-halo'}`}>
@@ -70,7 +71,7 @@ export default function PreviewSheet() {
                   </div>
                   <div className="flex my-2">
                     <p className="px-6 rounded-3xl bg-violet-pill text-white">{context.sheet.summaryPost.posterName}</p>
-                    <p className="ml-2.5 text-purple-hover">{context.sheet.summaryPost.summaryPostId}</p>
+                    <p className="ml-2.5 text-purple-hover">{context.sheet.summaryPost.subject.subjectId + ' ' + _.startCase(context.sheet.summaryPost.subject.subjectName.toLowerCase())}</p>
                   </div>
                 </div>
                 <div className="text-xs md:mt-5 md:text-2xl">
@@ -100,7 +101,7 @@ export default function PreviewSheet() {
                   {
                     context.file ?
                       <div className="md:w-1/4 md:mb-12 text-center cursor-pointer mt-5 ml-auto text-white">
-                        <a href={context.file} download={context.sheet.summaryPost.summaryPostId}>
+                        <a href={context.file} download={context.sheet.summaryPost.subject.subjectId + '-' + context.sheet.summaryPost.summaryPostId}>
                           <Button color="purple" size="sm">Download</Button>
                         </a>
                       </div>
