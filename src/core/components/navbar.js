@@ -1,7 +1,7 @@
 
 import Button from "../../core/components/button";
 import React, { useState, useEffect } from 'react'
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
     // const [isMobile, setIsMobile] = useState(false);
@@ -27,7 +27,9 @@ export default function Navbar() {
 
                         <div className="h-screen  grid grid-cols-1 glass">
                             <div onClick={() => setBars(false)} className="top-8 right-8 absolute">
-                                <i className="fas fa-times text-4xl text-gray-mailbox "></i>
+                                <span className="material-icons text-gray-mailbox ">
+                                    cancel
+                                </span>
                             </div>
 
                             <div className="space-y-10 grid grid-cols-1 justify-items-center place-self-center" >
