@@ -47,22 +47,33 @@ export default function SheetThumb({id, fileName, link}) {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
   return (
-    <div className="py-3 md:px-8 md:py-4">
+    <div className="py-3 lg:px-4 lg:py-3 xl:px-8 xl:py-4">
       <Link key={id} to={`/sheets/${id}`}>
         <div className="p-2 cursor-pointer" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
           <div ref={ref} className={classNames("w-full h-auto rounded-lg transition duration-200 transform flex justify-center items-center text-center",
-          {"bg-violet-bubbleHover text-violet-page shadow-halo-sm overflow-hidden" : !file},
+          {"bg-white text-violet-hover shadow-halo-sm overflow-hidden" : !file},
           {"scale-105" : isHover}
           )}>
               {file ?
-                <div className={classNames("rounded-lg overflow-hidden", {"shadow-halo-sm" : isLoaded})}>
-                  <Document file={file} loading={<div>Loading PDF...<br />Please Wait</div>}>
-                    <Page pageNumber={1} onLoadSuccess={() => setIsLoaded(true)} renderTextLayer={false} renderAnnotationLayer={false} />
+                <div className={classNames("rounded-lg", {"shadow-halo-sm overflow-hidden" : isLoaded})}>
+                  <Document file={file} loading={
+                    <div className="text-violet-hover">
+                      <span className="material-icons-round md:text-iconLoad text-3xl spin">hourglass_top</span>
+                      <div>Loading... Please Wait</div>
+                    </div>
+                  }>
+                    <Page pageNumber={1} loading={
+                      <div className="text-violet-hover">
+                        <span className="material-icons-round md:text-iconLoad text-3xl spin">hourglass_top</span>
+                        <div>Loading... Please Wait</div>
+                      </div>
+                    }
+                    onLoadSuccess={() => setIsLoaded(true)} renderTextLayer={false} renderAnnotationLayer={false} />
                   </Document>
                 </div> :
                 link ?
-                  <span className="material-icons xl:text-9xl lg:text-5xl text-9xl w-full transform -rotate-45">link</span> :
-                  <span className="material-icons xl:text-9xl lg:text-5xl text-9xl w-full">subject</span>
+                  <span className="material-icons md:text-icon text-9xl w-full transform -rotate-45">link</span> :
+                  <span className="material-icons md:text-icon text-9xl w-full">subject</span>
               }
           </div>
           <div className="md:hidden text-lg font-semibold uppercase text-gray-header text-center mt-5 truncate">{fileName}</div>

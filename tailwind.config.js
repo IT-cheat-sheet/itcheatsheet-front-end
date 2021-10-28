@@ -114,7 +114,9 @@ module.exports = {
       fontSize: {
         'popup': '2.625rem',
         'primary': '5rem',
-        'xxs': '0.5rem'
+        'xxs': '0.5rem',
+        'icon': '8.5vw',
+        'iconLoad': '4vw'
       },
       borderRadius: {
         'button': '0.625rem'
