@@ -5,6 +5,8 @@ class PreviewSheetContext {
   isLoad;
   sheet;
   file;
+  ref;
+  exceed;
 
   constructor() {
     this.sheet = [];
@@ -22,7 +24,8 @@ class PreviewSheetContext {
       const resp = await getSpecificSheet(id);
       if (resp.status !== 204) {
         this.setValue('sheet', resp.data);
-        this.setValue('isLoad', true)
+        this.setValue('isLoad', true);
+        this.setValue('exceed', this.ref.current.scrollHeight > this.ref.current.clientHeight);
         document.title = "ITCheatSheet – "+this.sheet.summaryPost.summaryTitle;
       }
     } catch (err) {
@@ -33,6 +36,7 @@ class PreviewSheetContext {
 
   async preparePdf(id) {
     try {
+      this.setValue('file', null);
       const resp = await getSpecificPdf(id);
       if (resp.status === 200) {
         var reader = new FileReader();
@@ -40,8 +44,6 @@ class PreviewSheetContext {
           this.setValue('file', e.target.result)
         };
         reader.readAsDataURL(resp.data);
-      } else {
-        this.setValue('file', null)
       }
     } catch (err) {
       console.log(err);
