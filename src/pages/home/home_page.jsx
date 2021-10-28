@@ -1,4 +1,4 @@
-
+// import SheetThumb from "../all_sheets/components/sheet_thumb";
 import Navbar from "../../core/components/navbar";
 import Footer from "../../core/components/footer";
 import Helloworld from "../../hello-world.jpg";
@@ -66,7 +66,7 @@ export default function HomePage() {
       console.log(item)
       // ${item}
 
-      const res = await fetch(`http://localhost:3000/review/hotReview/${item}`)
+      const res = await fetch(`http://localhost:3000/review/hotReview/5`)
       const data = await res.json();
       setAlls(data.data[0]);
       console.log(data.data[0].reviewId)
@@ -151,10 +151,43 @@ export default function HomePage() {
               all SIT students :)</div>
           </div>
         </div>
-        <div className="flex justify-center text-gray-mailbox space-x-4 px-44 lg:px-44 sm:px-14 md:px-24 mt-36 ">
-          <div>
-            {/* <img src={Helloworld} alt="tutorial for use website" /> */}
+        <div >
+          {isVideo.check ?
+            <div className="h-oversizedesktop absolute top-0 inset-0 z-50 grid grid-cols-1 bg-gradient-to-b from-gray-header bg-opacity-50 backdrop-filter backdrop-blur-glass ">
+              <div className="absolute space-y-2 grid grid-cols-1 justify-items-center place-self-center mx-9">
+                <div id="asd" onClick={Clickclick} className="absolute right-0 -top-7">
+                  <span className="material-icons text-white">
+                    cancel
+                  </span>
+                </div>
+                <div  >
+                  <video controls>
+                    <source src={isVideo.name} type="video/mp4" />
+                  </video>
+                  {/* <div>{isVideo.check} </div> */}
+                </div>
 
+              </div>
+            </div>
+
+            :
+            <div className="flex justify-center text-gray-mailbox space-x-4 px-44 lg:px-44 sm:px-14 md:px-24 mt-36 ">
+              <div onClick={() => Clickclick(0)} className="w-120 ">
+                <img src={Helloworld} alt="tutorial for use website" />
+                <div className="p-5 text-center">Basic use</div>
+              </div>
+              <div className="w-120 " >
+                <img onClick={() => Clickclick(1)} src={Helloworld} alt="tutorial for use website" />
+                <div className="p-5 text-center">Post sheet</div>
+              </div>
+              <div className="w-120 "  >
+                <img onClick={() => Clickclick(2)} src={Helloworld} alt="tutorial for use website" />
+                <div className="p-5 text-center">Delete post</div>
+              </div>
+            </div>
+          }
+
+          {/* <div>
             <video controls>
               <source src="/images/1.mp4" type="video/mp4" />
             </video>
@@ -171,31 +204,46 @@ export default function HomePage() {
               <source src="/images/1.mp4" type="video/mp4" />
             </video>
             <div className="p-5 text-center">Delete post</div>
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-40 mx-44  mb-20 z-40 h-46.313 relative flex">
           <div className=" bottom-36 left-0 text-white antialiased space-y-5 z-40 absolute mr-1.3/2 ">
-            <h1 className="text-6xl font-semibold text-right text-violet-sheet">HOT SHEET</h1>
+            <h1 className="text-6xl font-semibold text-right text-violet-sheet">SUGGEST SHEET</h1>
             <div className="text-lg font-normal text-right text-violet-sheet">The highest popularity of summary
               sheets at this time. Check it out now!
             </div>
           </div>
           <div className="bg-violet-hotsheet w-2/3  ml-1/3 flex justify-center shadow-lg rounded-md">
 
-            <div className=" w-96 my-14 text-white text-5xl font-bold">
+            <div className=" w-96  text-white text-5xl font-bold grid grid-cols-1 place-content-center">
+
+              {/* <SheetThumb id={sheet.summaryPostId} fileName={sheet.summaryTitle} link={sheet.linkAttachment}/> */}
               {isLoad ?
-                <Link to={`/sheets/${sheet.summaryPostId}`}>
-                  <Document
-                    file={file}
-                  >
-                    <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
-                  </Document>
-                </Link> : <></>}
+                file ? <Link to={`/sheets/${sheet.summaryPostId}`}>
+                  <div className="w-full overflow-hidden flex justify-center text-center rounded-xl shadow-halo-sm">
+
+                    
+                      <Document
+                        file={file} loading={<div>Loading PDF...<br />Please Wait</div>}
+                      >
+                        <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
+                      </Document>
+                    
+
+                  </div>  </Link> :
+                  <div className="w-full h-128 bg-white flex items-center justify-center text-center rounded-xl shadow-halo-sm">
+                    <Link to={`/sheets/${sheet.summaryPostId}`}>
+                      <span className="material-icons xl:text-9xl lg:text-5xl text-9xl w-full transform -rotate-45 text-violet-hover">link</span>
+                    </Link>
+                  </div>
+                :
+                <></>
+              }
               {isLoad ?
                 <h1 className="flex justify-center mt-10 text-4xl text-center w-96">
                   <Link to={`/sheets/${sheet.summaryPostId}`}>
-                    {sheet.posterName}
+                    {sheet.summaryTitle}
                   </Link></h1> :
                 <h1 className="flex justify-center mt-10 text-3xl">File Name</h1>
               }
@@ -208,14 +256,8 @@ export default function HomePage() {
         </div>
 
         <div className="mb-24 mx-44 z-40  relative flex">
-          <div className=" top-36 right-48 text-white text-left antialiased space-y-5 z-40 absolute pl-1.3/2 ">
-            <h1 className="text-6xl font-semibold  text-blue-dark">HOT REVIEW</h1>
-            <div className="text-lg font-normal text-blue-dark">The hotest reviews at this time.
-              Check it out now!
-            </div>
-          </div>
 
-          <div className="bg-violet-bg w-2/3  -ml-1/3  shadow-lg rounded-md">
+          <div className="bg-violet-bg w-2/3  -ml-1/3  shadow-lg rounded-md ">
             <div >
               {
                 reviewImage ?
@@ -247,6 +289,12 @@ export default function HomePage() {
                 </div>}
             </div>
           </div>
+          <div className=" top-36 right-24 text-white text-left antialiased space-y-5 z-40 relative ">
+            <h1 className="text-6xl font-semibold  text-blue-dark ">SUGGEST REVIEW</h1>
+            <div className="text-lg font-normal text-blue-dark">The hotest reviews at this time.
+              Check it out now!
+            </div>
+          </div>
         </div>
       </div>
       <div className="md:hidden overflow-hidden h-full">
@@ -264,7 +312,7 @@ export default function HomePage() {
         </div>
         {isVideo.check ?
 
-          <div className="h-oversize absolute top-0 inset-0 z-50 grid grid-cols-1 backdrop-filter backdrop-blur-bx bg-violet-sheet bg-opacity-50 ">
+          <div className="h-oversize absolute top-0 inset-0 z-50 grid grid-cols-1 glass ">
             <div id="asd" onClick={Clickclick} className="top-8 right-8 absolute">
               <i className="fas fa-times text-4xl text-gray-mailbox "></i>
             </div>
@@ -303,11 +351,17 @@ export default function HomePage() {
             <div className=" ">
               <div className="text-left text-4xl font-medium text-violet-sheet">
                 {isLoad ?
-                  <h1 className="flex justify-center mt-3 text-2xl text-left w-5/6">{sheet.posterName}</h1> :
+                  <h1 className="flex justify-center mt-3 text-2xl text-left w-5/6">{sheet.summaryTitle}</h1> :
                   <h1 className="flex justify-center mt-3 text-3xl">TITLE OF PDF</h1>
                 }
               </div>
-              <div className="text-left text-2xl font-light text-violet-sheet">POST OWNER</div>
+              <div className="text-left text-2xl font-light text-violet-sheet">
+                {isLoad ?
+                  <div>{sheet.posterName}</div>
+                  :
+                  <div> POST OWNER </div>
+                }
+              </div>
             </div>
 
             {isLoad ?

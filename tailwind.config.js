@@ -104,9 +104,11 @@ module.exports = {
         '27': '6.75rem',
         '18': '4.5rem',
         '46.313':'46.313rem',
+        '128':'32rem',
         '2.5/4':'63.5%',
         '1.5/4':'37.5%',
-        'oversize': '156rem'
+        'oversize': '156rem',
+        'oversizedesktop': '167rem'
       },
       lineHeight: {
         '11': '2.625rem'
