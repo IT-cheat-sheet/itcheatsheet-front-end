@@ -1,421 +1,149 @@
-
 import Navbar from "../../core/components/navbar";
 import Footer from "../../core/components/footer";
 import Helloworld from "../../hello-world.jpg";
-
 import Carousel from "../../core/components/carousel";
-import React, { useState, useEffect } from "react";
-import { Document, Page, pdfjs } from 'react-pdf';
+import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router";
 // import { useParams } from 'react-router';
 import { Link } from "react-router-dom";
+import SheetThumb from "../all_sheets/components/sheet_thumb";
+import { homeContext } from "./home_context";
+import { Observer } from "mobx-react-lite";
+import { Fragment } from "react/cjs/react.production.min";
+import _ from "lodash";
 
 export default function HomePage() {
-  pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-  // const params = useParams();
-  const [sheet, setSheet] = useState([]);
-  const [file, setFile] = useState([]);
-  const [alls, setAlls] = useState([]);
-  const [reviewPost] = useState([]);
-  const [reviewImage, setReviewImage] = useState([]);
-  const [isLoad, setIsLoad] = useState(false);
-  const [isVideo, setVideo] = useState({ name: "", check: false });
-  let video = ["/images/1.mp4", "/images/1.mp4", "/images/1.mp4"]
+  const context = useContext(homeContext);
 
-  function Clickclick(asd) {
-    // console.log(Object.values(asd)[0])
-    console.log(asd)
-    console.log(isVideo)
-    if (isVideo.check === false) {
+  const history = useHistory();
 
-      setVideo((prevState) => ({
-        ...prevState,
-        name: video[asd], check: true
-      }))
-    }
-    if (isVideo.check === true) {
-      setVideo((prevState) => ({
-        ...prevState,
-        name: video[asd], check: false
-      }))
-    }
-    console.log(isVideo)
-  }
   useEffect(() => {
 
-    async function getHotSheet() {
+    const importAll = (r) => {
+      return r.keys().map(r);
+    }
 
-      const res = await fetch(`http://localhost:3000/semester/getall`)
-      const data = await res.json();
-      data.semesters.forEach((semester) => {
-        reviewPost.push({ key: semester.semester, value: semester.semesterNumber });
+    const name = ["Basic use", "Post sheet", "Delete post"];
+    const thumb = importAll(require.context(`../../../public/tutorial/thumbnail`, false, /\.(png|jpe?g|svg)$/));
+    const vid = importAll(require.context(`../../../public/tutorial/video`, false, /\.(mp4)$/));
+    const vidList = [];
+
+    _.forEach(name, (name, index) => {
+      vidList.push({
+        name: name,
+        thumb: thumb[index].default,
+        src: vid[index].default
       })
-      //   console.log(reviewPost.length)
-      // setReviewPost(reviewPost);
-      var count = Math.floor(Math.random() * reviewPost.length);
-      console.log(count)
-      const res1 = await fetch(`http://localhost:3000/summarypost/hotSheet/${count}`);
-      const data1 = await res1.json();
-      setSheet(data1.data[0]);
-      console.log(data1.data[0]);
-      await fetchFile(data1.data[0].summaryPostId);
+    })
 
-    }
-    async function getHotReview() {
-      var items = ["1", "2", "3", "4", "5"]
-      var item = items[Math.floor(Math.random() * items.length)];
-      console.log(item)
-      // ${item}
-
-      const res = await fetch(`http://localhost:3000/review/hotReview/${item}`)
-      const data = await res.json();
-      setAlls(data.data[0]);
-      console.log(data.data[0].reviewId)
-      await fetchReviewImage(data.data[0].reviewId)
-
-    }
-
-    async function fetchReviewImage(num) {
-      /* รอเปลี่ยนเป็นตัวแปร */
-
-      console.log(num)
-      const res = await fetch(`http://localhost:3000/review/image/${num}`);
-      const data = await res.blob();
-
-      if (res.status === 200) {
-        // console.log(data.type)
-        if (data.type.includes("image")) {
-          var reader = new FileReader();
-          reader.onload = (e) => {
-            setReviewImage(e.target.result);
-          };
-          reader.readAsDataURL(data);
-        }
-      } else {
-        setReviewImage(null);
-      }
-      setIsLoad(true);
-
-    };
-    async function fetchFile(num) {
-      /* รอเปลี่ยนเป็นตัวแปร */
-
-      const res = await fetch(`http://localhost:3000/summarypost/getFile/${num}`);
-      const data = await res.blob();
-      if (res.status === 200) {
-        var reader = new FileReader();
-        reader.onload = (e) => {
-          setFile(e.target.result);
-        };
-        reader.readAsDataURL(data);
-      } else {
-        setFile(null);
-      }
-
-    }
-    getHotReview();
-    getHotSheet();
-    // async function fetchReviewPost() {
-    //     const res = await fetch(`http://localhost:3000/review/get/1`);
-    //     const data = await res.json();
-    //     setReviewPost(data);
-    // };
-    // window.addEventListener('resize', setVideo);
-    //  window.addEventListener("click", setVideo);
-    // fetchReviewPost();
-    // fetchReviewImage();
-    // async function fetchSheet() {
-    //     /* รอใช้ hotreview ได้แล้วลบ*/
-    //     const res = await fetch(`http://localhost:3000/summarypost/get/1`)
-    //     const data = await res.json();
-
-    //     setSheet(data);
-    //     // setIsLoad(true);
-    // };
-    // fetchSheet();
-    // fetchFile();
+    context.setValue('vidList', vidList);
+    context.prepareSheet();
+    context.prepareReview();
     document.title = "ITCheatSheet"
-  }, [isVideo, reviewPost])
-  // , [params.id])
+  }, [])
 
   return (
-    <div className="h-full w-full">
+  <Observer>
+    {() => (
+    <div>
       <Navbar />
-      <div className="hidden md:block">
-        <div className="mx-44 my-3 lg:mx-44 sm:mx-14 md:mx-24  bg-red-200 relative ">
-          <Carousel page="home" />
-          <div className="absolute bottom-36 -left-10 text-white antialiased space-y-5 z-10 " >
-            <h1 className=" rounded-lg  px-3 py-2 text-6xl font-semibold text-left w-max backdrop-filter backdrop-blur-bx bg-red-padding bg-opacity-50 ">IT CHEATSHEET</h1>
-            <div className="rounded-lg  px-3 py-2 text-lg font-light text-left backdrop-filter backdrop-blur-bx bg-red-padding bg-opacity-50 " >This website gathers a large number
-              of summary sheets and reviews for
-              all SIT students :)</div>
+        <div className="xl:mx-44 md:mx-24 my-3 sm:mx-14">
+          <div className="relative">
+            <Carousel page="home" />
+            <div className="absolute top-36 md:bottom-36 md:-left-10 text-white antialiased space-y-2 md:space-y-5 z-10">
+              <h1 className="rounded-lg px-3 py-2 mx-auto md:m-0 text-4xl md:text-6xl font-semibold text-left w-max backdrop-filter backdrop-blur-bx bg-red-padding bg-opacity-50">IT CHEATSHEET</h1>
+              <div className="text-base font-medium text-center text-violet-hover md:text-white md:rounded-lg px-4 md:px-3 md:py-2 md:text-lg md:font-light md:backdrop-filter md:backdrop-blur-bx md:bg-red-padding md:bg-opacity-50">
+                This website gathers a large number of summary sheets and reviews for all SIT students
+              </div>
+            </div>
           </div>
-        </div>
-        {/* <div > */}
-          {isVideo.check ?
-            <div className="h-oversizedesktop absolute top-0 inset-0 z-50 grid grid-cols-1 bg-gradient-to-b from-gray-header bg-opacity-50 backdrop-filter backdrop-blur-glass ">
-              <div className="absolute space-y-2 grid grid-cols-1 justify-items-center place-self-center mx-9">
-                <div id="asd" onClick={Clickclick} className="absolute right-0 -top-7">
-                  <span className="material-icons text-white">
-                    cancel
-                  </span>
-                </div>
-                <div  >
-                  <video controls>
-                    <source src={isVideo.name} type="video/mp4" />
-                  </video>
-                  {/* <div>{isVideo.check} </div> */}
-                </div>
 
+          {context.showVid !== '' &&
+            <Fragment>
+              <div className="justify-center items-center flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-60 outline-none focus:outline-none mx-0 md:mx-4 backdrop-filter backdrop-blur-sm">
+                <div className="relative space-y-2 grid grid-cols-1 justify-items-center place-self-center mx-9 w-4/5 md:w-2/3">
+                  <div id="asd" onClick={() => context.setValue('showVid', '')} className="absolute right-0 -top-7 md:-top-9">
+                    <span className="material-icons text-white text-2xl md:text-4xl cursor-pointer">cancel</span>
+                  </div>
+                  <div className="w-full">
+                    <video controls autoPlay className="w-full rounded-xl">
+                      <source src={context.showVid} type="video/mp4" />
+                    </video>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            :
-            <div className="flex justify-center text-gray-mailbox space-x-4 px-44 lg:px-44 sm:px-14 md:px-24 mt-36 ">
-              <div onClick={() => Clickclick(0)} className="w-120 ">
-                <img src={Helloworld} alt="tutorial for use website" />
-                <div className="p-5 text-center">Basic use</div>
-              </div>
-              <div className="w-120 " >
-                <img onClick={() => Clickclick(1)} src={Helloworld} alt="tutorial for use website" />
-                <div className="p-5 text-center">Post sheet</div>
-              </div>
-              <div className="w-120 "  >
-                <img onClick={() => Clickclick(2)} src={Helloworld} alt="tutorial for use website" />
-                <div className="p-5 text-center">Delete post</div>
-              </div>
-            </div>
+              <div className="fixed inset-0 z-50 bg-black opacity-50"></div>
+            </Fragment>
           }
-
-          {/* <div>
-            <video controls>
-              <source src="/images/1.mp4" type="video/mp4" />
-            </video>
-            <div className="p-5 text-center">Basic use</div>
+          <div className="overflow-x-auto hideScrollBar grid grid-rows-1 grid-flow-col relative -mt-28 md:flex md:justify-center text-gray-mailbox bg-scroll space-x-4 px-4 md:mt-28">
+            {
+              _.map(context.vidList, vid => (
+                <div onClick={() => context.setValue('showVid', vid.src)} className="w-72 md:w-full cursor-pointer">
+                  <img src={vid.thumb} alt="tutorial for use website" className="rounded-xl" />
+                  <div className="text-base md:text-xl p-5 text-center">{vid.name}</div>
+                </div>
+              ))
+            }
           </div>
-          <div>
-            <video controls>
-              <source src="/images/1.mp4" type="video/mp4" />
-            </video>
-            <div className="p-5 text-center">Post sheet</div>
-          </div>
-          <div>
-            <video controls>
-              <source src="/images/1.mp4" type="video/mp4" />
-            </video>
-            <div className="p-5 text-center">Delete post</div>
-          </div> */}
-        {/* </div> */}
 
-        <div className="mt-40 mx-44  mb-20 z-40 h-46.313 relative flex">
-          <div className=" bottom-36 left-0 text-white antialiased space-y-5 z-40 absolute mr-1.3/2 ">
-            <h1 className="text-6xl font-semibold text-right text-violet-sheet">SUGGEST SHEET</h1>
-            <div className="text-lg font-normal text-right text-violet-sheet">The highest popularity of summary
-              sheets at this time. Check it out now!
-            </div>
-          </div>
-          <div className="bg-violet-hotsheet w-2/3  ml-1/3 flex justify-center shadow-lg rounded-md">
-
-            <div className=" w-96  text-white text-5xl font-bold grid grid-cols-1 place-content-center">
-
-              {/* <SheetThumb id={sheet.summaryPostId} fileName={sheet.summaryTitle} link={sheet.linkAttachment}/> */}
-              {isLoad ?
-                file ? <Link to={`/sheets/${sheet.summaryPostId}`}>
-                  <div className="w-full overflow-hidden flex justify-center text-center rounded-xl shadow-halo-sm">
-
-                    
-                      <Document
-                        file={file} loading={<div>Loading PDF...<br />Please Wait</div>}
-                      >
-                        <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
-                      </Document>
-                    
-
-                  </div>  </Link> :
-                  <div className="w-full h-128 bg-white flex items-center justify-center text-center rounded-xl shadow-halo-sm">
-                    <Link to={`/sheets/${sheet.summaryPostId}`}>
-                      <span className="material-icons xl:text-9xl lg:text-5xl text-9xl w-full transform -rotate-45 text-violet-hover">link</span>
-                    </Link>
+          <div className="mt-12 mb-20 md:mt-16 md:mb-20 mx-4 flex flex-col md:grid md:grid-cols-2 gap-y-16 md:gap-x-20 md:mx-0">
+            <div className="md:col-span-1 md:order-2 w-full">
+              <div className="text-white antialiased space-y-1">
+                <h1 className="font-semibold text-violet-sheet w-full md:w-2/3 text-3xl md:text-iconLoad leading-none">SUGGESTED SHEET</h1>
+                <div className="text-base md:text-lg font-normal text-violet-sheet uppercase">The sheet you may like</div>
+              </div>
+              <div className="hidden md:flex bg-violet-hotsheet mt-3 md:mt-8 w-full justify-center shadow-lg rounded-md h-128">
+                <div className="w-2/3 text-white text-5xl font-bold grid grid-cols-1 place-content-center">
+                  {context.isSheetLoad && <SheetThumb id={context.sheet.summaryPostId} fileName={context.sheet.summaryTitle} link={context.sheet.linkAttachment}/>}
+                </div>
+              </div>
+              <Link to={`/sheets/${context.sheet.summaryPostId}`}>
+                <div className="md:hidden grid grid-cols-12 bg-violet-hotsheet text-violet-sheet px-8 py-6 mt-3 w-full shadow-lg rounded-button h-auto">
+                  <div className="col-span-10 w-8/10 truncate">
+                    <div className="font-bold text-2xl">{context.sheet.summaryTitle}</div>
+                    <div>{context.sheet.posterName}</div>
                   </div>
-                :
-                <></>
-              }
-              {isLoad ?
-                <h1 className="flex justify-center mt-10 text-4xl text-center w-96">
-                  <Link to={`/sheets/${sheet.summaryPostId}`}>
-                    {sheet.summaryTitle}
-                  </Link></h1> :
-                <h1 className="flex justify-center mt-10 text-3xl">File Name</h1>
-              }
-            </div>
-
-
-
-
-          </div>
-        </div>
-
-        <div className="mb-24 mx-44 z-40  relative flex">
-
-          <div className="bg-violet-bg w-2/3  -ml-1/3  shadow-lg rounded-md ">
-            <div >
-              {
-                reviewImage ?
-                  <img src={reviewImage} className=" object-cover h-96 w-full  rounded-t-lg" alt="review" />
-                  : <img src="images/home_header_2.png" alt="Review" className="h-2.5/4  rounded-t-lg" />
-              }
-
-            </div>
-
-            <div className="rounded-b-lg bg-blue-page px-9 pt-5 pb-5 lg:px-20 lg:pt-5 lg:pb-10 space-y-5 text-left relative">
-              {isLoad ?
-                <div className="h-48">
-                  <div className="text-4xl font-semibold text-left text-white">{alls.reviewTitle}</div>
-                  <div className="text-white font-light line-clamp-3">
-                    {alls.reviewTitle}
-                    <div className="font-normal underline ml-1 text-blue-dark absolute right-10 bottom-5">
-                      {isLoad ?
-                        <Link to={`/reviews/${alls.reviewId}`}>read more</Link> :
-                        <></>}</div>
+                  <div className="col-span-2 flex items-center justify-end">
+                    <span className="material-icons-round text-4xl">chevron_right</span>
                   </div>
                 </div>
-                :
-                <div>
-                  <div className="text-4xl font-semibold text-left text-white"> Thread Name</div>
-                  <div className="text-white font-light line-clamp-3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis pulvinar fusce vulputate quis bibendum blandit ultrices phasellus ultricies. lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis pulvinar fusce vulputate phasellus ultricies. Mattis pulvinar fusce vulputate phasellus ultricies phasellus ultricies  read more
-                    <a href='https://www.youtube.com/watch?v=hZun_g5dEFo' className="font-normal underline ml-1 text-blue-dark absolute right-10 bottom-5">read more</a>
-                  </div>
-                </div>}
-            </div>
-          </div>
-          <div className=" top-36 right-24 text-white text-left antialiased space-y-5 z-40 relative ">
-            <h1 className="text-6xl font-semibold  text-blue-dark ">SUGGEST REVIEW</h1>
-            <div className="text-lg font-normal text-blue-dark">The hotest reviews at this time.
-              Check it out now!
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="md:hidden overflow-hidden h-full">
-        <div className=" relative  ">
-          <Carousel page="home" />
-
-          <div className="absolute top-48 mx-10 antialiased space-y-2.5 z-10 grid grid-cols-1 justify-items-center place-self-center " >
-            <h1 className=" rounded-lg  px-3 py-2 text-white text-4xl sm:text-6xl font-semibold text-center w-max backdrop-filter backdrop-blur-bx bg-red-padding bg-opacity-50">SIT CHEATSHEET</h1>
-            <div className="rounded-lg  px-3 py-2 text-violet-header text-base sm:text-lg font-normal text-center" >This website gathers a large number
-              of summary sheets and reviews for
-              all SIT students :)</div>
-          </div>
-
-
-        </div>
-        {isVideo.check ?
-
-          <div className="h-oversize absolute top-0 inset-0 z-50 grid grid-cols-1 glass ">
-            <div id="asd" onClick={Clickclick} className="top-8 right-8 absolute">
-              <span className="material-icons text-gray-mailbox ">
-                    cancel
-                  </span>
+              </Link>
             </div>
 
-            <div className="space-y-10 grid grid-cols-1 justify-items-center place-self-center mx-9" >
-              <video controls>ั
-                <source src={isVideo.name} type="video/mp4" />
-              </video>
-              {/* <img src= alt="tutorial for use website" /> */}
-              <div>{isVideo.check} </div>
-            </div>
-
-          </div>
-
-          :
-          <div className="z-10 relative  -top-28 grid grid-rows-1  example  grid-flow-col text-gray-mailbox overflow-x-auto space-x-4 ml-4 pr-9">
-            <div onClick={() => Clickclick(0)} className="w-120 ">
-              <img src={Helloworld} alt="tutorial for use website" />
-              <div className="p-5 text-center">Basic use</div>
-            </div>
-            <div className="w-120 " >
-              <img onClick={() => Clickclick(1)} src={Helloworld} alt="tutorial for use website" />
-              <div className="p-5 text-center">Post sheet</div>
-            </div>
-            <div className="w-120 "  >
-              <img onClick={() => Clickclick(2)} src={Helloworld} alt="tutorial for use website" />
-              <div className="p-5 text-center">Delete post</div>
-            </div>
-          </div>
-        }
-        <div className="mt-12 mx-4 mb-12 z-40 ">
-          <div className="left-0 text-white antialiased mb-2.5 z-40 ">
-            <h1 className="text-6xl font-semibold text-left text-violet-sheet">HOT SHEET</h1>
-          </div>
-          <div className="bg-violet-bg flex justify-between items-center shadow-lg rounded-2xl h-40 p-10">
-            <div className=" ">
-              <div className="text-left text-4xl font-medium text-violet-sheet">
-                {isLoad ?
-                  <h1 className="flex justify-center mt-3 text-2xl text-left w-5/6">{sheet.summaryTitle}</h1> :
-                  <h1 className="flex justify-center mt-3 text-3xl">TITLE OF PDF</h1>
-                }
+            <div className="md:col-span-1 md:order-1 w-full">
+              <div className="text-white text-left antialiased space-y-1">
+                <h1 className="font-semibold text-blue-dark w-full md:w-2/3 text-3xl md:text-iconLoad leading-none">SUGGESTED REVIEW</h1>
+                <div className="text-base md:text-lg font-normal text-blue-dark uppercase">The review just for you</div>
               </div>
-              <div className="text-left text-2xl font-light text-violet-sheet">
-                {isLoad ?
-                  <div>{sheet.posterName}</div>
-                  :
-                  <div> POST OWNER </div>
-                }
-              </div>
-            </div>
-
-            {isLoad ?
-              <Link to={`/sheets/${sheet.summaryPostId}`}>
-                <i className="fas fa-chevron-right text-2xl"></i>
-              </Link> : <></>}
-          </div>
-        </div>
-
-        <div className="mb-12 mx-4 z-40 ">
-          <div className=" text-white text-left antialiased mb-2.5 z-40   ">
-            <h1 className="text-6xl font-semibold  text-blue-dark">HOT REVIEW</h1>
-          </div>
-
-          <div className="bg-violet-bg    shadow-lg rounded-md">
-            <div >
-              {
-                reviewImage ?
-                  <img src={reviewImage} className=" object-cover h-96 w-full  rounded-t-lg" alt="review" />
-                  : <img src="images/home_header_2.png" alt="Review" className="h-2.5/4  rounded-t-lg" />
-              }
-
-            </div>
-            <div className="rounded-b-lg bg-blue-page h-1.5/4 px-7 pt-5  pb-10 space-y-2 text-left relative">
-              {isLoad ?
-                <div className="h-48">
-                  <div className="text-4xl font-semibold text-left text-white">{alls.reviewTitle}</div>
-                  <div className="text-white font-light line-clamp-3">
-                    {alls.reviewTitle}
-                    <div className="font-normal underline ml-1 text-blue-dark absolute right-10 bottom-5">
-                      {isLoad ?
-                        <Link to={`/reviews/${alls.reviewId}`}>read more</Link> :
-                        <></>}</div>
+              {context.isReviewLoad && (
+                <div className={`shadow-lg rounded-md mt-3 md:mt-8 overflow-hidden flex flex-col h-80 md:h-128`} onClick={
+                  () => {
+                    if(window.innerWidth < 768){
+                      history.push(`/reviews/${context.review.reviewId}`);
+                    }
+                  }
+                }>
+                  {context.image &&
+                  <div className="h-3/5">
+                    <img src={context.image} className="object-cover h-full w-full" alt="review" />
+                  </div>}
+                  <div className={`bg-blue-page md:px-9 lg:px-20 text-left relative space-y-2 ${context.image ? 'h-2/5 pt-3 md:pt-5 pb-5 lg:pb-10 px-5' : 'h-full flex flex-col justify-center md:space-y-5 px-9'}`}>
+                    <div className={`text-2xl md:text-4xl font-semibold text-left text-white`}>{context.review.reviewTitle}</div>
+                    <div className={`text-white font-light ${context.image ? 'text-sm md:text-base line-clamp-3' : 'line-clamp-10'}`}>
+                      {context.review.reviewContent}
+                    </div>
+                    <div className="hidden md:block font-normal underline ml-1 text-blue-dark text-right">
+                      <Link to={`/reviews/${context.review.reviewId}`}>Read more</Link>
+                    </div>
                   </div>
                 </div>
-                :
-                <div>
-                  <div className="text-4xl font-semibold text-left text-white"> Thread Name</div>
-                  <div className="text-white font-light line-clamp-3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis pulvinar fusce vulputate quis bibendum blandit ultrices phasellus ultricies. lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis pulvinar fusce vulputate phasellus ultricies. Mattis pulvinar fusce vulputate phasellus ultricies phasellus ultricies  read more
-                    <a href='https://www.youtube.com/watch?v=hZun_g5dEFo' className="font-normal underline ml-1 text-blue-dark absolute right-4 bottom-3">read more</a>
-                  </div>
-                </div>}
-
-              {/* href={'/reviews/${id}'} */}
+              )}
             </div>
           </div>
         </div>
-
-      </div>
       <Footer />
     </div>
-
+    )}
+  </Observer>
   )
-
 }
