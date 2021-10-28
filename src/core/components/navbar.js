@@ -80,7 +80,7 @@ export default function Navbar() {
                     <div className="flex place-self-center  justify-center ml-24 lg:ml-44" >
                         <div >
                             <Link to="/">
-                                <img src="/images/cheatsheetlogo1.png" alt="Logo" className="h-14 w-52 min-w-max" />
+                                <img src="/images/cheatsheetlogo1.png" alt="Logo" className="h-14 w-52" />
                             </Link>
 
                         </div>
