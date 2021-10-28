@@ -47,7 +47,7 @@ export default function Carousel({page}) {
   const settings = {
     dots: true,
     appendDots: dots => (
-      <ul style={{bottom: isMobile ? "15px" : "-25px"}}>
+      <ul style={{bottom: isMobile ? page === 'home' ? "120px" : "15px" : "-25px"}}>
         {dots.map((item, index) => {
             return (
               <button key={index}

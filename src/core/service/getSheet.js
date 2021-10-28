@@ -53,3 +53,11 @@ export const getSpecificReview = (id) => {
 export const getRecommendedReviews = () => {
   return axios.get("http://localhost:3000/review/random");
 }
+
+export const getSuggestedSheet = (sem) => {
+  return axios.get(`http://localhost:3000/summarypost/hotSheet/${sem}`);
+}
+
+export const getSuggestedReview = (rand) => {
+  return axios.get(`http://localhost:3000/review/hotReview/${rand}`);
+}
