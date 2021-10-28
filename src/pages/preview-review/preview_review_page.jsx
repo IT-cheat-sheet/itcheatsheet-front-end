@@ -13,10 +13,14 @@ export default function PreviewReview() {
   const context = useContext(previewReviewContext);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
     context.prepareReview(params.id);
     context.prepareReviewImage(params.id);
     context.prepareRecommendedReviews();
-  }, [params])
+  }, [params,context])
 
   return (
     <Observer>
@@ -64,8 +68,8 @@ export default function PreviewReview() {
                     {
                       _.map(context.recommendedReviews, (review, index) => (
                         // <Link to={`/reviews/${review.reviewId}`} key={index}>
-                          <RecommendedBlock
-                            review={review} key={index} />
+                        <RecommendedBlock
+                          review={review} key={index} />
                         // </Link>
                       ))
                     }
