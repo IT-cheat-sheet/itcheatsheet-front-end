@@ -37,15 +37,13 @@ export default function PreviewReview() {
                       <Kebab page="review" postId={context.review.data.reviewId} />
                     </div>
                     <div className="flex mt-1">
-                      <p className="px-6 rounded-3xl bg-blue-form text-white text-xxs">{context.review.data.reviewer}</p>
-                      <p className="ml-4 text-blue-page text-xxs">{context.review.data.reviewId}</p>
+                      <p className="px-4 py-0.5 rounded-3xl bg-blue-form text-white text-xs">{context.review.data.reviewer}</p>
                     </div>
                   </div>
                   <div className="hidden md:block md:mt-5">
                     <h1 className="header-secondary text-blue-body"> {context.review.data.reviewTitle}</h1 >
                     <div className="flex my-2">
                       <p className="uppercase px-6 rounded-3xl bg-blue-form text-white">{context.review.data.reviewer}</p>
-                      <p className="ml-2.5 text-blue-page">{context.review.data.reviewId}</p>
                     </div>
                   </div>
                   <div className="mt-5 text-sm md:text-2xl bg-lightblue-bg rounded-lg pb-5 md:pb-12">
