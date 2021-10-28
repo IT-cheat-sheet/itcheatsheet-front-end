@@ -66,7 +66,7 @@ export default function HomePage() {
       console.log(item)
       // ${item}
 
-      const res = await fetch(`http://localhost:3000/review/hotReview/5`)
+      const res = await fetch(`http://localhost:3000/review/hotReview/${item}`)
       const data = await res.json();
       setAlls(data.data[0]);
       console.log(data.data[0].reviewId)
