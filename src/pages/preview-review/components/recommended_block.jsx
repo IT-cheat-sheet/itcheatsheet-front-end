@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+import { getReviewImage } from "../../../core/service/getSheet";
 
 export default function RecommendedBlock({ review }) {
   const [image, setImage] = useState(null);
@@ -7,28 +9,28 @@ export default function RecommendedBlock({ review }) {
   useEffect(() => {
     (async function() {
       try {
-        const res = await fetch(`http://localhost:3000/review/image/${review.reviewId}`);
-        const data = await res.blob();
+        setImage(null);
+        const res = await getReviewImage(review.reviewId);
       
         if(res.status === 200){
-          if (data.type.includes("image")) {
+          if (res.data.type.includes("image")) {
             var reader = new FileReader();
             reader.onload = (e) => {
               setImage(e.target.result);
             };
-            reader.readAsDataURL(data);
+            reader.readAsDataURL(res.data);
           }
         } else {
           setImage(null);
         }
       } catch (err) {
         console.log(err);
-        alert(err.message);
       }
     })();
   }, [review])
 
   return (
+    <Link to={`/reviews/${review.reviewId}`}>
       <div 
         className={`w-full grid grid-cols-5 text-blue-body bg-lightblue-bg rounded-lg h-24 md:h-44 cursor-pointer transform transition duration-200 ${isHover ? "scale-105":""}`} 
         onMouseEnter={() => setIsHover(true)} 
@@ -53,5 +55,6 @@ export default function RecommendedBlock({ review }) {
           </div>
         </div>
       </div>
+    </Link>
   )
 }
