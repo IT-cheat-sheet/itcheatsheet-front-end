@@ -95,7 +95,7 @@ export default function Kebab({ page, postId }) {
     <div className={`text-right relative w-27 md:w-36 lg:w-64 ${page === 'sheet' ? 'text-violet-hover' : 'text-blue-body'}`}>
       <span className="kebab material-icons cursor-pointer p-1" onClick={() => setToggle(!toggle)}>more_vert</span>
       {toggle
-        ? <div className={`uppercase w-27 md:w-36 lg:w-60 text-center absolute top-0 right-7 text-xs md:text-sm lg:text-xl rounded-lg ${page === 'sheet' ? 'bg-violet-bubbleHover' : 'bg-lightblue-lighter'}`}>
+        ? <div className={`uppercase w-36 lg:w-60 text-center absolute top-0 right-7 text-sm lg:text-xl rounded-lg ${page === 'sheet' ? 'bg-violet-bubbleHover' : 'bg-lightblue-lighter'}`}>
           <p className={`py-2 lg:py-5 cursor-pointer rounded-t-lg flex justify-center items-center hover:text-white ${page === 'sheet' ? 'hover:bg-violet-hover' : 'hover:bg-blue-page'}`}
             onClick={share}>
             share
@@ -144,7 +144,7 @@ export default function Kebab({ page, postId }) {
         openSuggestModal ?
           <>
             <div
-              className="justify-center items-center flex overflow-x-hidden overflow-y-auto md:overflow-y-hidden fixed inset-0 z-60 outline-none focus:outline-none mx-0 md:mx-4 md:backdrop-filter md:backdrop-blur-sm"
+              className="justify-center items-center flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-60 outline-none focus:outline-none mx-0 md:mx-4 md:backdrop-filter md:backdrop-blur-sm"
             >
               <div className="relative w-full h-screen md:h-auto md:w-4/5 my-6 mx-auto max-w-3xl text-left">
                 <div className="flex md:justify-between mx-4 md:mx-0 pt-10 md:pt-0">
