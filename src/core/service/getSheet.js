@@ -50,8 +50,6 @@ export const getSpecificReview = (id) => {
   return axios.get(`http://localhost:3000/review/get/${id}`);
 }
 
-export const getSpecificReviewImage = (id) => {
-  return axios.get(`http://localhost:3000/review/image/${id}`, {
-    responseType: 'blob'
-  })
+export const getRecommendedReviews = () => {
+  return axios.get("http://localhost:3000/review/random");
 }

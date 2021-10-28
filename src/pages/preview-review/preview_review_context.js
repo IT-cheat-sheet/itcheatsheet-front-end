@@ -1,23 +1,18 @@
 import { createContext } from "react";
 import { makeAutoObservable } from "mobx";
-import { getSpecificReview, getReviewImage } from "../../core/service/getSheet";
-import { deleteReview } from "../../core/service/deleteSheet"
+import { getSpecificReview, getReviewImage, getRecommendedReviews } from "../../core/service/getSheet";
 
-class AdminPreviewReviewContext {
+class PreviewReviewContext {
   isLoad;
   review;
   image;
-  token;
-  state;
-  history;
+  recommendedReviews;
 
   constructor() {
     this.review = [];
     this.image = null;
     this.isLoad = false;
-    this.token = this.getCookie('cheatSheetToken');
-    this.deleteSuccess = false;
-    this.history = [];
+    this.recommendedReviews = [];
     makeAutoObservable(this);
   }
 
@@ -25,18 +20,13 @@ class AdminPreviewReviewContext {
     this[key] = value;
   }
 
-  getCookie = (name) => {
-    const c = document.cookie.split(';').find(c => c.trim().startsWith(name + '='));
-    return c ? c.substring((name + '=').length) : null;
-  }
-
   async prepareReview(id) {
     try {
       const resp = await getSpecificReview(id);
       if (resp.status !== 204) {
-        this.setValue('review', resp.data.data);
+        this.setValue('review', resp.data);
         this.setValue('isLoad', true);
-        document.title = "ITCheatSheet – " + this.review.reviewTitle;
+        document.title = "ITCheatSheet – " + this.review.data.reviewTitle;
       }
     } catch (err) {
       console.error(err);
@@ -46,26 +36,25 @@ class AdminPreviewReviewContext {
 
   async prepareReviewImage(id) {
     try {
+      this.setValue('image',null)
       const resp = await getReviewImage(id);
-      if (resp.status === 200) {
+      if (resp.status !== 204) {
         var reader = new FileReader();
         reader.onload = (e) => {
           this.setValue('image', e.target.result)
         };
         reader.readAsDataURL(resp.data);
-      } else {
-        this.setValue('image', null)
       }
     } catch (err) {
       console.log(err);
     }
   }
 
-  async delReview(postId, token) {
+  async prepareRecommendedReviews() {
     try {
-      const resp = await deleteReview(postId, token);
-      if (resp.status !== 204) {
-        this.history.replace("/admin");
+      const resp = await getRecommendedReviews();
+      if(resp.status !== 204){
+        this.setValue("recommendedReviews", resp.data.data)
       }
     } catch (err) {
       console.log(err);
@@ -74,4 +63,4 @@ class AdminPreviewReviewContext {
   }
 }
 
-export const adminPreviewReviewContext = createContext(new AdminPreviewReviewContext());
+export const previewReviewContext = createContext(new PreviewReviewContext());
