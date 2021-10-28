@@ -1,4 +1,4 @@
-// import SheetThumb from "../all_sheets/components/sheet_thumb";
+
 import Navbar from "../../core/components/navbar";
 import Footer from "../../core/components/footer";
 import Helloworld from "../../hello-world.jpg";
@@ -141,7 +141,6 @@ export default function HomePage() {
     <div className="h-full w-full">
       <Navbar />
       <div className="hidden md:block">
-
         <div className="mx-44 my-3 lg:mx-44 sm:mx-14 md:mx-24  bg-red-200 relative ">
           <Carousel page="home" />
           <div className="absolute bottom-36 -left-10 text-white antialiased space-y-5 z-10 " >
@@ -151,7 +150,7 @@ export default function HomePage() {
               all SIT students :)</div>
           </div>
         </div>
-        <div >
+        {/* <div > */}
           {isVideo.check ?
             <div className="h-oversizedesktop absolute top-0 inset-0 z-50 grid grid-cols-1 bg-gradient-to-b from-gray-header bg-opacity-50 backdrop-filter backdrop-blur-glass ">
               <div className="absolute space-y-2 grid grid-cols-1 justify-items-center place-self-center mx-9">
@@ -205,7 +204,7 @@ export default function HomePage() {
             </video>
             <div className="p-5 text-center">Delete post</div>
           </div> */}
-        </div>
+        {/* </div> */}
 
         <div className="mt-40 mx-44  mb-20 z-40 h-46.313 relative flex">
           <div className=" bottom-36 left-0 text-white antialiased space-y-5 z-40 absolute mr-1.3/2 ">
@@ -314,11 +313,13 @@ export default function HomePage() {
 
           <div className="h-oversize absolute top-0 inset-0 z-50 grid grid-cols-1 glass ">
             <div id="asd" onClick={Clickclick} className="top-8 right-8 absolute">
-              <i className="fas fa-times text-4xl text-gray-mailbox "></i>
+              <span className="material-icons text-gray-mailbox ">
+                    cancel
+                  </span>
             </div>
 
             <div className="space-y-10 grid grid-cols-1 justify-items-center place-self-center mx-9" >
-              <video controls>
+              <video controls>ั
                 <source src={isVideo.name} type="video/mp4" />
               </video>
               {/* <img src= alt="tutorial for use website" /> */}
