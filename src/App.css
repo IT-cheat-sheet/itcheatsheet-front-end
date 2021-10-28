@@ -61,3 +61,16 @@ scrollbar-width: none;  /* Firefox */
 .innerTrack::-webkit-scrollbar-track {
   background: none;
 }
+
+@keyframes spin {
+  from {
+      transform:rotate(0deg);
+  }
+  to {
+      transform:rotate(360deg);
+  }
+}
+
+.spin {
+  animation: spin 1s ease-out infinite;
+}

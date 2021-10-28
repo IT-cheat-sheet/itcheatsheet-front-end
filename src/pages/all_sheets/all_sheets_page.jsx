@@ -48,7 +48,7 @@ export default function AllSheets() {
         <div className="md:hidden">
             <Carousel page="sheet" />
           </div>
-        <div className="lg:mx-44 md:mb-24 px-4 md:p-0">
+        <div className="xl:mx-44 md:mx-24 md:mb-24 px-4 md:p-0">
           <div className="hidden md:block">
             <Carousel page="sheet" />
           </div>
