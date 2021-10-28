@@ -52,15 +52,25 @@ export default function PreviewSheet() {
                     context.file ?
                       <a id="pdfOpen" href={`http://localhost:3000/summarypost/getFile/${params.id}`} target="_blank" rel="noreferrer">
                         <div>
-                          <Document file={context.file} onLoadSuccess={() => setIsPdfLoad(true)} loading={<div className="text-center my-5">Loading PDF...<br />Please Wait</div>}>
-                            <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} />
+                          <Document file={context.file} onLoadSuccess={() => setIsPdfLoad(true)} loading={
+                            <div className="text-violet-hover text-center pt-20">
+                              <span className="material-icons-round md:text-iconLoad text-3xl spin">hourglass_top</span>
+                              <div>Loading... Please Wait</div>
+                            </div>
+                          }>
+                            <Page pageNumber={1} renderTextLayer={false} renderAnnotationLayer={false} loading={
+                            <div className="text-violet-hover text-center pt-20">
+                              <span className="material-icons-round md:text-iconLoad text-3xl spin">hourglass_top</span>
+                              <div>Loading... Please Wait</div>
+                            </div>
+                          }/>
                           </Document>
                         </div>
                       </a>
                       : <></>
                   }
                 </div>
-                {context.file && (<div className="w-full text-center mt-2 text-purple-hover text-sm md:text-2xl">Click PDF to View File</div>)}
+                {context.file && isPdfLoad && (<div className="w-full text-center mt-2 text-purple-hover text-sm md:text-2xl">Click PDF to View File</div>)}
 
               </div>
               <div className="mt-5 xl:mt-7 md:col-span-7">
