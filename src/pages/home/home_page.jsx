@@ -125,7 +125,7 @@ export default function HomePage() {
                   <div className="h-3/5">
                     <img src={context.image} className="object-cover h-full w-full" alt="review" />
                   </div>}
-                  <div className={`bg-blue-page md:px-9 lg:px-20 text-left relative space-y-2 ${context.image ? 'h-2/5 pt-3 md:pt-5 pb-5 lg:pb-10 px-5' : 'h-full flex flex-col justify-center md:space-y-5 px-9'}`}>
+                  <div className={`bg-blue-page text-left relative space-y-2 ${context.image ? 'h-2/5 pt-3 md:pt-5 pb-5 lg:pb-10 px-5 md:px-4 lg:px-10' : 'h-full flex flex-col justify-center md:space-y-5 px-9 md:px-9 lg:px-20'}`}>
                     <div className={`text-2xl md:text-4xl font-semibold text-left text-white`}>{context.review.reviewTitle}</div>
                     <div className={`text-white font-light ${context.image ? 'text-sm md:text-base line-clamp-3' : 'line-clamp-10'}`}>
                       {context.review.reviewContent}
