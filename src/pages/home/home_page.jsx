@@ -1,10 +1,8 @@
 import Navbar from "../../core/components/navbar";
 import Footer from "../../core/components/footer";
-import Helloworld from "../../hello-world.jpg";
 import Carousel from "../../core/components/carousel";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router";
-// import { useParams } from 'react-router';
 import { Link } from "react-router-dom";
 import SheetThumb from "../all_sheets/components/sheet_thumb";
 import { homeContext } from "./home_context";
