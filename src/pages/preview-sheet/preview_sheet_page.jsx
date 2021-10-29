@@ -19,6 +19,8 @@ export default function PreviewSheet() {
   const ref = useRef();
 
   useEffect(() => {
+    setToggleSeeMore(false);
+    setIsPdfLoad(false);
     context.setValue('ref', ref);
     context.prepareSheet(params.id);
     context.preparePdf(params.id);
@@ -42,7 +44,7 @@ export default function PreviewSheet() {
                   </div>
                   <div className="flex flex-col mt-1 mb-5 space-y-2">
                     <p className="px-2 py-0.5 text-xs rounded-3xl bg-violet-pill text-white whitespace-nowrap w-max">{context.sheet.summaryPost.posterName}</p>
-                    <p className="text-purple-hover text-xs truncate">{context.sheet.summaryPost.subject.subjectId + ' ' + _.startCase(context.sheet.summaryPost.subject.subjectName.toLowerCase())}</p>
+                    <p className="text-purple-hover text-xs truncate">{context.sheet.summaryPost.subject.subjectId + ' ' + _.startCase(context.sheet.summaryPost.subject.subjectName.toLowerCase()).replace(/[i]{2,}/i, match => match.toUpperCase())}</p>
                   </div>
                 </div>
                 <div className={`rounded-button overflow-hidden ${context.file && 'mt-5'} ${isPdfLoad && 'shadow-halo'}`}>
@@ -78,7 +80,7 @@ export default function PreviewSheet() {
                   </div>
                   <div className="flex my-2">
                     <p className="px-6 rounded-3xl bg-violet-pill text-white whitespace-nowrap">{context.sheet.summaryPost.posterName}</p>
-                    <p className="ml-2.5 text-purple-hover truncate">{context.sheet.summaryPost.subject.subjectId + ': ' + _.startCase(context.sheet.summaryPost.subject.subjectName.toLowerCase())}</p>
+                    <p className="ml-2.5 text-purple-hover truncate">{context.sheet.summaryPost.subject.subjectId + ': ' + _.startCase(context.sheet.summaryPost.subject.subjectName.toLowerCase()).replace(/[i]{2,}/i, match => match.toUpperCase())}</p>
                   </div>
                 </div>
                 <div className="text-xs md:mt-5 md:text-2xl">
@@ -87,7 +89,7 @@ export default function PreviewSheet() {
                       <Kebab page="sheet" postId={context.sheet.summaryPost.summaryPostId} />
                     </div>
                     <div className="md:mx-11">
-                      <p ref={ref} className={`text-purple-hover ${toggleSeeMore ? "" : "line-clamp-6"} md:max-h-72 md:overflow-y-scroll innerTrack px-3`}>
+                      <p ref={ref} className={`text-purple-hover ${toggleSeeMore ? "md:overflow-y-scroll" : "line-clamp-6"} md:max-h-72 innerTrack px-3`}>
                         {context.sheet.summaryPost.summaryContent}
                       </p>
                       {
