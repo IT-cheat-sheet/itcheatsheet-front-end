@@ -43,7 +43,7 @@ export default function AllReviews() {
       {() => (
       <div>
         <Navbar />
-        <div className="md:mx-44">
+        <div className="md:mx-24 xl:mx-44">
           <Carousel page="review" />
           <div className="px-4">
             <div className="text-2xl tracking-wider leading-normal md:text-popup font-bold text-blue-body mt-14 mb-5">ALL THREAD</div>
