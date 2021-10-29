@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import AdminNavbar from "../../core/components/adminNavbar";
 import Footer from "../../core/components/footer";
 import SearchBox from "../../core/components/searchBox";
-import AdminThumb from "./admin_thumb";
+import AdminThumb from "./components/admin_thumb";
 import { adminHomeContext } from "./admin_home_context";
 import _ from 'lodash';
 
