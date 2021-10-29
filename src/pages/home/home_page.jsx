@@ -51,7 +51,7 @@ export default function HomePage() {
             <div className="absolute top-36 md:bottom-36 md:-left-10 text-white antialiased space-y-2 md:space-y-5 z-10">
               <h1 className="rounded-lg px-3 py-2 mx-auto md:m-0 text-4xl md:text-6xl font-semibold text-left w-max backdrop-filter backdrop-blur-bx bg-red-padding bg-opacity-50">IT CHEATSHEET</h1>
               <div className="text-base font-medium text-center text-violet-hover md:text-white md:rounded-lg px-4 md:px-3 md:py-2 md:text-lg md:font-light md:backdrop-filter md:backdrop-blur-bx md:bg-red-padding md:bg-opacity-50">
-                This website gathers a large number of summary sheets and reviews for all SIT students
+                This website gathers a large number of summary sheets and reviews for all IT students
               </div>
             </div>
           </div>
@@ -76,7 +76,7 @@ export default function HomePage() {
           <div className="overflow-x-auto hideScrollBar grid grid-rows-1 grid-flow-col relative -mt-28 md:flex md:justify-center text-gray-mailbox bg-scroll space-x-4 px-4 md:mt-28">
             {
               _.map(context.vidList, vid => (
-                <div onClick={() => context.setValue('showVid', vid.src)} className="w-72 md:w-full cursor-pointer">
+                <div key={vid.name} onClick={() => context.setValue('showVid', vid.src)} className="w-72 md:w-full cursor-pointer">
                   <img src={vid.thumb} alt="tutorial for use website" className="rounded-xl" />
                   <div className="text-base md:text-xl p-5 text-center">{vid.name}</div>
                 </div>
