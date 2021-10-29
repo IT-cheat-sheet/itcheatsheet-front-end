@@ -1,7 +1,6 @@
 import Button from "../../core/components/button";
-import React, { useState, useEffect } from "react";
+import React, { useState, Fragment } from "react";
 import { Link } from "react-router-dom";
-import { Fragment } from "react/cjs/react.production.min";
 
 export default function Navbar() {
   const [toggle, setToggle] = useState(false);

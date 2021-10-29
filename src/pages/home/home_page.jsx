@@ -1,13 +1,12 @@
 import Navbar from "../../core/components/navbar";
 import Footer from "../../core/components/footer";
 import Carousel from "../../core/components/carousel";
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, Fragment } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 import SheetThumb from "../all_sheets/components/sheet_thumb";
 import { homeContext } from "./home_context";
 import { Observer } from "mobx-react-lite";
-import { Fragment } from "react/cjs/react.production.min";
 import _ from "lodash";
 
 export default function HomePage() {
