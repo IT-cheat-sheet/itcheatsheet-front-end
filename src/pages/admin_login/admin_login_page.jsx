@@ -1,6 +1,7 @@
 
 import { useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import { login } from "../../core/service/postSheet";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
@@ -14,18 +15,10 @@ export default function AdminLogin() {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      const res = await fetch('http://localhost:3000/admin/login', {
-        method: 'post',
-        headers: {'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          "username": `${username}`,
-          "password": `${password}`
-        })
-      });
-      const data = await res.json();
+      const res = await login(username, password)
       if (res.status === 200) {
-        console.log(data.token)
-        document.cookie =`cheatSheetToken=${data.token};path=/admin;`
+        console.log(res.data.token)
+        document.cookie =`cheatSheetToken=${res.data.token};path=/admin;`
         history.push("/admin")
       }
     } catch (err) {

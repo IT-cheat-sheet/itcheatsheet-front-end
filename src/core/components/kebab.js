@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { postReport } from '../service/postSheet';
 import Button from './button'
 import ConfirmModal from './comfirmModal';
 import Dropdown from './dropdown';
@@ -41,34 +42,7 @@ export default function Kebab({ page, postId }) {
     setDescError(description === "" ? "This field is required." : "");
 
     if (actionSelected !== "" && description !== "") {
-      const res = await fetch(`http://localhost:3000/report/add`,
-        (page === "sheet") ?
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              summaryPostId: postId,
-              reportAction: actionSelected,
-              reportDescription: description,
-              readStatus: 0
-            })
-          }
-          :
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              reviewId: postId,
-              reportAction: actionSelected,
-              reportDescription: description,
-              readStatus: 0
-            })
-          }
-      );
+      const res = await postReport(page, postId, actionSelected, description);
       if (res.status === 201) {
         setOpenSendSuccessModal(true);
         setOpenSuggestModal(false);
