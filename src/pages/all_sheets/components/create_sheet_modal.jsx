@@ -6,13 +6,12 @@ import { Observer } from "mobx-react-lite";
 import _ from "lodash";
 import TextArea from "../../../core/components/textArea";
 
-export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
+export default function CreateSheetModal({ isOpen, onClose, onComplete, semesters }) {
   const context = useContext(createSheetContext);
 
   const ref = useRef();
 
   useEffect(() => {
-    context.prepareSemester();
     context.prepareSubject();
     context.setValue("onClose", onClose);
     context.setValue("onComplete", onComplete);
@@ -65,7 +64,7 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete }) {
                       <Dropdown
                         page="sheet"
                         label="semester/year"
-                        options={_.map(context.semesterChoice, (semester) => ({
+                        options={_.map(semesters, (semester) => ({
                           name: semester.semester,
                           value: semester.semesterNumber,
                         }))}

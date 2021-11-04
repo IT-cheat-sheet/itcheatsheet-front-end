@@ -22,7 +22,6 @@ class CreateSheetContext {
   fileError;
 
   subjectChoice;
-  semesterChoice;
   onClose;
   onComplete;
 
@@ -54,18 +53,6 @@ class CreateSheetContext {
       const resp = await getSubject();
       if (resp.status !== 204) {
         this.subjectChoice = resp.data.subjects;
-      }
-    } catch (err) {
-      console.error(err);
-      alert(err.message);
-    }
-  }
-
-  async prepareSemester() {
-    try {
-      const resp = await getSemester();
-      if (resp.status !== 204) {
-        this.semesterChoice = resp.data.semesters;
       }
     } catch (err) {
       console.error(err);
