@@ -5,6 +5,9 @@ services:
     container_name: frontend
     ports:
        - "80:80"
+    secrets: 
+     - source: deploy_key 
+       target: ssh_key
       
 networks:
     default:
