@@ -37,7 +37,7 @@ jobs:
       with: 
          host: ${{ secrets.HOST }}
          username: ${{ secrets.USERNAME }}
-         password: ${{ secrets.PASSWORD }}
+         key: ${{ secrets.PRIVATE_KEY }}
          source: ./docker-compose.dev.yml
          target: ./frontend
     
