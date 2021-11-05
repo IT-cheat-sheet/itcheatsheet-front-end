@@ -35,7 +35,7 @@ jobs:
         file: ./Dockerfile
         context: .
         push: true
-        tags: ${{ github.repository_owner }}/itcheatsheet-front-end:dev
+        tags: itcheatsheet-front-end:dev
    
     - name: Publish compose file
       uses: appleboy/scp-action@master
