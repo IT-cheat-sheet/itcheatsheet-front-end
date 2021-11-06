@@ -55,7 +55,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          {context.showVid !== '' &&
+          {/* {context.showVid !== '' &&
             <Fragment>
               <div className="justify-center items-center flex overflow-x-hidden overflow-y-hidden fixed inset-0 z-60 outline-none focus:outline-none mx-0 md:mx-4 backdrop-filter backdrop-blur-sm">
                 <div className="relative space-y-2 grid grid-cols-1 justify-items-center place-self-center mx-9 w-4/5 md:w-2/3">
@@ -81,7 +81,7 @@ export default function HomePage() {
                 </div>
               ))
             }
-          </div>
+          </div> */}
 
           <div className="mt-12 mb-20 md:mt-16 md:mb-20 mx-4 flex flex-col md:grid md:grid-cols-2 gap-y-16 md:gap-x-20 md:mx-0">
             <div className="md:col-span-1 md:order-2 w-full">
