@@ -51,12 +51,12 @@ export default function AdminPreviewReview() {
               </div>
               <ConfirmModal
                 isOpen={openDeleteModal}
-                onButtonClick={() => context.delSheet(context.sheet.summaryPostId, context.token)}
+                onButtonClick={() => context.delReview(context.review.reviewId, context.token)}
                 onClose={() => setOpenDeleteModal(false)}
                 label="confirm delete"
                 buttonText="delete"
                 header="are you sure you want to delete?"
-                desc="Delete this sheet will also delete all reports of this sheet."
+                desc="Delete this review will also delete all reports of this review."
                 buttonColor="red" />
             </div>
             : <></>}
