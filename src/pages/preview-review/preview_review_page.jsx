@@ -50,7 +50,7 @@ export default function PreviewReview() {
                     <div className="hidden md:flex justify-end mr-6 pt-2">
                       <Kebab page="review" postId={context.review.data.reviewId} />
                     </div>
-                    <p className="md:mx-14 text-blue-body">
+                    <p className="md:mx-14 text-blue-body leading-relaxed">
                       {context.review.data.reviewContent}
                     </p>
                     {
