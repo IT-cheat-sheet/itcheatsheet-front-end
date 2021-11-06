@@ -8,6 +8,7 @@ class AllReviewContext {
   current;
   total;
   isLoad;
+  creating
 
   searchWord;
   filter;
@@ -23,6 +24,7 @@ class AllReviewContext {
     this.searchWord = '';
     this.filter = '';
     this.pageSize = 6;
+    this.creating = false;
     makeAutoObservable(this);
   }
 

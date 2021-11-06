@@ -6,7 +6,12 @@ import { Observer } from "mobx-react-lite";
 import _ from "lodash";
 import TextArea from "../../../core/components/textArea";
 
-export default function CreateSheetModal({ isOpen, onClose, onComplete, semesters }) {
+export default function CreateSheetModal({
+  isOpen,
+  onClose,
+  onComplete,
+  semesters,
+}) {
   const context = useContext(createSheetContext);
 
   const ref = useRef();
@@ -37,11 +42,18 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete, semester
                   style={{ width: "1080px" }}
                 >
                   {/* <p className="text-gray-form body-base">UPLOAD SHEET</p> */}
-                  <h3 className="uppercase text-white text-2xl md:text-4xl font-bold">UPLOAD SHEET</h3>
-                  <span className="material-icons text-gray-footer text-4xl cursor-pointer hidden md:block" onClick={() => {
-                    onClose();
-                    context.resetError();
-                  }}>cancel</span>
+                  <h3 className="text-2xl font-bold text-white uppercase md:text-4xl">
+                    UPLOAD SHEET
+                  </h3>
+                  <span
+                    className="hidden text-4xl cursor-pointer material-icons text-gray-footer md:block"
+                    onClick={() => {
+                      onClose();
+                      context.resetError();
+                    }}
+                  >
+                    cancel
+                  </span>
                 </div>
                 <div
                   className="flex flex-col px-8 py-6 space-y-5 rounded-lg bg-violet-bg"
@@ -80,7 +92,7 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete, semester
                         page="sheet"
                         label="subject"
                         options={_.map(context.subjectChoice, (subject) => ({
-                          name: subject.subjectId + ': ' + subject.subjectName,
+                          name: subject.subjectId + ": " + subject.subjectName,
                           value: subject.subjectNumber,
                         }))}
                         setValue={(e) => {
@@ -104,9 +116,15 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete, semester
                   </div>
 
                   <div className="flex flex-col items-start">
-                    <TextArea page="sheet" textAreaLabel="DESCRIPTION" placeholder="Text here" setValue={(x) => {
+                    <TextArea
+                      page="sheet"
+                      textAreaLabel="DESCRIPTION"
+                      placeholder="Text here"
+                      setValue={(x) => {
                         context.setValue("description", x);
-                      }} errorText={context.descriptionError} />
+                      }}
+                      errorText={context.descriptionError}
+                    />
                   </div>
 
                   <div className="flex flex-col items-start">
@@ -123,13 +141,15 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete, semester
 
                   <div className="flex items-end justify-between w-full">
                     <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-violet-bubbleText">FILE
-                      <span
-                          className="text-red-button tracking-normal ml-4"
+                      <p className="body-sm text-violet-bubbleText">
+                        FILE
+                        <span
+                          className="ml-4 tracking-normal text-red-button"
                           style={{ fontSize: "10px" }}
                         >
-                        {context.fileError}
-                      </span></p>
+                          {context.fileError}
+                        </span>
+                      </p>
                       <div className="flex items-center space-x-4">
                         <button
                           className="h-10 px-4 rounded-lg bg-purple-button"
@@ -138,9 +158,15 @@ export default function CreateSheetModal({ isOpen, onClose, onComplete, semester
                           <p className="text-white body-sm">Upload file...</p>
                         </button>
                         {context.file && (
-                          <p className="text-left truncate select-none w-72">
-                            {context.file?.name || ""}
-                          </p>
+                          <div className="flex items-center px-4 space-x-2 text-left text-white truncate rounded-full select-none body-sm bg-violet-button">
+                            <p>{context.file?.name || ""}</p>
+                            <button
+                              className="flex items-center w-4 h-4 text-black rounded-full bg-gray-form"
+                              onClick={() => context.setValue("file", null)}
+                            >
+                              <p className="w-full text-center">x</p>
+                            </button>
+                          </div>
                         )}
                       </div>
                       <input

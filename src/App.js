@@ -7,23 +7,15 @@ import PreviewReview from "./pages/preview-review/preview_review_page";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import AdminHome from "./pages/admin_home/admin_home_page";
 import AdminLogin from "./pages/admin_login/admin_login_page";
-import CreateSheetModal from "./pages/preview-review/components/create_review_modal";
 import { useState } from "react";
 import AdminPreviewSheet from "./pages/admin_preview_sheet/admin_preview_sheet_page.jsx"
 import AdminPreviewReview from "./pages/admin_preview_review/admin_preview_review_page";
 import NotFound from "./pages/not_found/not_found_page";
 function App() {
-  const [isOpen, setIsOpen] = useState(true);
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route path="/test">
-            <CreateSheetModal
-              isOpen={isOpen}
-              onClose={() => setIsOpen(false)}
-            ></CreateSheetModal>
-          </Route>
           <Route path="/sheets/:id" component={PreviewSheet} />
           <Route path="/reviews/:id" component={PreviewReview} />
           <Route path="/admin/reviews/:id" component={AdminPreviewReview} />

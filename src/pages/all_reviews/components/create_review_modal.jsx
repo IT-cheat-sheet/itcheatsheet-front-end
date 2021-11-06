@@ -144,15 +144,18 @@ export default function CreateReviewModal({ isOpen, onClose }) {
                       <p className="body-sm text-blue-form">FILE</p>
                       <div className="flex items-center space-x-4">
                         <button
-                          className="h-10 px-4 rounded-lg bg-purple-button"
+                          className="h-10 px-4 rounded-lg bg-blue-button"
                           onClick={() => ref.current.click()}
                         >
                           <p className="text-white body-sm">Upload file...</p>
                         </button>
                         {context.file && (
-                          <p className="text-left truncate select-none w-72">
-                            {context.file?.name || ""}
-                          </p>
+                          <div className="flex items-center px-4 space-x-2 text-left text-white truncate rounded-full select-none body-sm bg-blue-button">
+                            <p>{context.file?.name || ""}</p>
+                            <button className="flex items-center w-4 h-4 text-black rounded-full bg-gray-form" onClick={() => context.setValue("file", null)}>
+                              <p className="w-full text-center">x</p>
+                            </button>
+                          </div>
                         )}
                       </div>
                       <input
