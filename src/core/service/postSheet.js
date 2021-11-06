@@ -12,7 +12,7 @@ export const postSheet = (
   posterName,
   linkAttachment
 ) => {
-  return axios.post(`h${host}${port}/summarypost/create`, {
+  return axios.post(`${host}${port}/summarypost/create`, {
     semesterNumber,
     subjectNumber,
     summaryTitle,
