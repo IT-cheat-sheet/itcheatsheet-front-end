@@ -104,6 +104,7 @@ class CreateSheetContext {
           if(postResp.status === 200){
             this.onClose();
             this.onComplete();
+            this.setValue('file', null);
           }
         }
       } catch (error) {

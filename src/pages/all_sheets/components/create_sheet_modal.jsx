@@ -38,11 +38,15 @@ export default function CreateSheetModal({
                 style={{ zIndex: 100 }}
               >
                 <div
-                  className="flex justify-between mb-2"
-                  style={{ width: "1080px" }}
+                  className="w-full md:w-3/4 flex justify-between mb-2"
                 >
                   {/* <p className="text-gray-form body-base">UPLOAD SHEET</p> */}
-                  <h3 className="text-2xl font-bold text-white uppercase md:text-4xl">
+                  <h3 className="text-2xl font-bold text-white uppercase mx-4 mt-7 md-mt-0 md:mx-0 md:text-4xl flex">
+                    <span className="material-icons text-white text-2xl md:hidden" onClick={() => {
+                      onClose();
+                      context.resetError();
+                      context.setValue('file', null);
+                    }}>arrow_back_ios</span>
                     UPLOAD SHEET
                   </h3>
                   <span
@@ -50,17 +54,16 @@ export default function CreateSheetModal({
                     onClick={() => {
                       onClose();
                       context.resetError();
+                      context.setValue('file', null);
                     }}
                   >
                     cancel
                   </span>
                 </div>
                 <div
-                  className="flex flex-col px-8 py-6 space-y-5 rounded-lg bg-violet-bg"
-                  style={{ width: "1080px" }}
+                  className="w-full h-full md:h-auto md:w-3/4 flex flex-col overflow-y-scroll hideScrollBar px-8 pt-6 pb-12 md:py-6 space-y-5 rounded-t-lg md:rounded-lg bg-violet-bg"
                 >
-                  <div className="flex space-x-12">
-                    <div className="flex flex-col items-start">
+                  <div className="flex flex-col w-full md:flex-row md:space-x-12">
                       <InputText
                         placeholder="Text here"
                         label="title"
@@ -70,9 +73,6 @@ export default function CreateSheetModal({
                         }}
                         errorText={context.titleError}
                       />
-                    </div>
-
-                    <div className="flex flex-col items-start">
                       <Dropdown
                         page="sheet"
                         label="semester/year"
@@ -85,9 +85,6 @@ export default function CreateSheetModal({
                         }}
                         errorText={context.semesterError}
                       ></Dropdown>
-                    </div>
-
-                    <div className="flex flex-col items-start">
                       <Dropdown
                         page="sheet"
                         label="subject"
@@ -100,22 +97,17 @@ export default function CreateSheetModal({
                         }}
                         errorText={context.subjectError}
                       ></Dropdown>
-                    </div>
-
-                    <div className="flex flex-col items-start">
                       <InputText
                         placeholder="Text here"
-                        label="license/your name"
+                        label="your name"
                         page="sheet"
                         onChange={(e) => {
                           context.setValue("licence", e.target.value);
                         }}
                         errorText={context.licenceError}
                       />
-                    </div>
                   </div>
 
-                  <div className="flex flex-col items-start">
                     <TextArea
                       page="sheet"
                       textAreaLabel="DESCRIPTION"
@@ -125,7 +117,6 @@ export default function CreateSheetModal({
                       }}
                       errorText={context.descriptionError}
                     />
-                  </div>
 
                   <div className="flex flex-col items-start">
                     <p className="body-sm text-violet-bubbleText">LINK</p>
@@ -139,8 +130,8 @@ export default function CreateSheetModal({
                     />
                   </div>
 
-                  <div className="flex items-end justify-between w-full">
-                    <div className="flex flex-col items-start space-y-2">
+                  <div className="flex flex-col md:flex-row items-start md:items-end justify-between space-y-12 md:space-y-0 w-full">
+                    <div className="w-full flex flex-col items-start space-y-2">
                       <p className="body-sm text-violet-bubbleText">
                         FILE
                         <span
@@ -150,7 +141,7 @@ export default function CreateSheetModal({
                           {context.fileError}
                         </span>
                       </p>
-                      <div className="flex items-center space-x-4">
+                      <div className="flex flex-col w-full md:w-auto md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
                         <button
                           className="h-10 px-4 rounded-lg bg-purple-button"
                           onClick={() => ref.current.click()}
@@ -158,14 +149,13 @@ export default function CreateSheetModal({
                           <p className="text-white body-sm">Upload file...</p>
                         </button>
                         {context.file && (
-                          <div className="flex items-center px-4 space-x-2 text-left text-white truncate rounded-full select-none body-sm bg-violet-button">
-                            <p>{context.file?.name || ""}</p>
-                            <button
-                              className="flex items-center w-4 h-4 text-black rounded-full bg-gray-form"
-                              onClick={() => context.setValue("file", null)}
-                            >
-                              <p className="w-full text-center">x</p>
-                            </button>
+                          <div className="flex max-w-full md:w-auto items-center px-4 space-x-2 text-left text-white rounded-full select-none body-sm bg-purple-button">
+                            <p className="w-11/12 truncate">{context.file?.name || ""}</p>
+                            <span
+                            className="text-xl cursor-pointer material-icons text-gray-footer md:block"
+                            onClick={() => context.setValue("file", null)}>
+                              cancel
+                            </span>
                           </div>
                         )}
                       </div>
@@ -181,7 +171,7 @@ export default function CreateSheetModal({
                       />
                     </div>
                     <button
-                      className="w-24 h-10 px-4 rounded-lg bg-purple-button"
+                      className="w-full md:w-24 h-10 px-4 rounded-lg bg-purple-button"
                       onClick={() => context.onSubmit()}
                     >
                       <p className="text-white body-sm">POST</p>

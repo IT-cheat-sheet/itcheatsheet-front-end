@@ -67,7 +67,7 @@ export default function AllSheets() {
                 <div className="grid grid-cols-2 md:grid-cols-4 mt-4">
                   {
                     _.map(context.sheets, (sheet, index) => (
-                      <SheetThumb id={sheet.summaryPostId} fileName={sheet.summaryTitle} link={sheet.linkAttachment}/>
+                      <SheetThumb key={index} id={sheet.summaryPostId} fileName={sheet.summaryTitle} link={sheet.linkAttachment}/>
                     ))
                   }
                 </div>
