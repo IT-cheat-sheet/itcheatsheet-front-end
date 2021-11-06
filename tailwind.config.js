@@ -104,9 +104,11 @@ module.exports = {
         '27': '6.75rem',
         '18': '4.5rem',
         '46.313':'46.313rem',
+        '128':'32rem',
         '2.5/4':'63.5%',
         '1.5/4':'37.5%',
-        'oversize': '156rem'
+        'oversize': '156rem',
+        'oversizedesktop': '167rem'
       },
       lineHeight: {
         '11': '2.625rem'
@@ -114,7 +116,9 @@ module.exports = {
       fontSize: {
         'popup': '2.625rem',
         'primary': '5rem',
-        'xxs': '0.5rem'
+        'xxs': '0.5rem',
+        'icon': '8.5vw',
+        'iconLoad': '4vw'
       },
       borderRadius: {
         'button': '0.625rem'
@@ -123,6 +127,7 @@ module.exports = {
         '22.5': '5.625rem'
       },
       boxShadow: {
+        'halo-sm': '0 0 15px rgba(0,0,0,0.15)',
         'halo': '0 0 25px rgba(0,0,0,0.15)'
       },
       backdropBlur: {
@@ -137,6 +142,9 @@ module.exports = {
       },
       zIndex: {
         '60': '60'
+      },
+      lineClamp: {
+        '10': '10'
       }
     },
   },
