@@ -8,15 +8,15 @@ COPY . .
 ARG REACT_APP_BE_HOST="CLIENT"
 ARG REACT_APP_BE_PORT="CLIENT"
 
-RUN printf "\nREACT_APP_BE_HOST=$REACT_APP_BE_HOST\n" >> .env
-RUN echo REACT_APP_BE_PORT="$REACT_APP_BE_PORT" >> .env
 RUN npm run build
 
 # production stage
 FROM nginx:1.21.3-alpine as production-stage
-RUN printf "server {\n  location / {\n    root /usr/share/nginx/html;\n    try_files \$uri \$uri/ /index.html;\n  }\n}\n" > /etc/nginx/conf.d/default.conf
-ARG NGINX_MAX_BODY_SIZE="200M"
-RUN sed -i '$ s/}/\n  client_max_body_size '"$NGINX_MAX_BODY_SIZE"';\n}/' /etc/nginx/conf.d/default.conf
+# RUN printf "server {\n  location / {\n    root /usr/share/nginx/html;\n    try_files \$uri \$uri/ /index.html;\n  }\n}\n" > /etc/nginx/conf.d/default.conf
+# ARG NGINX_MAX_BODY_SIZE="200M"
+# RUN sed -i '$ s/}/\n  client_max_body_size '"$NGINX_MAX_BODY_SIZE"';\n}/' /etc/nginx/conf.d/default.conf
+WORKDIR /usr/share/nginx/html
+COPY  ./nginx/nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build-stage /app/build /usr/share/nginx/html
 EXPOSE 3001
 CMD ["nginx", "-g", "daemon off;"]
