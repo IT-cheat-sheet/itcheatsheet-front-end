@@ -4,7 +4,7 @@ services:
     image: ghcr.io/it-cheat-sheet/itcheatsheet-front-end:latest
     container_name: frontend
     ports:
-       - "80:80"
+       - "3001:80"
       
 networks:
     default:
