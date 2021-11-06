@@ -10,10 +10,9 @@ import { allReviewContext } from "./all_reviews_context";
 import _ from "lodash";
 import { Observer } from "mobx-react-lite";
 import CreateReviewModal from "./components/create_review_modal";
+import ConfirmModal from "../../core/components/comfirmModal";
 
 export default function AllReviews() {
-  const [isOpen, setIsOpen] = useState(false)
-
   const context = useContext(allReviewContext);
   const history = useHistory();
   const location = useLocation();
@@ -46,9 +45,25 @@ export default function AllReviews() {
       {() => (
         <div>
           <CreateReviewModal
-            isOpen={isOpen}
-            onClose={() => setIsOpen(false)}
+            topics={context.topics}
+            isOpen={context.createToggle}
+            onClose={() => context.setValue('createToggle', false)}
+            onComplete={() => context.setValue('confirmToggle', true)}
           />
+          <ConfirmModal
+              isOpen={context.confirmToggle}
+              onButtonClick={() => {
+                context.setValue('confirmToggle', false);
+                context.prepareReview();
+              }}
+              onClose={() => {
+                context.setValue('confirmToggle', false);
+                context.prepareReview();
+              }}
+              label="create thread"
+              buttonText="ok"
+              header="thread created successfully!"
+              buttonColor="green" />
           <Navbar />
           <div className="md:mx-24 xl:mx-44">
             <Carousel page="review" />
@@ -99,7 +114,7 @@ export default function AllReviews() {
             <div>
               <button
                 className="fixed z-30 button-circular bottom-7 right-4 md:bottom-12 md:right-24"
-                onClick={() => setIsOpen(true)}
+                onClick={() => context.setValue('createToggle', true)}
               >
                 <span className="text-6xl font-bold material-icons-round md:text-8xl">
                   add

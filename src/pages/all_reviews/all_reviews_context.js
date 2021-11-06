@@ -8,7 +8,8 @@ class AllReviewContext {
   current;
   total;
   isLoad;
-  creating
+  createToggle;
+  confirmToggle;
 
   searchWord;
   filter;
@@ -21,6 +22,8 @@ class AllReviewContext {
     this.current = 0;
     this.total = 0;
     this.isLoad = false;
+    this.createToggle = false;
+    this.confirmToggle = false;
     this.searchWord = '';
     this.filter = '';
     this.pageSize = 6;

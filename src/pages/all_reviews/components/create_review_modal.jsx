@@ -4,15 +4,16 @@ import Dropdown from "../../../core/components/dropdown";
 import { Observer } from "mobx-react-lite";
 import _ from "lodash";
 import { createReviewContext } from "./create_review_context";
+import TextArea from "../../../core/components/textArea";
 
-export default function CreateReviewModal({ isOpen, onClose }) {
+export default function CreateReviewModal({ topics, isOpen, onClose, onComplete }) {
   const context = useContext(createReviewContext);
 
   const ref = useRef();
 
   useEffect(() => {
-    context.prepareTopic();
     context.setValue("onClose", onClose);
+    context.setValue("onComplete", onComplete);
   }, []);
 
   return (
@@ -22,7 +23,7 @@ export default function CreateReviewModal({ isOpen, onClose }) {
           {isOpen && (
             <Fragment>
               <div
-                className="fixed top-0 left-0 w-screen h-screen bg-black opacity-20"
+                className="fixed top-0 left-0 w-screen h-screen bg-black opacity-50"
                 style={{ zIndex: 100 }}
                 onClick={onClose}
               />
@@ -32,117 +33,80 @@ export default function CreateReviewModal({ isOpen, onClose }) {
                 style={{ zIndex: 100 }}
               >
                 <div
-                  className="flex justify-between mb-2"
-                  style={{ width: "1080px" }}
+                  className="w-full md:w-3/4 flex justify-between mb-2"
                 >
-                  <p className="text-gray-form body-base">CREATE THREAD</p>
-                  <button
-                    className="w-6 h-6 rounded-full bg-gray-footer"
-                    onClick={onClose}
+                  {/* <p className="text-gray-form body-base">CREATE THREAD</p> */}
+                  <h3 className="text-2xl font-bold text-white uppercase mx-4 mt-7 md-mt-0 md:mx-0 md:text-4xl flex">
+                    <span className="material-icons text-white text-2xl md:hidden" onClick={() => {
+                      onClose();
+                      context.resetError();
+                      context.setValue('file', null);
+                    }}>arrow_back_ios</span>
+                    CREATE THREAD
+                  </h3>
+                  <span
+                    className="hidden text-4xl cursor-pointer material-icons text-gray-footer md:block"
+                    onClick={() => {
+                      onClose();
+                      context.resetError();
+                      context.setValue('file', null);
+                    }}
                   >
-                    x
-                  </button>
+                    cancel
+                  </span>
                 </div>
                 <div
-                  className="flex flex-col px-8 py-6 space-y-5 rounded-lg bg-lightblue-bg"
-                  style={{ width: "1080px" }}
+                  className="w-full h-full md:h-auto md:w-3/4 flex flex-col overflow-y-scroll hideScrollBar px-8 pt-6 pb-12 md:py-6 space-y-5 rounded-t-lg md:rounded-lg bg-lightblue-bg"
                 >
-                  <div className="flex space-x-12">
-                    <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-blue-form">THREAD NAME</p>
+                  <div className="flex flex-col xl:w-4/5 md:flex-row md:space-x-12">
                       <InputText
-                        placeholder="title"
+                        label="thread name"
+                        placeholder="Text Here"
                         page="review"
                         onChange={(e) => {
                           context.setValue("reviewTitle", e.target.value);
                         }}
+                        errorText={context.reviewTitleError}
                       />
-                      <p
-                        className="h-4 text-red-button"
-                        style={{ fontSize: "10px" }}
-                      >
-                        {context.reviewTitleError}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-blue-form">TOPIC</p>
                       <Dropdown
                         page="review"
-                        options={_.map(context.topic, (topic) => ({
+                        label="topic"
+                        options={_.map(topics, (topic) => ({
                           name: topic.topicName,
                           value: topic.topicId,
                         }))}
                         setValue={(e) => {
                           context.setValue("topicId", e);
                         }}
+                        errorText={context.topicIdError}
                       ></Dropdown>
-                      <p
-                        className="h-4 text-red-button"
-                        style={{ fontSize: "10px" }}
-                      >
-                        {context.topicIdError}
-                      </p>
-                    </div>
-
-                    <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-blue-form">
-                        LISENCE/YOUR NAME
-                      </p>
                       <InputText
                         placeholder="Text here"
                         page="review"
+                        label="license/your name"
                         onChange={(e) => {
                           context.setValue("reviewer", e.target.value);
                         }}
+                        errorText={context.reviewerError}
                       />
-                      <p
-                        className="h-4 text-red-button"
-                        style={{ fontSize: "10px" }}
-                      >
-                        {context.reviewerError}
-                      </p>
-                    </div>
                   </div>
 
-                  <div className="flex flex-col items-start space-y-2">
-                    <p className="body-sm text-blue-form">TEXT CONTENT</p>
-                    <textarea
-                      className="w-full px-6 py-3 overflow-y-auto placeholder-opacity-50 rounded-lg h-36 body-sm text-blue-form focus:outline-none placeholder-blue-form"
-                      placeholder="Please text politely :)"
-                      onChange={(e) => {
-                        context.setValue("reviewContent", e.target.value);
-                      }}
-                    />
-                    <p
-                      className="h-4 text-red-button"
-                      style={{ fontSize: "10px" }}
-                    >
-                      {context.reviewContentError}
-                    </p>
-                  </div>
-
-                  <div className="flex flex-col items-start space-y-2">
-                    <p className="body-sm text-blue-form">LINK</p>
-                    <InputText
-                      placeholder="Link"
+                    <TextArea
                       page="review"
-                      onChange={(e) => {
-                        context.setValue("reviewLink", e.target.value);
+                      textAreaLabel="TEXT CONTENT"
+                      placeholder="Text here"
+                      setValue={(x) => {
+                        context.setValue("reviewContent", x);
                       }}
+                      errorText={context.reviewContentError}
                     />
-                    <p
-                      className="h-4 text-red-button"
-                      style={{ fontSize: "10px" }}
-                    >
-                      {context.reviewLinkError}
-                    </p>
-                  </div>
 
-                  <div className="flex items-end justify-between w-full">
-                    <div className="flex flex-col items-start space-y-2">
-                      <p className="body-sm text-blue-form">FILE</p>
-                      <div className="flex items-center space-x-4">
+                  <div className="flex flex-col md:flex-row items-start md:items-end justify-between space-y-12 md:space-y-0 w-full">
+                    <div className="flex flex-col w-full items-start space-y-2">
+                      <p className="body-sm text-blue-body">
+                        FILE
+                      </p>
+                      <div className="flex flex-col w-full md:w-auto md:flex-row items-start md:items-center space-y-4 md:space-y-0 md:space-x-4">
                         <button
                           className="h-10 px-4 rounded-lg bg-blue-button"
                           onClick={() => ref.current.click()}
@@ -150,11 +114,13 @@ export default function CreateReviewModal({ isOpen, onClose }) {
                           <p className="text-white body-sm">Upload file...</p>
                         </button>
                         {context.file && (
-                          <div className="flex items-center px-4 space-x-2 text-left text-white truncate rounded-full select-none body-sm bg-blue-button">
-                            <p>{context.file?.name || ""}</p>
-                            <button className="flex items-center w-4 h-4 text-black rounded-full bg-gray-form" onClick={() => context.setValue("file", null)}>
-                              <p className="w-full text-center">x</p>
-                            </button>
+                          <div className="flex max-w-full md:w-auto items-center px-4 space-x-2 text-left text-white rounded-full select-none body-sm bg-blue-button">
+                            <p className="w-11/12 truncate">{context.file?.name || ""}</p>
+                            <span
+                            className="text-xl cursor-pointer material-icons text-gray-footer md:block"
+                            onClick={() => context.setValue("file", null)}>
+                              cancel
+                            </span>
                           </div>
                         )}
                       </div>
@@ -162,7 +128,7 @@ export default function CreateReviewModal({ isOpen, onClose }) {
                         type="file"
                         className="hidden"
                         ref={ref}
-                        accept="application/pdf"
+                        accept="image/png, image/jpeg"
                         multiple={false}
                         onChange={(e) => {
                           context.setValue("file", e.target.files[0]);
@@ -170,7 +136,7 @@ export default function CreateReviewModal({ isOpen, onClose }) {
                       />
                     </div>
                     <button
-                      className="w-24 h-10 px-4 rounded-lg bg-blue-formHover"
+                      className="w-full md:w-24 h-10 px-4 rounded-lg bg-blue-formHover"
                       onClick={() => context.onSubmit()}
                     >
                       <p className="text-white body-sm">POST</p>
