@@ -38,11 +38,39 @@ export const postThread = ({
   });
 };
 
+export const postReview = (
+  reviewTitle,
+  reviewContent,
+  reviewLink,
+  reviewer,
+  topicId
+) => {
+  return axios.post(`${host}${port}/review/add`, {
+    reviewTitle,
+    reviewContent,
+    reviewLink,
+    reviewer,
+    topicId,
+  });
+};
+
 export const postPdf = (id, file) => {
   const fd = new FormData();
   fd.append('file', file);
 
   return axios.post(`${host}${port}/summaryPost/upload/${id}`, fd,
+  {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  });
+}
+
+export const postPic = (id, file) => {
+  const fd = new FormData();
+  fd.append('image', file);
+
+  return axios.post(`${host}${port}/review/file/upload/${id}`, fd,
   {
     headers: {
       'Content-Type': 'multipart/form-data'
