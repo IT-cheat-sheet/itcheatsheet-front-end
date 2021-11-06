@@ -122,7 +122,7 @@ export default function Kebab({ page, postId }) {
             >
               <div className="relative w-full h-screen md:h-auto md:w-4/5 my-6 mx-auto max-w-3xl text-left">
                 <div className="flex md:justify-between mx-4 md:mx-0 pt-10 md:pt-0">
-                  <span class="material-icons text-white text-2xl md:hidden" onClick={() => {
+                  <span className="material-icons text-white text-2xl md:hidden" onClick={() => {
                     setOpenSuggestModal(false);
                     setActError("");
                     setDescError("");
