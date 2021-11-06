@@ -1,3 +1,71 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.header-primary {
+  @apply text-primary font-bold tracking-wider
+}
+
+.header-secondary {
+  @apply text-6xl font-bold tracking-wider
+}
+
+.header-tertiary {
+  @apply text-5xl font-bold tracking-wider
+}
+
+.header-popup {
+  @apply text-popup font-bold tracking-wider
+}
+
+.body-l {
+  @apply text-4xl tracking-wider leading-snug
+}
+
+.body-base {
+  @apply text-2xl tracking-wider leading-7
+}
+
+.body-sm {
+  @apply text-sm tracking-wider leading-7
+}
+
+.button-base {
+  @apply rounded-button body-base
+}
+
+.button-not-selected {
+  @apply button-base border-2
+}
+
+.button-disabled {
+  @apply button-base bg-gray-disabled
+}
+
+.button-disabled-not-selected {
+  @apply button-disabled border-2
+}
+
+.button-circular {
+  @apply w-18 h-18 md:w-27 md:h-27 shadow-halo bg-yellow-hover rounded-full flex justify-center items-center text-white
+}
+
+.banner:hover {
+  @apply scale-15 overflow-hidden
+}
+
+.glass {
+  @apply bg-white bg-opacity-50 backdrop-filter backdrop-blur-glass
+}
+
+.input {
+  @apply ring-offset-2
+}
+
+.input:hover, .input:focus {
+  @apply outline-none ring-4 shadow-lg
+}
+
+.gradient:hover {
+  @apply from-dark to-light bg-gradient-to-t
+}

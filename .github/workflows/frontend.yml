@@ -1,0 +1,55 @@
+name: Front-end
+
+on:
+  push:
+    branches:  
+      - main
+      - dev
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Chekout code
+      uses: actions/checkout@v2    
+      
+    - name: Login to Github registry ghcr
+      uses: docker/login-action@v1
+      with:
+         registry: ghcr.io
+         username: ${{ github.repository_owner }}
+         password: ${{ secrets.ITCHEATSHEET_TOKEN }}
+         
+    - name : Create env file
+      run : |
+        touch .env
+        echo PORT=${{ secrets.FE_PORT }} >> .env
+        echo REACT_APP_BE_HOST=${{ secrets.BE_HOST }} >> .env
+        echo REACT_APP_BE_PORT=${{ secrets.BE_PORT }} >> .env
+
+    - name: Build Docker image
+      run : docker build . --file Dockerfile --tag ghcr.io/it-cheat-sheet/itcheatsheet-front-end:latest
+
+    - name : Push Docker image to registry
+      run : |
+        docker images
+        docker push ghcr.io/it-cheat-sheet/itcheatsheet-front-end:latest
+    
+  deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+      
+      - name: Deploy execute command ssh to remote server
+        uses: appleboy/ssh-action@master
+        with:
+         host: ${{ secrets.HOST }}
+         username: ${{ secrets.USERNAME }}
+         password: ${{ secrets.PASSWORD }}
+         script: |
+           docker login -u ${{ github.repository_owner }} -p ${{ secrets.ITCHEATSHEET_TOKEN }}
+           docker-compose -f frontend/docker-compose.dev.yml down 
+           docker pull ghcr.io/it-cheat-sheet/itcheatsheet-front-end:latest
+           docker-compose -f frontend/docker-compose.dev.yml up -d 
