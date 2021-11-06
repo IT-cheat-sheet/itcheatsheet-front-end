@@ -49,6 +49,7 @@ jobs:
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
          script: |
+           docker login -u ${{ github.repository_owner }} -p ${{ secrets.ITCHEATSHEET_TOKEN }}
            docker-compose -f frontend/docker-compose.dev.yml down 
            docker pull ghcr.io/it-cheat-sheet/itcheatsheet-front-end:latest
            docker-compose -f frontend/docker-compose.dev.yml up -d 
