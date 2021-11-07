@@ -42,7 +42,8 @@ export default function HomePage() {
   return (
   <Observer>
     {() => (
-    <div>
+    <div className="min-h-screen flex flex-col justify-between">
+      <div>
       <Navbar />
         <div className="xl:mx-44 md:mx-24 my-3 sm:mx-14">
           <div className="relative">
@@ -138,6 +139,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+      </div>
       <Footer />
     </div>
     )}

@@ -6,6 +6,7 @@ import { Observer } from "mobx-react-lite";
 import Button from '../../core/components/button'
 import ConfirmModal from '../../core/components/comfirmModal';
 import _ from 'lodash';
+import Footer from '../../core/components/footer';
 
 export default function AdminPreviewSheet() {
   const params = useParams();
@@ -22,7 +23,8 @@ export default function AdminPreviewSheet() {
   return (
     <Observer>
       {() => (
-        <>
+        <div className="min-h-screen flex flex-col justify-between">
+          <div>
           <AdminNavbar />
           {context.isLoad &&
             <div className="mx-36 mb-12 my-5">
@@ -77,7 +79,9 @@ export default function AdminPreviewSheet() {
               desc="Delete this sheet will also delete all reports of this sheet."
               buttonColor="red" />
             </div>}
-        </>
+          </div>
+          <Footer />
+        </div>
       )}
 
 

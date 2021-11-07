@@ -27,7 +27,8 @@ export default function AdminHome() {
   return (
     <Observer>
       {() => (
-      <div>
+      <div className="min-h-screen flex flex-col justify-between">
+        <div>
         <AdminNavbar />
         <div className="mx-36 mb-16">
             <div className="header-tertiary text-gray-mailbox mt-10 mb-5 flex items-center gap-4">
@@ -93,6 +94,7 @@ export default function AdminHome() {
                 No Report Found
               </div>
             ) : <></>}
+        </div>
         </div>
         <Footer />
       </div>

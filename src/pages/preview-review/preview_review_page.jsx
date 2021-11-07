@@ -25,7 +25,8 @@ export default function PreviewReview() {
   return (
     <Observer>
       {() => (
-        <>
+        <div className="min-h-screen flex flex-col justify-between">
+          <div>
           <Navbar />
           {
             context.isLoad ?
@@ -76,8 +77,9 @@ export default function PreviewReview() {
               </>
               : <></>
           }
+          </div>
           <Footer />
-        </>
+        </div>
       )}
     </Observer >
 

@@ -43,7 +43,8 @@ export default function AllReviews() {
   return (
     <Observer>
       {() => (
-        <div>
+        <div className="min-h-screen flex flex-col justify-between">
+          <div>
           <CreateReviewModal
             topics={context.topics}
             isOpen={context.createToggle}
@@ -121,6 +122,7 @@ export default function AllReviews() {
                 </span>
               </button>
             </div>
+          </div>
           </div>
           <Footer />
         </div>

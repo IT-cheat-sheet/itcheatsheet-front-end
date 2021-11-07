@@ -43,7 +43,8 @@ export default function AllSheets() {
   return (
     <Observer>
       {() => (
-      <div className="bg-violet-bg md:bg-white">
+      <div className="bg-violet-bg md:bg-white min-h-screen flex flex-col justify-between">
+        <div>
         <Navbar />
         <div className="md:hidden">
             <Carousel page="sheet" />
@@ -103,6 +104,7 @@ export default function AllSheets() {
               header="sheet posted successfully!"
               buttonColor="green" />
         <div className="h-12 bg-white md:hidden"></div>
+        </div>
         <Footer />
       </div>
       )}

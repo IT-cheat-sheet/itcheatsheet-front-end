@@ -5,6 +5,7 @@ import { adminPreviewReviewContext } from './admin_preview_review_context';
 import { Observer } from "mobx-react-lite";
 import Button from '../../core/components/button'
 import ConfirmModal from '../../core/components/comfirmModal';
+import Footer from '../../core/components/footer';
 
 export default function AdminPreviewReview() {
   const params = useParams();
@@ -21,7 +22,8 @@ export default function AdminPreviewReview() {
   return (
     <Observer>
       {() => (
-        <>
+        <div className="min-h-screen flex flex-col justify-between">
+          <div>
           <AdminNavbar />
           {context.isLoad ?
             <div className="mx-36 mb-12 mt-5">
@@ -60,7 +62,9 @@ export default function AdminPreviewReview() {
                 buttonColor="red" />
             </div>
             : <></>}
-        </>
+          </div>
+          <Footer />
+        </div>
       )}
 
 

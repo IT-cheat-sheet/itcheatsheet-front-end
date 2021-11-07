@@ -8,6 +8,7 @@ import Footer from '../../core/components/footer'
 import { previewSheetContext } from './preview_sheet_context';
 import { Observer } from "mobx-react-lite";
 import _ from 'lodash';
+import { Fragment } from 'react';
 
 export default function PreviewSheet() {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -29,7 +30,8 @@ export default function PreviewSheet() {
   return (
     <Observer>
       {() => (
-        <>
+        <div className="min-h-screen flex flex-col justify-between">
+          <div>
           <Navbar />
           {context.isLoad &&
             <div className={`px-4 pb-12 md:px-16 lg:px-20 xl:px-44 bg-violet-bg pt-24 lg:pt-0 md:bg-white ${context.file ? "md:grid-cols-12 md:grid md:gap-7" : ""}`}>
@@ -119,8 +121,9 @@ export default function PreviewSheet() {
               </div>
             </div>
           }
+          </div>
           <Footer />
-        </>
+        </div>
       )}
     </Observer>
   )

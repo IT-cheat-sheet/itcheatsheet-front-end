@@ -10,7 +10,8 @@ export default function NotFound() {
   })
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col justify-between">
+      <div>
       <Navbar />
       <div className="flex flex-col space-y-10 md:space-y-8 justify-center items-center mt-44 mb-16 md:my-16">
         <div>
@@ -23,6 +24,7 @@ export default function NotFound() {
         <Link to="/" className="w-1/2 md:w-1/6">
           <Button color="purple" size="md" children="Back to Home" />
         </Link>
+      </div>
       </div>
       <Footer />
     </div>
