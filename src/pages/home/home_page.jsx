@@ -48,7 +48,7 @@ export default function HomePage() {
         <div className="xl:mx-44 md:mx-24 my-3 sm:mx-14">
           <div className="relative">
             <Carousel page="home" />
-            <div className="absolute top-36 md:bottom-36 md:-left-10 text-white antialiased space-y-2 md:space-y-5 z-10">
+            <div className="absolute top-36 xl:top-80 md:bottom-36 md:-left-10 text-white antialiased space-y-2 md:space-y-5 z-10">
               <h1 className="rounded-lg px-3 py-2 mx-auto md:m-0 text-4xl md:text-6xl font-semibold text-left w-max backdrop-filter backdrop-blur-bx bg-red-padding bg-opacity-50">IT CHEATSHEET</h1>
               <div className="text-base font-medium text-center text-violet-hover md:text-white md:rounded-lg px-4 md:px-3 md:py-2 md:text-lg md:font-light md:backdrop-filter md:backdrop-blur-bx md:bg-red-padding md:bg-opacity-50">
                 This website gathers a large number of summary sheets and reviews for all IT students
