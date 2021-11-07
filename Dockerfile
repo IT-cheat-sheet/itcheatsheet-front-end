@@ -5,8 +5,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 
-ARG REACT_APP_BE_HOST="CLIENT"
-ARG REACT_APP_BE_PORT="CLIENT"
+ARG REACT_APP_BE_HOST="https://be.itcheatsheet.com"
 
 RUN npm run build
 
