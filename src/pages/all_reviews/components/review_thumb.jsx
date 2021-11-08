@@ -36,13 +36,13 @@ export default function ReviewThumb({ review }) {
         onMouseLeave={() => setIsHover(false)}
         className={`relative grid grid-rows-5 md:grid-rows-2 md:grid-cols-12 h-full rounded-lg shadow-halo transition duration-200 transform cursor-pointer w-full ${isHover ? "bg-blue-button text-white" : "bg-lightblue-bg text-blue-body"}`}>
           {image && <div className="row-span-3 md:col-span-5 w-full"><img className="object-cover w-full h-full rounded-t-lg md:rounded-r-none md:rounded-l-lg" src={image} alt="Not Found"/></div>}
-          <div className={`${image ? "row-span-2 md:col-span-7" : "row-span-6 md:row-span-full md:col-span-12"} w-full flex flex-col justify-center px-9 py-5`}>
-            <div className={`md:hidden w-full body-base font-bold mb-1 line-clamp-1`}>
+          <div className={`${image ? "row-span-2 md:col-span-7" : "row-span-6 md:row-span-full md:col-span-12"} w-full flex flex-col justify-center pt-3 md:pt-5 pb-5 lg:pb-10 px-5 md:px-4 lg:px-10`}>
+            <div className={`w-full text-2xl md:text-4xl font-semibold mb-1 line-clamp-1`}>
               {review.reviewTitle}
             </div>
-            <div className={`hidden md:block w-full body-l font-bold mb-1 truncate`}>
+            {/* <div className={`hidden md:block w-full text-4xl font-bold mb-1 truncate`}>
               {review.reviewTitle}
-            </div>
+            </div> */}
             <div className={`text-sm tracking-wide break-words md:leading-6 overflow-x-hidden w-full ${image ? "line-clamp-3 md:line-clamp-4" : "line-clamp-5 md:line-clamp-6"}`} style={{textIndent: image ? '0' : '5%'}}>
               {review.reviewContent}
             </div>

@@ -97,8 +97,8 @@ export default function HomePage() {
               </div>
               <Link to={`/sheets/${context.sheet.summaryPostId}`}>
                 <div className="md:hidden grid grid-cols-12 bg-violet-hotsheet text-violet-sheet px-8 py-6 mt-3 w-full shadow-lg rounded-button h-auto">
-                  <div className="col-span-10 w-8/10 truncate">
-                    <div className="font-bold text-2xl">{context.sheet.summaryTitle}</div>
+                  <div className="col-span-10 w-8/10">
+                    <div className="font-bold text-2xl truncate">{context.sheet.summaryTitle}</div>
                     <div>{context.sheet.posterName}</div>
                   </div>
                   <div className="col-span-2 flex items-center justify-end">
@@ -126,7 +126,7 @@ export default function HomePage() {
                     <img src={context.image} className="object-cover h-full w-full" alt="review" />
                   </div>}
                   <div className={`bg-blue-page text-left relative space-y-2 ${context.image ? 'h-2/5 pt-3 md:pt-5 pb-5 lg:pb-10 px-5 md:px-4 lg:px-10' : 'h-full flex flex-col justify-center md:space-y-5 px-9 md:px-9 lg:px-20'}`}>
-                    <div className={`text-2xl md:text-4xl font-semibold text-left text-white`}>{context.review.reviewTitle}</div>
+                    <div className={`text-2xl md:text-4xl font-semibold truncate text-left text-white`}>{context.review.reviewTitle}</div>
                     <div className={`text-white font-light ${context.image ? 'text-sm md:text-base line-clamp-3' : 'line-clamp-10'}`}>
                       {context.review.reviewContent}
                     </div>
