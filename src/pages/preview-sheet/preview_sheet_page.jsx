@@ -8,7 +8,6 @@ import Footer from '../../core/components/footer'
 import { previewSheetContext } from './preview_sheet_context';
 import { Observer } from "mobx-react-lite";
 import _ from 'lodash';
-import { Fragment } from 'react';
 
 export default function PreviewSheet() {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -18,6 +17,7 @@ export default function PreviewSheet() {
   const [isPdfLoad, setIsPdfLoad] = useState(false);
 
   const ref = useRef();
+  const host = process.env.REACT_APP_BE_HOST;
 
   useEffect(() => {
     setToggleSeeMore(false);
@@ -52,7 +52,7 @@ export default function PreviewSheet() {
                 <div className={`rounded-button overflow-hidden ${context.file && 'mt-5'} ${isPdfLoad && 'shadow-halo'}`}>
                   {
                     context.file &&
-                      <a id="pdfOpen" href={`http://localhost:3000/summarypost/getFile/${params.id}`} target="_blank" rel="noreferrer">
+                      <a id="pdfOpen" href={`${host}/summarypost/getFile/${params.id}`} target="_blank" rel="noreferrer">
                         <div>
                           <Document file={context.file} onLoadSuccess={() => setIsPdfLoad(true)} loading={
                             <div className="text-violet-hover text-center pt-20">
