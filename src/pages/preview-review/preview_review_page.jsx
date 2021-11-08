@@ -44,7 +44,7 @@ export default function PreviewReview() {
                   <div className="hidden md:block md:mt-5">
                     <h1 className="header-secondary text-blue-body"> {context.review.data.reviewTitle}</h1 >
                     <div className="flex my-2">
-                      <p className="uppercase px-6 rounded-3xl bg-blue-form text-white">{context.review.data.reviewer}</p>
+                      <p className="px-6 rounded-3xl bg-blue-form text-white">{context.review.data.reviewer}</p>
                     </div>
                   </div>
                   <div className="mt-5 text-sm md:text-2xl bg-lightblue-bg rounded-lg pb-5 md:pb-12">

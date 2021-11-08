@@ -44,7 +44,7 @@ export default function RecommendedBlock({ review }) {
         }
         <div className={`py-3 px-5 md:p-6 table ${image ? "col-span-7 md:col-span-6" : "col-span-10"}`}>
           <div className="table-cell align-middle">
-            <h5 className="text-lg md:text-2xl font-bold">{review.reviewTitle}</h5>
+            <h5 className="text-lg md:text-2xl font-bold w-full line-clamp-1">{review.reviewTitle}</h5>
             <p className="line-clamp-2 text-xs md:text-sm md:line-clamp-3 tracking-wide md:leading-6">
               {review.reviewContent}
             </p>
