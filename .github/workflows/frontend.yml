@@ -27,7 +27,6 @@ jobs:
         touch .env
         echo PORT=${{ secrets.FE_PORT }} >> .env
         echo REACT_APP_BE_HOST=${{ secrets.BE_HOST }} >> .env
-        echo REACT_APP_BE_PORT=${{ secrets.BE_PORT }} >> .env
         ls -la
         cat .env
 
