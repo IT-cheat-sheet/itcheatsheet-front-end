@@ -32,13 +32,13 @@ export default function RecommendedBlock({ review }) {
   return (
     <Link to={`/reviews/${review.reviewId}`}>
       <div 
-        className={`w-full grid grid-cols-10 text-blue-body bg-lightblue-bg rounded-lg h-27 md:h-44 cursor-pointer transform transition duration-200 ${isHover ? "scale-105":""}`} 
+        className={`w-full grid grid-cols-10 text-blue-body bg-lightblue-bg rounded-lg h-full md:h-44 cursor-pointer transform transition duration-200 ${isHover ? "scale-105":""}`} 
         onMouseEnter={() => setIsHover(true)} 
         onMouseLeave={() => setIsHover(false)}
         >
         {image ?
           <div className="col-span-3 md:col-span-4">
-            <img src={image} className="h-27 w-full md:h-44 object-cover rounded-l-lg" alt="review"/>
+            <img src={image} className="h-full w-full md:h-44 object-cover rounded-l-lg" alt="review"/>
           </div>
           : <></>
         }
