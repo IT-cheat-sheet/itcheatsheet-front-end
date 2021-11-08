@@ -28,6 +28,8 @@ jobs:
         echo PORT=${{ secrets.FE_PORT }} >> .env
         echo REACT_APP_BE_HOST=${{ secrets.BE_HOST }} >> .env
         echo REACT_APP_BE_PORT=${{ secrets.BE_PORT }} >> .env
+        ls -la
+        cat .env
 
     - name: Build Docker image
       run : docker build . --file Dockerfile --tag ghcr.io/it-cheat-sheet/itcheatsheet-front-end:latest

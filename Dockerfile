@@ -2,6 +2,7 @@
 FROM node:16.3.0-alpine3.13 as build-stage
 WORKDIR /app
 COPY package*.json ./
+COPY .env ./
 RUN npm install
 COPY . .
 
