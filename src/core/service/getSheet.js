@@ -60,6 +60,6 @@ export const getSuggestedSheet = (sem) => {
   return axios.get(`${host}/summarypost/hotSheet/${sem}`);
 }
 
-export const getSuggestedReview = (rand) => {
-  return axios.get(`${host}/review/hotReview/${rand}`);
+export const getSuggestedReview = () => {
+  return axios.get(`${host}/review/hotReview`);
 }

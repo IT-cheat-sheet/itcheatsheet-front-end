@@ -45,8 +45,7 @@ class HomeContext {
     this.setValue('image', null);
 
     try {
-      var rand = Math.floor(Math.random() * 5) + 1;
-      const res = await getSuggestedReview(rand);
+      const res = await getSuggestedReview();
       if(res.status === 200){
         this.setValue('review', res.data.data[0]);
         this.prepareReviewImage(this.review.reviewId);
