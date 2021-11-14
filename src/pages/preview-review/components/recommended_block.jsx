@@ -44,13 +44,10 @@ export default function RecommendedBlock({ review }) {
         }
         <div className={`py-3 px-5 md:p-6 ${image ? "col-span-7 md:col-span-6" : "col-span-10"}`}>
           <div>
-            <h5 className="text-lg md:text-2xl font-bold w-full line-clamp-1 break-all">{review.reviewTitle}</h5>
-            <div className="">
-              <p className="line-clamp-2 text-xs md:text-sm md:line-clamp-3 tracking-wide md:leading-6">
+            <h5 className="text-lg md:text-2xl font-bold w-full line-clamp-1">{review.reviewTitle}</h5>
+            <p className="line-clamp-2 text-xs md:text-sm md:line-clamp-3 tracking-wide md:leading-6">
               {review.reviewContent}
             </p>
-            </div>
-            
             <div className="flex my-2 justify-end">
               <p className="px-4 rounded-3xl bg-blue-form text-white text-xs md:text-sm">{review.reviewer}</p>
             </div>
