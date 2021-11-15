@@ -34,7 +34,7 @@ export default function Pagination({ page, current, total, url }) {
   return (
     <div>
       <div className="text-lg md:text-2xl w-full flex justify-center">
-        <div className="hidden md:flex text-gray-header w-full justify-around">
+        <div className="hidden md:flex text-gray-header w-full justify-around md:justify-center">
           <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === 1})} disabled={current === 1} onClick={() => pageHop(1)}>&lt;&lt;</button>
           <button className={classNames("font-bold mx-4", {"text-gray-disabled cursor-default": current === 1})} disabled={current === 1} onClick={() => pageHop(current - 1)}>&lt;</button>
           <LoopPage totalPages={10}/>
