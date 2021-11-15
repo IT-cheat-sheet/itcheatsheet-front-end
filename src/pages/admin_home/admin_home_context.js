@@ -41,12 +41,11 @@ class AdminHomeContext {
       const res = await getReport(this.filter, this.searchWord, this.readPage, this.token);
     
       if(res.status === 200){
-        this.setValue('isLoad', true)
         this.setValue('reports', res.data.reports.reverse());
-
         if(this.amount < 0){
           this.setValue('amount', res.data.reports.length);
         }
+        this.setValue('isLoad', true)
       }
     } catch (err) {
       console.log(err);

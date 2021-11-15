@@ -11,7 +11,7 @@ export default function AdminThumb({ type, read, report }) {
       {"bg-yellow-bg" : read})}>
         <div className="flex flex-col justify-center px-9 py-5">
           <div className={`w-full flex items-center gap-2 body-base font-bold mb-1 truncate`}>
-            <div className="truncate">{type === 'sheet' ? report.summarypost.summaryTitle : report.review.reviewTitle}</div>
+            <div className="truncate">{type === 'sheet' ? report.summarypost.summaryTitle : report.reviews.reviewTitle}</div>
             <div className={classNames("inline-block w-3 h-3 rounded-full",
             {"bg-green-button" : read},
             {"bg-violet-header" : type === 'sheet' && !read},
