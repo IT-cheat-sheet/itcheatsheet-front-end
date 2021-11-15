@@ -80,7 +80,7 @@ class CreateSheetContext {
     this.linkError = this.link === "" && this.file === null ? "Either this field or upload file is required." : "";
     this.fileError = this.link === "" && this.file === null ? "Either this field or link is required." :
     // Convert to MiB then to MB
-    this.file.size * ((10 ** 6) / 2 ** 20) / 1024 / 1024 > 24 ? "File size cannot exceed 24MB." : "";
+    (this.file ? this.file.size * ((10 ** 6) / 2 ** 20) / 1024 / 1024 > 24 : false) ? "File size cannot exceed 24MB." : "";
 
     if (
       this.subjectError === "" &&
@@ -104,7 +104,6 @@ class CreateSheetContext {
           if(postResp.status === 200){
             this.onClose();
             this.onComplete();
-            this.setValue('file', null);
           }
         }
       } catch (error) {

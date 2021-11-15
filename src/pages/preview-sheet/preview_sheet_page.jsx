@@ -100,7 +100,7 @@ export default function PreviewSheet() {
                       }
                       {
                         context.sheet.summaryPost.linkAttachment ?
-                          <a href={context.sheet.summaryPost.linkAttachment} className="text-violet-link mt-5 md:mt-10 flex items-center" target="_blank" rel="noreferrer">
+                          <a href={context.sheet.summaryPost.linkAttachment} className="text-violet-link mt-5 md:mt-10 flex items-center line-clamp-1 break-all" target="_blank" rel="noreferrer">
                             <span className="material-icons text-base md:text-3xl transform -rotate-45">link</span>
                             <span className="ml-1 md:ml-2 underline">{context.sheet.summaryPost.linkAttachment}</span>
                           </a>
