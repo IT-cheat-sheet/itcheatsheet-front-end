@@ -34,9 +34,9 @@ export default function ReviewThumb({ review }) {
         <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
-        className={`relative grid grid-rows-5 md:grid-rows-2 md:grid-cols-12 h-full rounded-lg shadow-halo transition duration-200 transform cursor-pointer w-full ${isHover ? "bg-blue-button text-white" : "bg-lightblue-bg text-blue-body"}`}>
-          {image && <div className="row-span-3 md:col-span-5 w-full"><img className="object-cover w-full h-full rounded-t-lg md:rounded-r-none md:rounded-l-lg" src={image} alt="Not Found"/></div>}
-          <div className={`${image ? "row-span-2 md:col-span-7" : "row-span-6 md:row-span-full md:col-span-12"} w-full flex flex-col justify-center pt-3 md:pt-5 pb-5 lg:pb-10 px-5 md:px-4 lg:px-10`}>
+        className={`relative flex flex-col md:flex-row h-full rounded-lg shadow-halo transition duration-200 transform cursor-pointer w-full ${isHover ? "bg-blue-button text-white" : "bg-lightblue-bg text-blue-body"}`}>
+          {image && <div className="h-3/5 w-full md:w-5/12 md:h-full"><img className="object-cover w-full h-full rounded-t-lg md:rounded-r-none md:rounded-l-lg" src={image} alt="Not Found"/></div>}
+          <div className={`${image ? "h-2/5 md:w-7/12 md:h-full" : "h-full"} w-full flex flex-col justify-center pt-3 md:pt-5 pb-5 lg:pb-10 px-5 md:px-4 lg:px-10`}>
             <div className={`w-full text-2xl md:text-4xl font-semibold mb-1 line-clamp-1 break-words`}>
               {review.reviewTitle}
             </div>
