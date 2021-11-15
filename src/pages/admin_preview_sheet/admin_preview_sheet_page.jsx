@@ -34,7 +34,7 @@ export default function AdminPreviewSheet() {
               </div>
               <div className="flex my-2">
                 <p className="px-6 rounded-3xl bg-violet-pill text-white">{context.sheet.posterName}</p>
-                <p className="ml-2.5 text-purple-hover">{context.sheet.subject.subjectId + ' ' + _.startCase(context.sheet.subject.subjectName.toLowerCase())}</p>
+                <p className="ml-2.5 text-purple-hover">{context.sheet.subjects.subjectId + ' ' + _.startCase(context.sheet.subjects.subjectName.toLowerCase())}</p>
               </div>
               <div className="bg-violet-bg rounded-lg mt-5 px-12 py-12">
                 <p className="text-2xl text-purple-hover mb-5">{context.sheet.summaryContent}</p>
@@ -54,7 +54,7 @@ export default function AdminPreviewSheet() {
                         className="px-7 py-2 bg-violet-admin text-white rounded-full"
                         target="_blank"
                         rel="noreferrer">
-                        {context.sheet.subject.subjectId + '-' + context.sheet.summaryPostId + '.pdf'}
+                        {context.sheet.subjects.subjectId + '-' + context.sheet.summaryPostId + '.pdf'}
                       </a>
                     </div>
                     : <></>
