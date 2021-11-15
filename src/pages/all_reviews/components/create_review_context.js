@@ -19,6 +19,7 @@ class CreateReviewContext {
 
   onClose;
   onComplete;
+  loading;
 
   constructor() {
     this.reviewTitle = "";
@@ -31,6 +32,7 @@ class CreateReviewContext {
     this.reviewContentError = "";
     this.reviewerError = "";
     this.topicIdError = "";
+    this.loading = false;
     makeAutoObservable(this);
   }
 
@@ -60,6 +62,7 @@ class CreateReviewContext {
       this.topicIdError === ""
     ) {
       try {
+        this.setValue("loading", true);
         const resp = await postReview(
           this.reviewTitle,
           this.reviewContent,
@@ -70,6 +73,7 @@ class CreateReviewContext {
         if (resp.status === 200) {
           const postResp = await postPic(resp.data.result.reviewId, this.file);
           if(postResp.status === 200){
+            this.setValue("loading",false);
             this.onClose();
             this.onComplete();
             this.setValue('file', null);

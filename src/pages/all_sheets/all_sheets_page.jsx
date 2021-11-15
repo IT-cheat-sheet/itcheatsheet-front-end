@@ -88,7 +88,12 @@ export default function AllSheets() {
             <span className="material-icons-outlined text-5xl md:text-7xl">file_upload</span>
           </button>
         </div>
-        <CreateSheetModal semesters={context.semesters} isOpen={context.createToggle} onClose={() => context.setValue('createToggle', false)} onComplete={() => context.setValue('confirmToggle', true)} />
+        <CreateSheetModal
+          semesters={context.semesters}
+          isOpen={context.createToggle}
+          onClose={() => context.setValue('createToggle', false)}
+          onComplete={() => context.setValue('confirmToggle', true)}
+          />
         <ConfirmModal
               isOpen={context.confirmToggle}
               onButtonClick={() => {

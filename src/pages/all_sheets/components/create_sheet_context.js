@@ -24,6 +24,7 @@ class CreateSheetContext {
   subjectChoice;
   onClose;
   onComplete;
+  loading;
 
   constructor() {
     this.title = "";
@@ -41,6 +42,8 @@ class CreateSheetContext {
     this.descriptionError = "";
     this.linkError = "";
     this.fileError = "";
+
+    this.loading = false;
     makeAutoObservable(this);
   }
 
@@ -91,6 +94,7 @@ class CreateSheetContext {
       this.fileError !== "File size cannot exceed 24MB."
     ) {
       try {
+        this.setValue("loading",true);
         const resp = await postSheet(
           this.semester,
           this.subject,
@@ -103,6 +107,7 @@ class CreateSheetContext {
           const postResp = await postPdf(resp.data.result.summaryPostId, this.file);
           if(postResp.status === 200){
             this.onClose();
+            this.setValue("loading", false);
             this.onComplete();
           }
         }

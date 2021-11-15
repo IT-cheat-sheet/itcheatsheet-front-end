@@ -10,7 +10,7 @@ export default function CreateSheetModal({
   isOpen,
   onClose,
   onComplete,
-  semesters,
+  semesters
 }) {
   const context = useContext(createSheetContext);
 
@@ -64,59 +64,59 @@ export default function CreateSheetModal({
                   className="w-full h-full md:h-auto md:w-3/4 flex flex-col overflow-y-scroll hideScrollBar px-8 pt-6 pb-12 md:py-6 space-y-5 rounded-t-lg md:rounded-lg bg-violet-bg"
                 >
                   <div className="flex flex-col w-full md:flex-row md:space-x-12">
-                      <InputText
-                        placeholder="Text here"
-                        label="title"
-                        page="sheet"
-                        onChange={(e) => {
-                          context.setValue("title", e.target.value);
-                        }}
-                        errorText={context.titleError}
-                      />
-                      <Dropdown
-                        page="sheet"
-                        label="semester/year"
-                        options={_.map(semesters, (semester) => ({
-                          name: semester.semester,
-                          value: semester.semesterNumber,
-                        }))}
-                        setValue={(e) => {
-                          context.setValue("semester", e);
-                        }}
-                        errorText={context.semesterError}
-                      ></Dropdown>
-                      <Dropdown
-                        page="sheet"
-                        label="subject"
-                        options={_.map(context.subjectChoice, (subject) => ({
-                          name: subject.subjectId + ": " + subject.subjectName,
-                          value: subject.subjectNumber,
-                        }))}
-                        setValue={(e) => {
-                          context.setValue("subject", e);
-                        }}
-                        errorText={context.subjectError}
-                      ></Dropdown>
-                      <InputText
-                        placeholder="Text here"
-                        label="your name"
-                        page="sheet"
-                        onChange={(e) => {
-                          context.setValue("licence", e.target.value);
-                        }}
-                        errorText={context.licenceError}
-                      />
+                    <InputText
+                      placeholder="Text here"
+                      label="title"
+                      page="sheet"
+                      onChange={(e) => {
+                        context.setValue("title", e.target.value);
+                      }}
+                      errorText={context.titleError}
+                    />
+                    <Dropdown
+                      page="sheet"
+                      label="semester/year"
+                      options={_.map(semesters, (semester) => ({
+                        name: semester.semester,
+                        value: semester.semesterNumber,
+                      }))}
+                      setValue={(e) => {
+                        context.setValue("semester", e);
+                      }}
+                      errorText={context.semesterError}
+                    ></Dropdown>
+                    <Dropdown
+                      page="sheet"
+                      label="subject"
+                      options={_.map(context.subjectChoice, (subject) => ({
+                        name: subject.subjectId + ": " + subject.subjectName,
+                        value: subject.subjectNumber,
+                      }))}
+                      setValue={(e) => {
+                        context.setValue("subject", e);
+                      }}
+                      errorText={context.subjectError}
+                    ></Dropdown>
+                    <InputText
+                      placeholder="Text here"
+                      label="your name"
+                      page="sheet"
+                      onChange={(e) => {
+                        context.setValue("licence", e.target.value);
+                      }}
+                      errorText={context.licenceError}
+                    />
                   </div>
 
-                    <TextArea
-                      page="sheet"
-                      textAreaLabel="DESCRIPTION"
-                      placeholder="Text here"
-                      setValue={(x) => {
-                        context.setValue("description", x);
-                      }}
-                      errorText={context.descriptionError}
-                    />
+                  <TextArea
+                    page="sheet"
+                    textAreaLabel="DESCRIPTION"
+                    placeholder="Text here"
+                    setValue={(x) => {
+                      context.setValue("description", x);
+                    }}
+                    errorText={context.descriptionError}
+                  />
 
                   <div className="flex flex-col items-start">
                     <p className="body-sm text-violet-bubbleText">LINK</p>
@@ -152,8 +152,8 @@ export default function CreateSheetModal({
                           <div className="flex max-w-full md:w-auto items-center px-4 space-x-2 text-left text-white rounded-full select-none body-sm bg-purple-button">
                             <p className="w-11/12 truncate">{context.file?.name || ""}</p>
                             <span
-                            className="text-xl cursor-pointer material-icons text-gray-footer md:block"
-                            onClick={() => context.setValue("file", null)}>
+                              className="text-xl cursor-pointer material-icons text-gray-footer md:block"
+                              onClick={() => context.setValue("file", null)}>
                               cancel
                             </span>
                           </div>
@@ -178,6 +178,18 @@ export default function CreateSheetModal({
                     </button>
                   </div>
                 </div>
+                {context.loading && (
+                  <div className="absolute table bg-black opacity-60 w-full h-full">
+                    <div className="table-cell align-middle">
+                      <div className="flex justify-center">
+                        <img
+                          src="https://www.isabelhealthcare.com/assets/post_isabel/loading4-2fa514fd64ec8a05a04f3fc45b438f7e.gif"
+                          alt="loading animation"
+                          className="w-20 h-20" />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </Fragment>
           )}
