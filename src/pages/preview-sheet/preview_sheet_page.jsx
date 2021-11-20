@@ -121,6 +121,18 @@ export default function PreviewSheet() {
               </div>
             </div>
           }
+          {context.loading && (
+                  <div className="absolute table bg-black opacity-60 w-full h-full">
+                    <div className="table-cell align-middle">
+                      <div className="flex justify-center">
+                        <img
+                          src="https://www.isabelhealthcare.com/assets/post_isabel/loading4-2fa514fd64ec8a05a04f3fc45b438f7e.gif"
+                          alt="loading animation"
+                          className="w-20 h-20" />
+                      </div>
+                    </div>
+                  </div>
+                )}
           </div>
           <Footer />
         </div>

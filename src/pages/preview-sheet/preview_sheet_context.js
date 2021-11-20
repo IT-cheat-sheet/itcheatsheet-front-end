@@ -7,11 +7,13 @@ class PreviewSheetContext {
   file;
   ref;
   exceed;
+  loading;
 
   constructor() {
     this.sheet = [];
     this.file = null;
     this.isLoad = false;
+    this.loading = false;
     makeAutoObservable(this);
   }
 
@@ -21,9 +23,11 @@ class PreviewSheetContext {
 
   async prepareSheet(id) {
     try {
+      this.setValue("loading",true);
       const resp = await getSpecificSheet(id);
       if (resp.status !== 204) {
         this.setValue('sheet', resp.data);
+        this.setValue("loading",false);
         this.setValue('isLoad', true);
         this.setValue('exceed', this.ref.current.scrollHeight > this.ref.current.clientHeight);
         document.title = "ITCheatSheet – "+this.sheet.summaryPost.summaryTitle;
@@ -31,11 +35,13 @@ class PreviewSheetContext {
     } catch (err) {
       console.error(err);
       alert(err.message);
+      this.setValue("loading",false);
     }
   }
 
   async preparePdf(id) {
     try {
+      this.setValue("loading",true);
       this.setValue('file', null);
       const resp = await getSpecificPdf(id);
       if (resp.status === 200) {
@@ -44,9 +50,11 @@ class PreviewSheetContext {
           this.setValue('file', e.target.result)
         };
         reader.readAsDataURL(resp.data);
+        this.setValue("loading",false);
       }
     } catch (err) {
       console.log(err);
+      this.setValue("loading",false);
     }
   }
 

@@ -114,6 +114,7 @@ class CreateSheetContext {
       } catch (error) {
         console.error(error);
         alert(error.message);
+        this.setValue("loading", false);
       }
     }
   }

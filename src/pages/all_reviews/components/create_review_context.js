@@ -73,8 +73,8 @@ class CreateReviewContext {
         if (resp.status === 200) {
           const postResp = await postPic(resp.data.result.reviewId, this.file);
           if(postResp.status === 200){
-            this.setValue("loading",false);
             this.onClose();
+            this.setValue("loading",false);
             this.onComplete();
             this.setValue('file', null);
           }
@@ -82,6 +82,7 @@ class CreateReviewContext {
       } catch (error) {
         console.error(error);
         alert(error.message);
+        this.setValue("loading", false);
       }
     }
   }
