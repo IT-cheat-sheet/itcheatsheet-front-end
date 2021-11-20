@@ -24,7 +24,6 @@ class PreviewSheetContext {
   async prepareSheet(id) {
     try {
       this.setValue("loading",true);
-      this.setValue('sheet', []);
       const resp = await getSpecificSheet(id);
       if (resp.status !== 204) {
         this.setValue('sheet', resp.data);
